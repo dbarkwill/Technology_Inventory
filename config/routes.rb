@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+
+  root 'networks#index'
+
   resources :printers
 
   resources :generic_network_devices
