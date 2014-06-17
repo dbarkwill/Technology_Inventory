@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  namufacturer: MyString
+  model: MyString
+  MAC: MyString
+  location: MyString
+  print_queue: MyString
+
+two:
+  name: MyString
+  namufacturer: MyString
+  model: MyString
+  MAC: MyString
+  location: MyString
+  print_queue: MyString

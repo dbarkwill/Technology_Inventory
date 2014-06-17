@@ -1,0 +1,35 @@
+<h1>Listing printers</h1>
+
+<table class='table'>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Manufacturer</th>
+      <th>Model</th>
+      <th>MAC</th>
+      <th>Location</th>
+      <th>Print queue</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @printers.each do |printer| %>
+      <tr>
+        <td><%= printer.name %></td>
+        <td><%= printer.namufacturer %></td>
+        <td><%= printer.model %></td>
+        <td><%= printer.MAC %></td>
+        <td><%= printer.location %></td>
+        <td><%= printer.print_queue %></td>
+        <td><%= link_to 'Show', printer %></td>
+        <td><%= link_to 'Edit', edit_printer_path(printer) %></td>
+        <td><%= link_to 'Destroy', printer, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Printer', new_printer_path %>

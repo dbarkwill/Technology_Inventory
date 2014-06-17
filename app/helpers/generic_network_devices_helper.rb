@@ -1,0 +1,2 @@
+module GenericNetworkDevicesHelper
+end
