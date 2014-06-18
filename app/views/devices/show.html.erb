@@ -22,5 +22,36 @@
 </p>
 <% end %>
 
+
+<% if @device.addresses.count > 0 %>
+    <h4>Current IP Addresses:</h4>
+    <table class="table">
+      <tbody>
+        <% @device.addresses.each do |a| %>
+          <tr>
+            <td><%= a.address %></td>
+            <td><%= a.network.name %></td>
+            <td><%= link_to 'Destroy', a, method: :delete, class:"label label-danger" %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% end %>
+  <h4>Add IP Address:</h4>
+  <%= form_for(@new_ip) do |f| %>
+    <div class="form-group">
+      <%= f.label :network_id, "Network" %>
+      <%= f.collection_select :network_id, Network.all, :id, :name, {:include_blank => "Please Select"}, {:class => "form-control"} %>
+    </div>
+    <div class="form-group">
+      <%= f.label :address %><br>
+      <%= f.text_field :address, class:"form-control" %>
+    </div>
+    <%= hidden_field_tag :device_id, @device.id %>
+    <div class="actions">
+      <%= f.submit "Add IP Address",  class:"btn btn-primary" %>
+    </div>
+  <% end %>
+
 <%= link_to 'Edit', edit_device_path(@device) %> |
 <%= link_to 'Back', devices_path %>

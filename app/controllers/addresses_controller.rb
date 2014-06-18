@@ -25,7 +25,7 @@ class AddressesController < ApplicationController
   # POST /addresses.json
   def create
     @address = Address.new(address_params)
-    @device = eval(params[:device_type]).find_by(id: params[:device_id])
+    @device = Device.find_by(id: params[:device_id])
 
     @address.device = @device
 
@@ -77,7 +77,7 @@ class AddressesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def address_params
-      params.require(:address).permit(:address, :device_id, :device_type, :network_id)
+      params.require(:address).permit(:address, :device_id, :network_id)
     end
 
     def validate_ip(network, ip)
