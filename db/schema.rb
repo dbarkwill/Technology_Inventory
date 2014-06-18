@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140514202237) do
+ActiveRecord::Schema.define(version: 20140617204106) do
 
   create_table "addresses", force: true do |t|
     t.string   "address"
@@ -20,6 +20,36 @@ ActiveRecord::Schema.define(version: 20140514202237) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "network_id"
+  end
+
+  create_table "attr_devices", force: true do |t|
+    t.integer  "attr_id"
+    t.integer  "device_id"
+    t.string   "value"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "attrs", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "device_group_id"
+  end
+
+  create_table "device_groups", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "devices", force: true do |t|
+    t.string   "name"
+    t.string   "asset_tag"
+    t.text     "notes"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "device_group_id"
   end
 
   create_table "generic_network_devices", force: true do |t|

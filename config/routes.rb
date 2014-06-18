@@ -1,5 +1,11 @@
 Rails.application.routes.draw do
 
+  resources :attrs
+
+  resources :device_groups
+
+  resources :devices
+
   root 'networks#index'
 
   resources :printers

@@ -1,0 +1,26 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @device.name %>
+</p>
+
+<p>
+  <strong>Asset tag:</strong>
+  <%= @device.asset_tag %>
+</p>
+
+<p>
+  <strong>Notes:</strong>
+  <%= @device.notes %>
+</p>
+
+<% @device.attr_devices.each do |attrb| %>
+<p>
+	<strong><%= attrb.attr.name %>:</strong>
+	<%= attrb.value %>
+</p>
+<% end %>
+
+<%= link_to 'Edit', edit_device_path(@device) %> |
+<%= link_to 'Back', devices_path %>

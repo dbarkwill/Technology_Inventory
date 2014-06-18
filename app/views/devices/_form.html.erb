@@ -1,0 +1,43 @@
+<%= form_for(@device) do |f| %>
+  <% if @device.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@device.errors.count, "error") %> prohibited this device from being saved:</h2>
+
+      <ul>
+      <% @device.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :asset_tag %><br>
+    <%= f.text_field :asset_tag %>
+  </div>
+  <div class="field">
+    <%= f.label :notes %><br>
+    <%= f.text_area :notes %>
+  </div>
+  <div class="field">
+    <%= f.label :device_group %><br>
+    <%= f.collection_select :device_group_id, DeviceGroup.all.collect, :id, :name , {:include_blank => "Please Select"}, {:class => "form-control"} %>
+  </div>
+  <% if @device.device_group %>
+    <% @device.attr_devices.each do |a| %>
+      <%= fields_for :attr_devices, a do |attr_fields| %>
+        <div class="field">
+          <%= attr_fields.label :value, "#{a.attr.name}" %><br>
+          <%= attr_fields.text_field :value, :name => "attr[#{a.attr_id}]" %>
+        </div>
+      <% end %>
+    <% end %>
+  <% end %>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

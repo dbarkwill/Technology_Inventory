@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @device_group.name %>
+</p>
+
+<p>
+  <strong>Attributes:</strong>
+  <ul>
+  	<% @device_group.attrs.each do |a| %>
+  		<li><%= a.name %></li>
+  	<% end %>
+  </ul>
+</p>
+
+<%= form_for(@attr_new) do |f| %>
+	<div class="form-group">
+		<%= f.label :name %><br>
+		<%= f.text_field :name, class:"form-control" %>
+	</div>
+	<%= hidden_field_tag :device_group_id, @device_group.id %><br>
+	<div class="actions">
+		<%= f.submit "Add Attribute",  class:"btn btn-primary" %>
+	</div>
+<% end %>
+
+<%= link_to 'Edit', edit_device_group_path(@device_group) %> |
+<%= link_to 'Back', device_groups_path %>
