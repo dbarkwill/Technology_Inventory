@@ -11,9 +11,16 @@
     </div>
     <div class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
+        <li><%= link_to 'Networks', networks_path %></li>
         <li><%= link_to 'Device Groups', device_groups_path %></li>
-        <li><%= link_to 'Attributes', attrs_path %></li>
-        <li><%= link_to 'Devices', devices_path %></li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Devices <b class="caret"></b></a>
+          <ul class="dropdown-menu">
+            <% @device_types.each do |group| %>
+              <li><a href="#"><%= group.name %></a></li>
+            <% end %>
+          </ul>
+        </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         

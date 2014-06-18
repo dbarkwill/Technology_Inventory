@@ -16,7 +16,6 @@ ActiveRecord::Schema.define(version: 20140617204106) do
   create_table "addresses", force: true do |t|
     t.string   "address"
     t.integer  "device_id"
-    t.string   "device_type"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "network_id"
@@ -52,14 +51,6 @@ ActiveRecord::Schema.define(version: 20140617204106) do
     t.integer  "device_group_id"
   end
 
-  create_table "generic_network_devices", force: true do |t|
-    t.string   "name"
-    t.string   "MAC"
-    t.text     "description"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "networks", force: true do |t|
     t.string   "name"
     t.string   "network"
@@ -67,18 +58,6 @@ ActiveRecord::Schema.define(version: 20140617204106) do
     t.text     "description"
     t.datetime "created_at"
     t.datetime "updated_at"
-  end
-
-  create_table "printers", force: true do |t|
-    t.string   "name"
-    t.string   "namufacturer"
-    t.string   "model"
-    t.string   "MAC"
-    t.string   "location"
-    t.string   "print_queue"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.text     "description"
   end
 
 end
