@@ -66,7 +66,7 @@ class DevicesController < ApplicationController
   # PATCH/PUT /devices/1.json
   def update
     params[:attr].each do |key,value|
-      @attr = @device.attr_devices.find_by(:attr_id => key)
+      @attr = @device.attr_devices.find_or_create_by(:attr_id => key)
       @attr.value = value
       @attr.save
     end

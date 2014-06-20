@@ -3,7 +3,7 @@ class CreateAttrDevices < ActiveRecord::Migration
     create_table :attr_devices do |t|
       t.integer :attr_id, index: true
       t.integer :device_id, index: true
-      t.string :value
+      t.text :value
 
       t.timestamps
     end

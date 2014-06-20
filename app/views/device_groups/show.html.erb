@@ -13,8 +13,8 @@
 					<% @device_group.attrs.each do |a| %>
 						<tr>
 							<td><%= a.name %></td>
+							<td><%= link_to 'Edit', edit_attr_path(a), class:"label label-success" %></td>
 							<td><%= link_to 'Destroy', a, method: :delete, class:"label label-danger" %></td>
-							<td colspan="2"></td>
 						</tr>
 					<% end %>
 				<% else %>
@@ -32,8 +32,8 @@
 				<%= f.text_field :name, class:"form-control" %>
 			</div>
 			<div class="form-group">
-				<%= f.label :type %><br>
-				<%= f.select(:type, Attr.valid_types { |value| [ value, value ] }, { :include_blank=>true }, { :class => 'form-control' }) %>
+				<%= f.label :style %><br>
+				<%= f.select(:style, Attr.valid_styles { |value| [ value, value ] }, { :include_blank=>true }, { :class => 'form-control' }) %>
 			</div>
 			<div class="form-group">
 				<%= f.label :unit %><br>

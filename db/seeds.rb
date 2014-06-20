@@ -28,8 +28,8 @@ group1.attrs << attrb17
 group2 = DeviceGroup.create(name: "Switches")
 attrb21 = Attr.create(name: "Manufacturer")
 attrb22 = Attr.create(name: "Model")
-attrb23 = Attr.create(name: "Port Count")
-attrb24 = Attr.create(name: "PoE Capable")
+attrb23 = Attr.create(name: "Port Count", style:"Dropdown List", values:"8 Port, 24 Port, 48 Port, Other")
+attrb24 = Attr.create(name: "PoE Capable", style:"Dropdown List", values:"Yes - Standard PoE, Yes - UBNT 24v/48v PoE, No")
 attrb25 = Attr.create(name: "Location")
 
 group2.attrs << attrb21
@@ -57,7 +57,7 @@ group4 = DeviceGroup.create(name: "Computers")
 attrb41 = Attr.create(name: "User")
 attrb42 = Attr.create(name: "Serial Number")
 attrb43 = Attr.create(name: "Purchase Date")
-attrb44 = Attr.create(name: "Warranty")
+attrb44 = Attr.create(name: "Warranty", style:"Dropdown List", values:"In Warranty, Expired")
 
 group4.attrs << attrb41
 group4.attrs << attrb42
@@ -66,9 +66,9 @@ group4.attrs << attrb44
 
 
 group5 = DeviceGroup.create(name: "Virtual Machines")
-attrb51 = Attr.create(name: "RAM")
-attrb52 = Attr.create(name: "HD")
-attrb53 = Attr.create(name: "OS")
+attrb51 = Attr.create(name: "RAM", unit:"GB")
+attrb52 = Attr.create(name: "HD", unit:"GB")
+attrb53 = Attr.create(name: "OS", style:"Dropdown List", values:"Microsoft Windows 7, Microsoft Windows 8, Microsoft Server 2008R2, Microsoft Server 2012R2, Linux Ubuntu, Other")
 attrb54 = Attr.create(name: "MAC")
 attrb55 = Attr.create(name: "Purpose")
 attrb56 = Attr.create(name: "Ports")
@@ -92,8 +92,8 @@ group6.attrs << attrb63
 
 
 group7 = DeviceGroup.create(name: "iPads")
-attrb71 = Attr.create(name: "Storage")
-attrb72 = Attr.create(name: "Cellular")
+attrb71 = Attr.create(name: "Storage", style:"Dropdown List", values:"16GB, 32GB, 64GB, 128GB")
+attrb72 = Attr.create(name: "Cellular", style:"Dropdown List", values:"ATT, Verizon, Sprint, T-Mobile, Other")
 attrb73 = Attr.create(name: "Owner")
 
 group7.attrs << attrb71
@@ -110,9 +110,9 @@ group8.attrs << attrb82
 
 
 group9 = DeviceGroup.create(name: "Physical Servers")
-attrb91 = Attr.create(name: "HD")
-attrb92 = Attr.create(name: "RAM")
-attrb93 = Attr.create(name: "OS")
+attrb91 = Attr.create(name: "HD", unit:"GB")
+attrb92 = Attr.create(name: "RAM", unit:"GB")
+attrb93 = Attr.create(name: "OS", style:"Dropdown List", values:"Microsoft Windows 7, Microsoft Windows 8, Microsoft Server 2008R2, Microsoft Server 2012R2, Linux Ubuntu, Other")
 attrb94 = Attr.create(name: "Purpose")
 attrb95 = Attr.create(name: "Ports")
 attrb96 = Attr.create(name: "Manufacturer")

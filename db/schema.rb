@@ -24,7 +24,7 @@ ActiveRecord::Schema.define(version: 20140620140252) do
   create_table "attr_devices", force: true do |t|
     t.integer  "attr_id"
     t.integer  "device_id"
-    t.string   "value"
+    t.text     "value"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -34,8 +34,8 @@ ActiveRecord::Schema.define(version: 20140620140252) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "device_group_id"
-    t.string   "type"
-    t.string   "values"
+    t.string   "style"
+    t.text     "values"
     t.string   "unit"
   end
 

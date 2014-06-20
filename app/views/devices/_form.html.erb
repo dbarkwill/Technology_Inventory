@@ -28,8 +28,8 @@
     <% @attr_list.each do |a| %>
       <%= fields_for :attr_devices, a do |attr_fields| %>
         <div class="field">
-          <%= attr_fields.label :value, "#{a.attr.name}" %><br>
-          <%= attr_fields.text_field :value, :name => "attr[#{a.attr_id}]", class:"form-control" %>
+          <%= attr_fields.label :value, "#{a.attr.name} #{a.attr.unit}" %><br>
+          <%= attribute_form_generator(attr_fields, a) %>
         </div>
       <% end %>
     <% end %>
