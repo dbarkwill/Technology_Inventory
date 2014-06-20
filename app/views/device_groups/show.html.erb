@@ -1,4 +1,3 @@
-<h2><%= @device_group.name %></h2>
 <div class="row">
 	<div class="col-md-6">
 		<h4>Attributes</h4>
@@ -53,8 +52,8 @@
 					<% @device_group.devices.each do |d| %>
 						<tr>
 							<td><%= d.name %></td>
-							<td><%= d.note %></td>
-							<td></td>
+							<td><%= d.notes %></td>
+							<td><% d.addresses.each do |addr| %><%= addr.address %> <% end %></td>
 						</tr>
 					<% end %>
 				<% else %>
