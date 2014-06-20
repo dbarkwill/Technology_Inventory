@@ -53,5 +53,5 @@
     </div>
   <% end %>
 
-<%= link_to 'Edit', edit_device_path(@device) %> |
-<%= link_to 'Back', devices_path %>
+<%= link_to 'Edit', device_group_edit_path(@device_group.name, @device) %> |
+<%= link_to 'Back', device_types_path(@device_group.name) %>

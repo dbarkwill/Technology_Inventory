@@ -1,10 +1,11 @@
 class DevicesController < ApplicationController
   before_action :set_device, only: [:show, :edit, :update, :destroy]
+  before_action :set_group
 
   # GET /devices
   # GET /devices.json
   def index
-    @devices = Device.all
+    @devices = @device_group.devices.all
   end
 
   # GET /devices/1
@@ -16,16 +17,26 @@ class DevicesController < ApplicationController
   # GET /devices/new
   def new
     @device = Device.new
-  end
-
-  # GET /devices/1/edit
-  def edit
+    @device.device_group = @device_group
+    @attr_list = Array.new
     @device.attrs.each do |property|
       @prop = AttrDevice.find_by(:attr => property, :device => @device)
       if !@prop
         @prop = AttrDevice.new(:attr => property, :device => @device)
-        @prop.save
       end
+      @attr_list << @prop
+    end
+  end
+
+  # GET /devices/1/edit
+  def edit
+    @attr_list = Array.new
+    @device.attrs.each do |property|
+      @prop = AttrDevice.find_by(:attr => property, :device => @device)
+      if !@prop
+        @prop = AttrDevice.new(:attr => property, :device => @device)
+      end
+      @attr_list << @prop
     end
   end
 
@@ -33,10 +44,16 @@ class DevicesController < ApplicationController
   # POST /devices.json
   def create
     @device = Device.new(device_params)
+    @device.device_group = DeviceGroup.find_by(:id => params[:device_group_id])
+
+    params[:attr].each do |key,value|
+      @attr = Attr.find_by(:id => key)
+      @attr_device = AttrDevice.create(:attr => @attr, :device => @device, :value => value)
+    end
 
     respond_to do |format|
       if @device.save
-        format.html { redirect_to @device, notice: 'Device was successfully created.' }
+        format.html { redirect_to(:controller => 'devices', :action => 'show', :group => @device.device_group.name, :id => @device)}
         format.json { render :show, status: :created, location: @device }
       else
         format.html { render :new }
@@ -55,7 +72,7 @@ class DevicesController < ApplicationController
     end
     respond_to do |format|
       if @device.update(device_params)
-        format.html { redirect_to @device, notice: 'Device was successfully updated.' }
+        format.html { redirect_to(:controller => 'devices', :action => 'show', :group => @device.device_group.name, :id => @device)}
         format.json { render :show, status: :ok, location: @device }
       else
         format.html { render :edit }
@@ -69,7 +86,7 @@ class DevicesController < ApplicationController
   def destroy
     @device.destroy
     respond_to do |format|
-      format.html { redirect_to devices_url, notice: 'Device was successfully destroyed.' }
+      format.html { redirect_to device_types_path(@device_group.name), notice: 'Device was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -78,6 +95,10 @@ class DevicesController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_device
       @device = Device.find(params[:id])
+    end
+
+    def set_group
+      @device_group = DeviceGroup.find_by(:name => params[:group])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

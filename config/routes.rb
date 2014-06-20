@@ -4,6 +4,13 @@ Rails.application.routes.draw do
 
   resources :device_groups
 
+  get 'devices/:group' => 'devices#index', as: :device_types
+  get 'devices/:group/new' => 'devices#new', as: :device_group_new
+  get 'devices/:group/:id' => 'devices#show', as: :device_group_show
+  get 'devices/:group/:id/edit' => 'devices#edit', as: :device_group_edit
+
+  delete 'devices/:group/:id' => 'devices#destroy', as: :device_group_delete
+
   resources :devices
 
   root 'networks#index'
