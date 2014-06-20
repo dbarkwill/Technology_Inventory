@@ -71,6 +71,6 @@ class AttrsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def attr_params
-      params.require(:attr).permit(:name, :device_group_id)
+      params.require(:attr).permit(:name, :device_group_id, :type, :unit, :values)
     end
 end

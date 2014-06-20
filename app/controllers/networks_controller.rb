@@ -11,6 +11,7 @@ class NetworksController < ApplicationController
   # GET /networks/1.json
   def show
     @ip_list = IPAddress(@network.network)
+    @devices = @network.devices.all
   end
 
   # GET /networks/new

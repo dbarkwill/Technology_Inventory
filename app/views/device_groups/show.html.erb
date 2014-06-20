@@ -31,6 +31,18 @@
 				<%= f.label :name %><br>
 				<%= f.text_field :name, class:"form-control" %>
 			</div>
+			<div class="form-group">
+				<%= f.label :type %><br>
+				<%= f.select(:type, Attr.valid_types { |value| [ value, value ] }, { :include_blank=>true }, { :class => 'form-control' }) %>
+			</div>
+			<div class="form-group">
+				<%= f.label :unit %><br>
+				<%= f.text_field :unit, class:"form-control" %>
+			</div>
+			<div class="form-group">
+				<%= f.label :values %><br>
+				<%= f.text_area :values, class:"form-control" %>
+			</div>
 			<%= hidden_field_tag :device_group_id, @device_group.id %><br>
 			<div class="actions">
 				<%= f.submit "Add Attribute",  class:"btn btn-primary" %>

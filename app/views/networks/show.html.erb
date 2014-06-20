@@ -15,7 +15,16 @@
 				<% @ip_list.each_host do |h| %>
 					<tr>
 						<td><%= h %></td>
-						<%= find_device(@network, h) %>
+						<% @current_device = @devices.detect{|d| d.addresses.detect{|a| a.address.to_s == h.to_s}} 
+							if @current_device %>
+								<td><%= @current_device.name %></td>
+								<td><%= @current_device.MAC %></td>
+								<td><%= @current_device.notes %></td>
+								<td><%= @current_device.device_group.name.singularize %></td>
+								<% @current_device = nil %>
+							<% else %>
+								<td colspan="4"></td>
+							<% end %>
 					</tr>
 				<% end %>
 			</tbody>
@@ -48,46 +57,7 @@
 <%= link_to 'Back', networks_path %>
 
 
-<div class="modal fade" id="add" tabindex="-1" role="dialog" aria-labelledby="addDevice" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h4 class="modal-title" id="myModalLabel">Import Computers</h4>
-      </div>
-      <div class="modal-body">
-        <h5>Importing Computer Records</h5>
-        <p>
-          Computer records can be imported from a CSV file. The file is required to have the first row as header titles. Valid header titles are below:
-          <ul class="list-unstyled">
-            <li><strong>id</strong> : Do not need unless updating a record</li>
-            <li><strong>computer_name</strong> : Computer DNS name</li>
-            <li><strong>serial_number</strong> : Computer serial number, required</li>
-            <li><strong>ram</strong> : RAM amount (in GB)</li>
-            <li><strong>hd_space</strong> : Hard drive capacity</li>
-            <li><strong>hd_type</strong> : Type of hard drive (HD or SSD)</li>
-            <li><strong>free_space</strong> : Free space of hard drive (in GB)</li>
-            <li><strong>purchase_date</strong> : Purchase date of computer (YYYY/MM/DD) </li>
-            <li><strong>expected_refresh</strong></li>
-            <li><strong>warranty</strong> : Computer warranty status (Out of Warranty or In Warranty)</li>
-            <li><strong>computer_type</strong> : Computer type (eg. iMac, Late 2009)</li>
-          </ul>
-        </p>
-        <hr>
-        <br>
-        
-          <div class="form-group">
-           
-          </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        
-        
-      </div>
-    </div>
-  </div>
-</div>
+
 
 
 <script>
