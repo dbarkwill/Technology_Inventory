@@ -1,55 +1,124 @@
-<p>
-  <strong>Name:</strong>
-  <%= @device.name %>
-</p>
+<div class="row">
+  <div class="col-xs-10">
+  <h2><%= @device.name %>&nbsp;&nbsp;&nbsp;&nbsp;<small><%=@device.device_group.name.singularize %></small></h2>
+  </div>
+  <div class="col-xs-2">
+    <div class="pull-right">
+      <br>
+      <div class="btn-group">
+        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+          <span class="glyphicon glyphicon-cog"></span>&nbsp;<span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu dropdown-menu-right" role="menu">
+          <li><%= link_to "Create New #{@device_group.name.singularize}", device_group_new_path(@device_group.name) %></li>
+          <li><%= link_to "Edit #{@device.device_group.name.singularize}", device_group_edit_path(@device_group.name, @device) %></li>
+          <li><%= link_to "Delete #{@device.device_group.name.singularize}", device_group_show_path(@device_group.name, @device), method: :delete, data: { confirm: 'Are you sure?' } %></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+<hr class="hr-divider">
+<div class="row">
+  <div class="col-md-9">
+    <div class="col-md-4">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">Asset Tag</h3>
+        </div>
+        <div class="panel-body">
+          <%= @device.asset_tag %>
+        </div>
+      </div>
+    </div>
+    <% @device.attr_devices.each do |attrb| %>
+      <% if attrb.value != nil && attrb.value != '' %>
+        <div class="col-md-4">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h3 class="panel-title"><%= attrb.attr.name %>
+            </div>
+            <div class="panel-body">
+              <%= attrb.value %>
+            </div> 
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+    <div class="col-md-12">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">Notes</h3>
+        </div>
+        <div class="panel-body">
+          <%= @device.notes %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div class="col-xs-12">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">IP Addresses</h3>
+        </div>
+          <ul class="list-group">
+          <% if @device.addresses.count > 0 %>
+            <% @device.addresses.each do |a| %>
+              <li class="list-group-item">
+                <%= a.address %> - 
+                <%= a.network.name %>
+                <div class="pull-right">
+                  <%= link_to 'X', a, method: :delete, class:"label label-danger" %>
+                </div>
+              </li>
+            <% end %>
+          <% else %>
+            <li class="list-group-item">
+              An IP address has not been assigned to this <%= @device_group.name.singularize.downcase %>. Click below to add one.
+            </li>
+          <% end %>
+        </ul>
+        <div class="panel-footer">
+          <button data-toggle="modal" data-target="#addIP" class="btn btn-default btn-block">
+            Add IP Address
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<hr class="hr-divide">
+<a href="<%= device_types_path(@device_group.name) %>" class="btn btn-default"><span class="glyphicon glyphicon-arrow-left"></span>&nbsp;Back</a>
+<hr class="hr-divide">
 
-<p>
-  <strong>Asset tag:</strong>
-  <%= @device.asset_tag %>
-</p>
-
-<p>
-  <strong>Notes:</strong>
-  <%= @device.notes %>
-</p>
-
-<% @device.attr_devices.each do |attrb| %>
-<p>
-	<strong><%= attrb.attr.name %>:</strong>
-	<%= attrb.value %>
-</p>
-<% end %>
 
 
-<% if @device.addresses.count > 0 %>
-    <h4>Current IP Addresses:</h4>
-    <table class="table">
-      <tbody>
-        <% @device.addresses.each do |a| %>
-          <tr>
-            <td><%= a.address %></td>
-            <td><%= a.network.name %></td>
-            <td><%= link_to 'Destroy', a, method: :delete, class:"label label-danger" %></td>
-          </tr>
+
+<div class="modal fade" id="addIP" tabindex="-1" role="dialog" aria-labelledby="addIP" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel">Add IP Address</h4>
+      </div>
+      <div class="modal-body">
+        <%= form_for(@new_ip) do |f| %>
+          <div class="form-group">
+            <%= f.label :network_id, "Network" %>
+            <%= f.collection_select :network_id, Network.all, :id, :name, {:include_blank => "Please Select"}, {:class => "form-control"} %>
+          </div>
+          <div class="form-group">
+            <%= f.label :address %><br>
+            <%= f.text_field :address, class:"form-control" %>
+          </div>
+          <%= hidden_field_tag :device_id, @device.id %>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+         <%= f.submit "Add IP Address",  class:"btn btn-primary" %>
         <% end %>
-      </tbody>
-    </table>
-  <% end %>
-  <h4>Add IP Address:</h4>
-  <%= form_for(@new_ip) do |f| %>
-    <div class="form-group">
-      <%= f.label :network_id, "Network" %>
-      <%= f.collection_select :network_id, Network.all, :id, :name, {:include_blank => "Please Select"}, {:class => "form-control"} %>
+      </div>
     </div>
-    <div class="form-group">
-      <%= f.label :address %><br>
-      <%= f.text_field :address, class:"form-control" %>
-    </div>
-    <%= hidden_field_tag :device_id, @device.id %>
-    <div class="actions">
-      <%= f.submit "Add IP Address",  class:"btn btn-primary" %>
-    </div>
-  <% end %>
-
-<%= link_to 'Edit', device_group_edit_path(@device_group.name, @device) %> |
-<%= link_to 'Back', device_types_path(@device_group.name) %>
+  </div>
+</div>

@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  resources :logs
+
   resources :attrs
 
   resources :device_groups

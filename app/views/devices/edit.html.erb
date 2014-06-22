@@ -1,6 +1,9 @@
-<h1>Edit <% @device_group.name %></h1>
+<h1>Edit <%= @device_group.name.singularize %></h1>
+<hr class="hr-divide">
 
 <%= render 'form' %>
+
+<hr class="hr-divide">
 
 <%= link_to 'Show', device_group_show_path(@device_group.name, @device) %> |
 <%= link_to 'Back', device_types_path(@device_group.name) %>

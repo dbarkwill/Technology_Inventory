@@ -1,5 +1,11 @@
 <h1>New <%= @device_group.name.singularize %></h1>
 
+<hr class="hr-divide">
+
 <%= render 'form' %>
 
-<%= link_to 'Back', devices_path %>
+<hr class="hr-divide">
+
+<a href="<%= device_types_path(@device_group.name) %>" class="btn btn-default"><span class="glyphicon glyphicon-arrow-left"></span>&nbsp;Back</a>
+
+<hr class="hr-divide">

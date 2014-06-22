@@ -11,30 +11,41 @@
     </div>
   <% end %>
 <div class="row">
-  <div class="col-md-6">
+  <div class="col-md-4">
     <div class="form-group">
       <%= f.label :name %><br>
       <%= f.text_field :name, class:"form-control" %>
     </div>
+  </div>
+  <div class="col-md-4">
     <div class="form-group">
       <%= f.label :asset_tag %><br>
       <%= f.text_field :asset_tag, class:"form-control" %>
     </div>
-    <div class="form-group">
-      <%= f.label :notes %><br>
-      <%= f.text_area :notes, class:"form-control" %>
-    </div>
-      <%= hidden_field_tag :device_group_id, @device.device_group.id %>
-    <% if @device.device_group %>
-      <% @attr_list.each do |a| %>
-        <%= fields_for :attr_devices, a do |attr_fields| %>
+  </div>
+    <%= hidden_field_tag :device_group_id, @device.device_group.id %>
+  <% if @device.device_group %>
+    <% @attr_list.each do |a| %>
+      <%= fields_for :attr_devices, a do |attr_fields| %>
+        <div class="col-md-4">
           <div class="form-group">
             <%= attr_fields.label :value, "#{a.attr.name} #{a.attr.unit}" %><br>
             <%= attribute_form_generator(attr_fields, a) %>
           </div>
-        <% end %>
+        </div>
       <% end %>
     <% end %>
+  <% end %>
+  <div class="col-md-12">
+    <div class="form-group">
+      <%= f.label :notes %><br>
+      <%= f.text_area :notes, class:"form-control", rows:'4' %>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-12">
+  <br>
     <div class="actions">
       <%= f.submit class:"btn btn-primary" %>
     </div>

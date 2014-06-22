@@ -5,6 +5,7 @@ class Device < ActiveRecord::Base
 	accepts_nested_attributes_for :device_group
 	has_many :networks, through: :addresses
 	has_many :addresses
+	has_and_belongs_to_many :logs
 
 
 	def MAC
