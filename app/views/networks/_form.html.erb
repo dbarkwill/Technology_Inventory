@@ -1,3 +1,4 @@
+<hr class="hr-divide">
 <%= form_for(@network) do |f| %>
   <% if @network.errors.any? %>
     <div id="error_explanation">
@@ -10,24 +11,39 @@
       </ul>
     </div>
   <% end %>
-
-  <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name, class:"form-control" %>
+<div class="row">
+  <div class="col-md-4">
+    <div class="form-group">
+      <%= f.label :name %><br>
+      <%= f.text_field :name, class:"form-control" %>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :network %><br>
-    <%= f.text_field :network, class:"form-control" %>
+  <div class="col-md-4">
+    <div class="form-group">
+      <%= f.label :network %><br>
+      <%= f.text_field :network, class:"form-control" %>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :vlan %><br>
-    <%= f.number_field :vlan, class:"form-control" %>
+  <div class="col-md-4">
+    <div class="form-group">
+      <%= f.label :vlan, "vLAN" %><br>
+      <%= f.number_field :vlan, class:"form-control" %>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :description %><br>
-    <%= f.text_area :description, class:"form-control" %>
+  <div class="col-md-12">
+    <div class="form-group">
+      <%= f.label :description %><br>
+      <%= f.text_area :description, class:"form-control" %>
+    </div>
   </div>
-  <div class="actions">
-    <%= f.submit %>
+</div>
+<br>
+<div class="row">
+  <div class="col-md-12">
+    <div class="actions">
+      <%= f.submit class:"btn btn-primary" %>
+    </div>
   </div>
+</div>
 <% end %>
+<hr class="hr-divide">

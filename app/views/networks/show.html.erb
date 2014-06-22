@@ -1,16 +1,40 @@
+<div class="row">
+	<div class="col-md-10">
+		<h2><%= @network.name %> <small>Network</small></h2>
+	</div>
+	<div class="col-md-2">
+		<div class="pull-right">
+			<br>
+		      <div class="btn-group">
+		        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+		          <span class="glyphicon glyphicon-cog"></span>&nbsp;<span class="caret"></span>
+		        </button>
+		        <ul class="dropdown-menu dropdown-menu-right" role="menu">
+		          <li><%= link_to "Create New Network", new_network_path %></li>
+		          <li><%= link_to "Edit Network", edit_network_path(@network) %></li>
+		          <li><%= link_to "Delete Network", network_path(@network), method: :delete, data: { confirm: 'Are you sure?' } %></li>
+		        </ul>
+		      </div>
+		</div>
+	</div>
+</div>
+
+<hr class="hr-divide">
 
 <div class="row">
-	<div class="col-md-8">
+	<div class="col-md-9">
 		<table class="table datatable">
-			<thead>
-				<tr>
-					<th>IP Address</th>
-					<th>Device Name</th>
-					<th>MAC Address</th>
-					<th>Description</th>
-					<th>Device Type</th>
-				</tr>
-			</thead>
+			<div data-spy="affix" data-offset-top="100" data-offset-bottom="200">
+				<thead>
+					<tr>
+						<th>IP Address</th>
+						<th>Device Name</th>
+						<th>MAC Address</th>
+						<th>Description</th>
+						<th>Device Type</th>
+					</tr>
+				</thead>
+			</div>
 			<tbody>
 				<% @ip_list.each_host do |h| %>
 					<tr>
@@ -30,31 +54,28 @@
 			</tbody>
 		</table>
 	</div>
-	<div class="col-md-4">
-		<p>
-		  <strong>Name:</strong>
-		  <%= @network.name %>
-		</p>
-
-		<p>
-		  <strong>Network:</strong>
-		  <%= @network.network %>
-		</p>
-
-		<p>
-		  <strong>Vlan:</strong>
-		  <%= @network.vlan %>
-		</p>
-
-		<p>
-		  <strong>Description:</strong>
-		  <%= @network.description %>
-		</p>
+	<div class="col-md-3">
+		<div data-spy="affix" data-offset-top="0" data-offset-bottom="0">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<div class="panel-title">
+						Network Information
+					</div>
+				</div>
+				<ul class="list-group">
+					<li class="list-group-item"><strong>Name: </strong><%= @network.name %></li>
+					<li class="list-group-item"><strong>Network: </strong><%= @network.network %></li>
+					<li class="list-group-item"><strong>vLAN: </strong><%= @network.vlan %></li>
+					<li class="list-group-item"><strong>Static Devices: </strong><%= @network.devices.count %></li>
+					<li class="list-group-item"><strong>Description: </strong><%= @network.description %></li>
+				</ul>
+				<div class="panel-footer">
+					<a href="<%= networks_path %>" class="btn btn-block btn-default">View All Networks</a>
+				</div>
+			</div>
+		</div>
 	</div>
 </div>
-
-<%= link_to 'Edit', edit_network_path(@network) %> |
-<%= link_to 'Back', networks_path %>
 
 
 
