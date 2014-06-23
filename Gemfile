@@ -46,3 +46,6 @@ gem 'bootstrap-sass'
 
 # Data Tables
 gem 'jquery-datatables-rails', git: 'git://github.com/rweng/jquery-datatables-rails.git'
+
+# JQuery and Turbolinks
+gem 'jquery-turbolinks'

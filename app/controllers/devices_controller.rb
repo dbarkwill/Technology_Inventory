@@ -53,6 +53,7 @@ class DevicesController < ApplicationController
 
     respond_to do |format|
       if @device.save
+        @device.logs.create(:message => "Device created.")
         format.html { redirect_to(:controller => 'devices', :action => 'show', :group => @device.device_group.name, :id => @device)}
         format.json { render :show, status: :created, location: @device }
       else
@@ -67,8 +68,12 @@ class DevicesController < ApplicationController
   def update
     params[:attr].each do |key,value|
       @attr = @device.attr_devices.find_or_create_by(:attr_id => key)
-      @attr.value = value
-      @attr.save
+      if @attr.value != value
+        @device.logs.create(:message => "#{@attr.attr.name} changed from #{@attr.value} to #{value}")
+        @attr.value = value
+        @attr.save
+      end
+      
     end
     respond_to do |format|
       if @device.update(device_params)

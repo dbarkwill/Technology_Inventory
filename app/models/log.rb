@@ -1,3 +1,3 @@
 class Log < ActiveRecord::Base
-	has_and_belongs_to_many :devices
+	belongs_to :device
 end

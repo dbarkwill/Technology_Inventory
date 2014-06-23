@@ -4,8 +4,8 @@ class Device < ActiveRecord::Base
 	has_many :attr_devices, dependent: :destroy
 	accepts_nested_attributes_for :device_group
 	has_many :networks, through: :addresses
-	has_many :addresses
-	has_and_belongs_to_many :logs
+	has_many :addresses, dependent: :destroy
+	has_many :logs, dependent: :destroy
 
 
 	def MAC
