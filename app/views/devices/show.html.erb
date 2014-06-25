@@ -93,7 +93,7 @@
         </div>
         <ul class="list-group">
           <% if @device.logs.count > 0 %>
-            <% @device.logs.each do |log| %>
+            <% @device.logs.order(created_at: :desc).limit(5).each do |log| %>
               <li class="list-group-item">
                 On <%= log.created_at.to_time.strftime("%-m-%-d-%Y") %>:<br>
                 <%= log.message %>
@@ -103,6 +103,13 @@
             <li class="list-group-item">No history for this device.</li>
           <% end %>
         </ul>
+        <% if @device.logs.count > 5 %>
+          <div class="panel-footer">
+            <button data-toggle="modal" data-target="#viewHistory" class="btn btn-default btn-block">
+              View Full History
+            </button>
+          </div>
+        <% end %>
       </div>
     </div>
   </div>
@@ -141,3 +148,26 @@
     </div>
   </div>
 </div>
+
+<% if @device.logs.count > 5 %>
+  <div class="modal fade" id="viewHistory" tabindex="-1" role="dialog" aria-labelledby="viewHistory" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h4 class="modal-title" id="myModalLabel"><%= @device_group.name.singularize %> History</h4>
+        </div>
+        <div class="modal-body">
+          <% @device.logs.order(created_at: :desc).each do |log| %>
+            On <%= log.created_at.to_time.strftime("%-m-%-d-%Y") %>:<br>
+            <%= log.message %>
+            <hr>
+          <% end %>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>

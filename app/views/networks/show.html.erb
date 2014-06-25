@@ -24,17 +24,15 @@
 <div class="row">
 	<div class="col-md-9">
 		<table class="table datatable">
-			<div data-spy="affix" data-offset-top="100" data-offset-bottom="200">
-				<thead>
-					<tr>
-						<th>IP Address</th>
-						<th>Device Name</th>
-						<th>MAC Address</th>
-						<th>Description</th>
-						<th>Device Type</th>
-					</tr>
-				</thead>
-			</div>
+			<thead>
+				<tr>
+					<th>IP Address</th>
+					<th>Device Name</th>
+					<th>MAC Address</th>
+					<th>Description</th>
+					<th>Device Type</th>
+				</tr>
+			</thead>
 			<tbody>
 				<% @ip_list.each_host do |h| %>
 					<tr>
@@ -55,23 +53,21 @@
 		</table>
 	</div>
 	<div class="col-md-3">
-		<div data-spy="affix" data-offset-top="0" data-offset-bottom="0" class="affix-top">
-			<div class="panel panel-default">
-				<div class="panel-heading">
-					<div class="panel-title">
-						Network Information
-					</div>
+		<div class="panel panel-default" >
+			<div class="panel-heading">
+				<div class="panel-title">
+					Network Information
 				</div>
-				<ul class="list-group">
-					<li class="list-group-item"><strong>Name: </strong><%= @network.name %></li>
-					<li class="list-group-item"><strong>Network: </strong><%= @network.network %></li>
-					<li class="list-group-item"><strong>vLAN: </strong><%= @network.vlan %></li>
-					<li class="list-group-item"><strong>Static Devices: </strong><%= @network.devices.count %></li>
-					<li class="list-group-item"><strong>Description: </strong><%= @network.description %></li>
-				</ul>
-				<div class="panel-footer">
-					<a href="<%= networks_path %>" class="btn btn-block btn-default">View All Networks</a>
-				</div>
+			</div>
+			<ul class="list-group">
+				<li class="list-group-item"><strong>Name: </strong><%= @network.name %></li>
+				<li class="list-group-item"><strong>Network: </strong><%= @network.network %></li>
+				<li class="list-group-item"><strong>vLAN: </strong><%= @network.vlan %></li>
+				<li class="list-group-item"><strong>Static Devices: </strong><%= @network.devices.count %></li>
+				<li class="list-group-item"><strong>Description: </strong><%= @network.description %></li>
+			</ul>
+			<div class="panel-footer">
+				<a href="<%= networks_path %>" class="btn btn-block btn-default">View All Networks</a>
 			</div>
 		</div>
 	</div>
