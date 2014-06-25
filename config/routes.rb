@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   get 'devices/:group/:id/edit' => 'devices#edit', as: :device_group_edit
 
   delete 'devices/:group/:id' => 'devices#destroy', as: :device_group_delete
+  delete 'devices/:group/:id/clear_history' => 'devices#clear_history', as: :device_group_clear_history
 
   resources :devices
 

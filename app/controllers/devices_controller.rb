@@ -1,5 +1,5 @@
 class DevicesController < ApplicationController
-  before_action :set_device, only: [:show, :edit, :update, :destroy]
+  before_action :set_device, only: [:show, :edit, :update, :destroy, :clear_history]
   before_action :set_group
 
   # GET /devices
@@ -69,12 +69,25 @@ class DevicesController < ApplicationController
     params[:attr].each do |key,value|
       @attr = @device.attr_devices.find_or_create_by(:attr_id => key)
       if @attr.value != value
-        @device.logs.create(:message => "#{@attr.attr.name} changed from #{@attr.value} to #{value}")
+        @device.logs.create(:message => "#{@attr.attr.name} changed from #{@attr.value} to #{value}.")
         @attr.value = value
         @attr.save
       end
       
     end
+
+    if @device.name != params[:device][:name]
+      @device.logs.create(:message => "Device name changed from #{@device.name} to #{params[:device][:name]}.")
+    end
+
+    if @device.asset_tag != params[:device][:asset_tag]
+      @device.logs.create(:message => "Device asset tag changed from #{@device.asset_tag} to #{params[:device][:asset_tag]}.")
+    end 
+
+    if @device.notes != params[:device][:notes]
+      @device.logs.create(:message => "Device notes were updated.")
+    end  
+
     respond_to do |format|
       if @device.update(device_params)
         format.html { redirect_to(:controller => 'devices', :action => 'show', :group => @device.device_group.name, :id => @device)}
@@ -83,6 +96,15 @@ class DevicesController < ApplicationController
         format.html { render :edit }
         format.json { render json: @device.errors, status: :unprocessable_entity }
       end
+    end
+  end
+
+  def clear_history
+    @device.logs.each do |log|
+      log.destroy
+    end
+    respond_to do |format|
+      format.html { redirect_to device_group_show_path(@device.device_group.name, @device), notice: 'Device history has been cleared.'}
     end
   end
 

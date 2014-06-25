@@ -165,6 +165,7 @@
           <% end %>
         </div>
         <div class="modal-footer">
+          <%= link_to "Clear History", device_group_clear_history_path(@device_group.name, @device),  method: :delete, class:"btn btn-danger" %>
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
         </div>
       </div>
