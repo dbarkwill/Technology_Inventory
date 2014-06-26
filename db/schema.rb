@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140621192856) do
+ActiveRecord::Schema.define(version: 20140626032218) do
 
   create_table "addresses", force: true do |t|
     t.string   "address"
@@ -39,6 +39,15 @@ ActiveRecord::Schema.define(version: 20140621192856) do
     t.string   "unit"
   end
 
+  create_table "checkout_histories", force: true do |t|
+    t.integer  "device_id"
+    t.string   "name"
+    t.text     "notes"
+    t.boolean  "checked_in"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "device_groups", force: true do |t|
     t.string   "name"
     t.datetime "created_at"
@@ -52,6 +61,7 @@ ActiveRecord::Schema.define(version: 20140621192856) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "device_group_id"
+    t.boolean  "checkedout"
   end
 
   create_table "logs", force: true do |t|

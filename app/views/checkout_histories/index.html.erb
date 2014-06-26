@@ -1,0 +1,31 @@
+<h1>Checked Out Devices</h1>
+
+<hr class="hr-divide">
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Device</th>
+      <th>Asset Tag</th>
+      <th>Name</th>
+      <th>Notes</th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @checkout_histories.each do |checkout_history| %>
+      <tr>
+        <td><%= checkout_history.device.name %></td>
+        <td><%= checkout_history.device.asset_tag %></td>
+        <td><%= checkout_history.name %></td>
+        <td><%= checkout_history.notes %></td>
+        <td><%= link_to 'Checkin', checkin_path(checkout_history), class:"label label-success" %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Checkout history', new_checkout_history_path %>

@@ -12,6 +12,7 @@ class DevicesController < ApplicationController
   # GET /devices/1.json
   def show
     @new_ip = Address.new
+    @checkout_history = CheckoutHistory.new
   end
 
   # GET /devices/new

@@ -27,7 +27,14 @@
             <div class="row">
               <div class="col-xs-8">
                 <h4 class="panel-title">
-                  <strong><a data-toggle="collapse" href="#<%= device.id %>"><%= device.name %></a></strong>
+                  <strong>
+                    <a data-toggle="collapse" href="#<%= device.id %>"><%= device.name %></a>
+                  </strong> &nbsp;&nbsp;&nbsp;
+                  <% if device.checkedout %>
+                    <div class="label label-danger">
+                      Loaned
+                    </div>
+                  <% end %>
                 </h4>
               </div>
               <div class="col-xs-4">

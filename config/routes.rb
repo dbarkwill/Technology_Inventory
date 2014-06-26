@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
 
+  resources :checkout_histories, :path => "checkout"
+
+  get 'checkin/:id' => 'checkout_histories#checkin', as: :checkin
+
   resources :logs
 
   resources :attrs

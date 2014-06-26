@@ -1,0 +1,32 @@
+<%= form_for(@checkout_history) do |f| %>
+  <% if @checkout_history.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@checkout_history.errors.count, "error") %> prohibited this checkout_history from being saved:</h2>
+
+      <ul>
+      <% @checkout_history.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+<div class="row">
+  <div class="col-md-6">
+    <div class="field">
+      <%= f.label :device_id %><br>
+      <%= f.collection_select :device_id, Device.all, :id, :name, {:include_blank => "Please Select"}, {:class => "form-control"} %>
+    </div>
+    <div class="field">
+      <%= f.label :name %><br>
+      <%= f.text_field :name, class:"form-control" %>
+    </div>
+    <div class="field">
+      <%= f.label :notes %><br>
+      <%= f.text_area :notes, class:"form-control" %>
+    </div>
+    <div class="actions">
+      <%= f.submit "Loan Device", class:"btn btn-primary" %>
+    </div>
+  </div>
+</div>
+<% end %>

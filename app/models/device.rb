@@ -6,6 +6,7 @@ class Device < ActiveRecord::Base
 	has_many :networks, through: :addresses
 	has_many :addresses, dependent: :destroy
 	has_many :logs, dependent: :destroy
+	has_many :checkout_histories, dependent: :destroy
 
 
 	def MAC
