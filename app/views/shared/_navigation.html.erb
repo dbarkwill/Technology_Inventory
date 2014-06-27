@@ -22,6 +22,16 @@
           </ul>
         </li>
       </ul>
+      <%= form_tag(devices_path, :method => "get", id: "search-form", class: "navbar-form navbar-right") do %>
+        <div class="form-group">
+          <div class="input-group">
+            <%= text_field_tag :search, params[:search], placeholder: "Search...", class:"form-control" %>
+            <span class="input-group-btn">
+              <button class="btn btn-default" type="submit"><span class="glyphicon glyphicon-search"></span></button>
+            </span>
+          </div>
+        </div>
+      <% end %>
       <ul class="nav navbar-nav navbar-right">
         
       </ul>

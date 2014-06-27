@@ -17,4 +17,8 @@ class Device < ActiveRecord::Base
 		end
 		return @MacAddress if @MacAddress
 	end
+
+	def self.search(query)
+	  where("asset_tag like ? OR name like ? OR notes like ?", "%#{query}%", "%#{query}%", "%#{query}%") 
+	end
 end
