@@ -14,5 +14,9 @@ module ApplicationHelper
 			return attr_fields.text_field :value, class:"form-control"
 		end
 	end
+
+	def cp(path)
+		"class='active'".html_safe if current_page?(path)
+	end
 	
 end
