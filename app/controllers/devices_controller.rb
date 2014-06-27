@@ -47,9 +47,9 @@ class DevicesController < ApplicationController
     @device = Device.new(device_params)
     @device.device_group = DeviceGroup.find_by(:id => params[:device_group_id])
 
-    params[:attr].each do |key,value|
+    params[:device][:attr_device].each do |key,value|
       @attr = Attr.find_by(:id => key)
-      @attr_device = AttrDevice.create(:attr => @attr, :device => @device, :value => value)
+      @attr_device = AttrDevice.create(:attr => @attr, :device => @device, :value => value[:value])
     end
 
     respond_to do |format|
@@ -67,14 +67,13 @@ class DevicesController < ApplicationController
   # PATCH/PUT /devices/1
   # PATCH/PUT /devices/1.json
   def update
-    params[:attr].each do |key,value|
+    params[:device][:attr_device].each do |key, value|
       @attr = @device.attr_devices.find_or_create_by(:attr_id => key)
-      if @attr.value != value
-        @device.logs.create(:message => "#{@attr.attr.name} changed from #{@attr.value} to #{value}.")
-        @attr.value = value
+      if @attr.value != value[:value]
+        @device.logs.create(:message => "#{@attr.attr.name} changed from #{@attr.value} to #{value[:value]}.")
+        @attr.value = value[:value]
         @attr.save
       end
-      
     end
 
     if @device.name != params[:device][:name]
