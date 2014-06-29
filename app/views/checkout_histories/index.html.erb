@@ -1,31 +1,48 @@
-<h1>Checked Out Devices</h1>
-
+<div class="row">
+  <div class="col-md-10">
+    <h1>Loaned Devices</h1>
+  </div>
+  <div class="col-md-2">
+    <div class="pull-right">
+      <br>
+      <div class="btn-group"> 
+        <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown">
+          <span class="glyphicon glyphicon-plus"></span>&nbsp;<span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu dropdown-menu-right" role="menu">
+          <li><%= link_to "Loan Device", new_checkout_history_path %></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
 <hr class="hr-divide">
-
-<table class="table">
-  <thead>
-    <tr>
-      <th>Device</th>
-      <th>Asset Tag</th>
-      <th>Name</th>
-      <th>Notes</th>
-      <th></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @checkout_histories.each do |checkout_history| %>
-      <tr>
-        <td><%= checkout_history.device.name %></td>
-        <td><%= checkout_history.device.asset_tag %></td>
-        <td><%= checkout_history.name %></td>
-        <td><%= checkout_history.notes %></td>
-        <td><%= link_to 'Checkin', checkin_path(checkout_history), class:"label label-success" %></td>
-      </tr>
+<div class="row">
+  <% if @checkout_histories.count > 0 %>
+    <% @checkout_histories.each do |checked_out| %>
+      <div class="col-md-4">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title">
+              <%= checked_out.device.name %>
+            </h3>
+          </div>
+          <div class="panel-body">
+            <strong>Device Type: </strong><%= checked_out.device.device_group.name.singularize %><br>
+            <strong>Loaned Out On: </strong><%= checked_out.created_at.to_time.strftime("%-m-%-d-%Y") %><br>
+            <strong>Loaned To: </strong><%= checked_out.name %><br>
+            <strong>Asset Tag: </strong><%= checked_out.device.asset_tag %><br>
+            <strong>Notes: </strong><%= checked_out.notes %>
+          </div>
+          <div class="panel-footer">
+            <%= link_to "Check In", checkin_path(checked_out), class:"btn btn-success btn-block" %>
+          </div>
+        </div>
+      </div>
     <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Checkout history', new_checkout_history_path %>
+  <% else %>
+    <div class="col-md-12">
+      <h3>No devices are loaned out at this time.</h3>
+    </div>
+  <% end %>
+</div>

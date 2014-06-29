@@ -10,26 +10,29 @@
       </ul>
     </div>
   <% end %>
-
-  <div class="form-group">
-    <%= f.label :name %><br>
-    <%= f.text_field :name, class:"form-control" %>
+<div class="row">
+  <div class="col-md-6">
+    <div class="form-group">
+      <%= f.label :name %><br>
+      <%= f.text_field :name, class:"form-control" %>
+    </div>
+    <div class="form-group">
+      <%= f.label :style %><br>
+      <%= f.select(:style, Attr.valid_styles { |value| [ value, value ] }, { :include_blank=>true }, { :class => 'form-control' }) %>
+    </div>
+    <div class="form-group">
+      <%= f.label :unit %><br>
+      <%= f.text_field :unit, class:"form-control" %>
+    </div>
+    <div class="form-group">
+      <%= f.label :values %><br>
+      <%= f.text_area :values, class:"form-control" %>
+    </div>
+    
+    <div class="actions">
+      <%= f.submit "Update Attribute",  class:"btn btn-primary" %>
+    </div>
   </div>
-  <div class="form-group">
-    <%= f.label :style %><br>
-    <%= f.select(:style, Attr.valid_styles { |value| [ value, value ] }, { :include_blank=>true }, { :class => 'form-control' }) %>
-  </div>
-  <div class="form-group">
-    <%= f.label :unit %><br>
-    <%= f.text_field :unit, class:"form-control" %>
-  </div>
-  <div class="form-group">
-    <%= f.label :values %><br>
-    <%= f.text_area :values, class:"form-control" %>
-  </div>
-  
-  <div class="actions">
-    <%= f.submit "Update Attribute",  class:"btn btn-primary" %>
-  </div>
+</div>
 <% end %>
 
