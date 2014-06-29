@@ -1,4 +1,4 @@
-<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -21,11 +21,12 @@
             <% end %>
           </ul>
         </li>
+        <li><%= link_to "Loan Devices", checkout_histories_path %></li>
       </ul>
       <%= form_tag(devices_path, :method => "get", id: "search-form", class: "navbar-form navbar-right") do %>
         <div class="form-group">
           <div class="input-group">
-            <%= text_field_tag :search, params[:search], placeholder: "Search...", class:"form-control" %>
+            <%= text_field_tag :search, params[:search], placeholder: "Search Devices...", class:"form-control" %>
             <span class="input-group-btn">
               <button class="btn btn-default" type="submit"><span class="glyphicon glyphicon-search"></span></button>
             </span>
