@@ -1,0 +1,69 @@
+<div class="row">
+  <div class="col-xs-10">
+    <h1>Knowledge Base</h1>
+  </div>
+  <div class="col-xs-2">
+        <div class="pull-right">
+          <br>
+            <div class="btn-group">
+              <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                <span class="glyphicon glyphicon-plus"></span>&nbsp;<span class="caret"></span>
+              </button>
+              <ul class="dropdown-menu dropdown-menu-right" role="menu">
+                <li><%= link_to "Create a new Article", new_article_path %></li>
+              </ul>
+            </div>
+        </div>
+      </div>
+    </div>
+
+
+<hr class="hr-divide">
+<div class="row">
+  <div class="col-md-9">
+    <% @articles.each do |article| %>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <div class="row">
+                <div class="col-xs-9">
+                  <h3 class="panel-title"><%= link_to article.title, article %></h3>
+                </div>
+                <div class="col-xs-3">
+                  <div class="pull-right">
+                    <%= link_to "Edit Article", edit_article_path(article), class:"label label-default" %>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="panel-body">
+              <span class="glyphicon glyphicon-tags"></span>&nbsp;&nbsp;<%= raw article.tags.map(&:name).map { |t| link_to t, tag_path(t) }.join(', ') %>
+            </div>
+            <div class="panel-body">
+              <%= raw article.summary %>
+            </div>
+          </div>
+        </div>
+      </div>
+      <hr class="hr-divide">
+    <% end %>
+  </div>
+  <div class="col-md-3">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h4 class="panel-title">
+          <span class="glyphicon glyphicon-tags"></span>&nbsp;&nbsp;Tags
+        </h4>
+      </div>
+      <div class="panel-body">
+          <ul class="list-unstyled">
+            <% @tags.each do |tag| %>
+              <li><%= link_to tag.name, tag_path(tag.name) %> (<%= tag.articles.count %>)</li>
+            <% end %>
+          </ul>
+      </div>
+    </div>
+  </div>
+</div>
+

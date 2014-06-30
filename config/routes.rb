@@ -1,5 +1,11 @@
 Rails.application.routes.draw do
 
+  get 'kb/tags/:tag' => 'articles#index', as: :tag
+
+  post 'kb/relate' => 'articles#relate'
+
+  resources :articles, :path => "kb"
+
   resources :checkout_histories, :path => "checkout"
 
   get 'checkin/:id' => 'checkout_histories#checkin', as: :checkin

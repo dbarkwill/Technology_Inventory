@@ -1,0 +1,81 @@
+<div class="row">
+	<div class="col-md-10">
+		<h1><%= @article.title %></h1>
+	</div>
+	<div class="col-xs-2">
+    <div class="pull-right">
+      <br>
+      <div class="btn-group">
+        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+          <span class="glyphicon glyphicon-cog"></span>&nbsp;<span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu dropdown-menu-right" role="menu">
+          <li><a data-toggle="modal" data-target="#relateArticle" href="#">Relate Article</a></li>
+          <li><%= link_to "Create new Article", new_article_path %></li>
+          <li><%= link_to "Edit Article", edit_article_path(@article) %></li>
+          <li><%= link_to "Delete Article", article_path(@article), method: :delete, data: { confirm: 'Are you sure?' } %></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+<hr class="hr-divide">
+<div class="row">
+	<div class="col-md-9">
+		<div class="panel panel-default">
+			<div class="panel-body">
+				<%= raw @article.summary %> <br>
+				<%= raw @article.content %>
+			</div>
+		</div>
+	</div>
+	<div class="col-md-3">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h4 class="panel-title">
+					<span class="glyphicon glyphicon-tags"></span>&nbsp;&nbsp;Tags
+				</h4>
+			</div>
+			<div class="panel-body">
+			    <ul class="list-unstyled">
+			      <% @article.tags.each do |tag| %>
+			        <li><%= link_to tag.name, tag_path(tag.name) %> (<%= tag.articles.count %>)</li>
+			      <% end %>
+			    </ul>
+			</div>
+		</div>
+		<div class="panel panel-default">
+			<div class="panel-heading">
+	    		<h4 class="panel-title">
+	    			<span class="glyphicon glyphicon-time"></span>&nbsp;&nbsp; Times
+	    		</h4>
+	    	</div>
+	    	<div class="panel-body">
+			    <ul class="list-unstyled">
+				    <li>Created On: <%= @article.created_at.to_time.strftime("%-m-%-d-%Y") %></li>
+				    <li>Updated On: <%= @article.updated_at.to_time.strftime("%-m-%-d-%Y") %></li>
+			    </ul>
+			</div>
+		</div>
+		<div class="panel panel-default">
+			<div class="panel-heading">
+	    		<h4 class="panel-title">
+	    			<span class="glyphicon glyphicon-pencil"></span>&nbsp;&nbsp; Creator
+	    		</h4>
+	    	</div>
+	    	<div class="panel-body">
+			    <ul class="list-unstyled">
+				    <li>AUTHOR</li>
+			    </ul>
+			</div>
+		</div>
+	</div>
+</div>
+<hr class="hr-divide">
+<div class="row">
+	<div class="col-md-12">
+		<a href="<%= articles_path %>" class="btn btn-default"><span class="glyphicon glyphicon-arrow-left"></span>&nbsp;Back</a>
+	</div>
+</div>
+
+

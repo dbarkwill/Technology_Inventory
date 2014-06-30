@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140626032218) do
+ActiveRecord::Schema.define(version: 20140630205536) do
 
   create_table "addresses", force: true do |t|
     t.string   "address"
@@ -19,6 +19,14 @@ ActiveRecord::Schema.define(version: 20140626032218) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "network_id"
+  end
+
+  create_table "articles", force: true do |t|
+    t.string   "title"
+    t.text     "content"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.text     "summary"
   end
 
   create_table "attr_devices", force: true do |t|
@@ -76,6 +84,30 @@ ActiveRecord::Schema.define(version: 20140626032218) do
     t.string   "network"
     t.integer  "vlan"
     t.text     "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "relatibles", force: true do |t|
+    t.integer  "article_id"
+    t.integer  "target_id"
+    t.string   "target_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "taggings", force: true do |t|
+    t.integer  "tag_id"
+    t.integer  "article_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "taggings", ["article_id"], name: "index_taggings_on_article_id"
+  add_index "taggings", ["tag_id"], name: "index_taggings_on_tag_id"
+
+  create_table "tags", force: true do |t|
+    t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
