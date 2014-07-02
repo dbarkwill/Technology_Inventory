@@ -129,6 +129,24 @@
           </div>
         <% end %>
       </div>
+      <div class="panel panel-default">
+          <div class="panel-heading">
+            <div class="panel-title">
+              Linked Articles
+            </div>
+          </div>
+          <div class="panel-body">
+            <ul class="list-unstyled">
+              <% @device.articles.each do |article| %>
+                <li><%= link_to "#{article.title}", article %></li>
+              <% end %>
+              <% @device.device_group.articles.each do |article| %>
+                <li><%= link_to "#{article.title}", article %></li>
+              <% end %>
+            </ul>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>

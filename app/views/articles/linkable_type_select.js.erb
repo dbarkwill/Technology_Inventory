@@ -1,0 +1,1 @@
+$('#linkable_select').empty().append("<%= escape_javascript(label_tag :linkable_id, 'Link to') %><%= escape_javascript(select_tag :linkable_id, options_for_select(@linkable_ids), class:'form-control' )%>");

@@ -10,7 +10,7 @@
           <span class="glyphicon glyphicon-cog"></span>&nbsp;<span class="caret"></span>
         </button>
         <ul class="dropdown-menu dropdown-menu-right" role="menu">
-          <li><a data-toggle="modal" data-target="#relateArticle" href="#">Relate Article</a></li>
+          <li><a data-toggle="modal" data-target="#relateArticle" href="#">Link Article</a></li>
           <li><%= link_to "Create new Article", new_article_path %></li>
           <li><%= link_to "Edit Article", edit_article_path(@article) %></li>
           <li><%= link_to "Delete Article", article_path(@article), method: :delete, data: { confirm: 'Are you sure?' } %></li>
@@ -69,6 +69,23 @@
 			    </ul>
 			</div>
 		</div>
+		<div class="panel panel-default">
+			<div class="panel-heading">
+	    		<h4 class="panel-title">
+	    			<span class="glyphicon glyphicon-link"></span>&nbsp;&nbsp; Linked To
+	    		</h4>
+	    	</div>
+	    	<div class="panel-body">
+			    <ul class="list-unstyled">
+				    <% @article.devices.each do |device| %>
+				    	<li><%= device.name %></li>
+				    <% end %>
+				    <% @article.device_groups.each do |device_group| %>
+				    	<li><%= device_group.name %></li>
+				    <% end %>
+			    </ul>
+			</div>
+		</div>
 	</div>
 </div>
 <hr class="hr-divide">
@@ -79,3 +96,45 @@
 </div>
 
 
+<div class="modal fade" id="relateArticle" tabindex="-1" role="dialog" aria-labelledby="relateArticle" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel">Link Article</h4>
+      </div>
+      <div class="modal-body">
+        <%= form_for @article, url: {action: "link"}, method: "post" do  %>
+          <div class="form-group">
+            <%= label_tag :linkable_type, "Type to Link to" %>
+            <%= select_tag :linkable_type, options_for_select([['Please select...',' '],['Device', 'Device'],['Device Group','DeviceGroup']]), class:'form-control' %>
+          </div>
+          <div class="form-group" id="linkable_select">
+          </div>
+          
+          <%= hidden_field_tag :article, @article.id %>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+         <%= submit_tag "Link Article",  class:"btn btn-primary" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<script>
+  $(document).ready(function() {
+    $('#linkable_type').change(function() {
+        $.ajax({
+           url: "<%= linkable_select_article_path %>",
+           data: {
+               linkable_type: $("#linkable_type option:selected").val()
+           },
+           dataType: "script"
+        });
+    });
+  });
+</script>

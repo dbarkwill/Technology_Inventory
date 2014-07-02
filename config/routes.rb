@@ -2,7 +2,9 @@ Rails.application.routes.draw do
 
   get 'kb/tags/:tag' => 'articles#index', as: :tag
 
-  post 'kb/relate' => 'articles#relate'
+  post 'kb/link' => 'articles#link'
+
+  get 'kb/linkable_type' => 'articles#linkable_type_select', as: :linkable_select_article
 
   resources :articles, :path => "kb"
 

@@ -72,6 +72,14 @@ ActiveRecord::Schema.define(version: 20140630205536) do
     t.boolean  "checkedout"
   end
 
+  create_table "links", force: true do |t|
+    t.integer  "article_id"
+    t.integer  "linkable_id"
+    t.string   "linkable_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "logs", force: true do |t|
     t.text     "message"
     t.integer  "device_id"
@@ -84,14 +92,6 @@ ActiveRecord::Schema.define(version: 20140630205536) do
     t.string   "network"
     t.integer  "vlan"
     t.text     "description"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "relatibles", force: true do |t|
-    t.integer  "article_id"
-    t.integer  "target_id"
-    t.string   "target_type"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

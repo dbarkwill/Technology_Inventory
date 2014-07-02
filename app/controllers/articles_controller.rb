@@ -20,7 +20,7 @@ class ArticlesController < ApplicationController
   # GET /articles/1
   # GET /articles/1.json
   def show
-    @relatible = Relatible.new
+    
   end
 
   # GET /articles/new
@@ -48,7 +48,25 @@ class ArticlesController < ApplicationController
     end
   end
 
-  def relate
+  def linkable_type_select
+    @linkable = params[:linkable_type].classify.constantize
+
+    @linkable_ids = @linkable.all.map { |linkable| [linkable.name, linkable.id] }
+
+    respond_to do |format|
+      format.js
+    end
+  end
+
+  def link
+    @article = Article.find_by_id(params[:article])
+    @link = @article.links.create(:linkable_id => params[:linkable_id], :linkable_type => params[:linkable_type])
+
+    respond_to do |format|
+      if @link.save
+        format.html { redirect_to @article, notice: 'Article linked.'}
+      end
+    end
   end
 
   # PATCH/PUT /articles/1

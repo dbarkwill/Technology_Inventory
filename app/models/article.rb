@@ -1,8 +1,9 @@
 class Article < ActiveRecord::Base
 	has_many :taggings
 	has_many :tags, through: :taggings
-	has_many :relatible, dependent: :destroy
-	has_many :targets, :through => :relatible
+	has_many :links, :dependent => :destroy
+	has_many :devices, :through => :links, :source => :linkable, :source_type => "Device"
+	has_many :device_groups, :through => :links, :source => :linkable, :source_type => "DeviceGroup"
 
 	def self.tagged_with(name)
 		Tag.find_by_name!(name).articles
