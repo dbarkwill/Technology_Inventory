@@ -3,7 +3,7 @@ class Attr < ActiveRecord::Base
 	has_many :attr_device, dependent: :destroy
 	has_many :devices, :through => :attr_device
 
-	@@valid_styles = ['Text Field','Text Area','Dropdown List']
+	@@valid_styles = ['Text Field','Text Area','Dropdown List', 'Person Select']
 
 	def self.valid_styles
 		@@valid_styles

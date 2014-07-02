@@ -10,6 +10,10 @@ module ApplicationHelper
 			values = attributeObj.attr.values.split(",").each {|v| v.strip!}
 			return attr_fields.select :value, options_for_select(values, :selected => attributeObj.value), { :prompt => true}, { class:"form-control"}
 			#return values
+		when 'Person Select'
+			values = Person.all.map {|person| [person.name, person.name]}
+			return attr_fields.select :value, options_for_select(values, :selected => attributeObj.value), { :prompt => true}, { class:"form-control"}
+			#return values
 		else
 			return attr_fields.text_field :value, class:"form-control"
 		end
