@@ -11,28 +11,20 @@
     </div>
     <div class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
+        <li><%= link_to "Knowledge Base", articles_path %></li>
         <li><%= link_to 'Networks', networks_path %></li>
-        <li><%= link_to 'Device Groups', device_groups_path %></li>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">Devices <b class="caret"></b></a>
           <ul class="dropdown-menu">
             <% @device_types.each do |group| %>
               <li><%= link_to "#{group.name}", device_types_path(group.name) %></li>
             <% end %>
+            <li class="divider"></li>
+            <li><%= link_to "Loan Devices", checkout_histories_path %></li>
           </ul>
         </li>
-        <li><%= link_to "Loan Devices", checkout_histories_path %></li>
+        <li><%= link_to 'Device Groups', device_groups_path %></li>
       </ul>
-      <%= form_tag(devices_path, :method => "get", id: "search-form", class: "navbar-form navbar-right") do %>
-        <div class="form-group">
-          <div class="input-group">
-            <%= text_field_tag :search, params[:search], placeholder: "Search Devices...", class:"form-control" %>
-            <span class="input-group-btn">
-              <button class="btn btn-default" type="submit"><span class="glyphicon glyphicon-search"></span></button>
-            </span>
-          </div>
-        </div>
-      <% end %>
       <ul class="nav navbar-nav navbar-right">
         
       </ul>

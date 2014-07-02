@@ -5,5 +5,6 @@
 
 <hr class="hr-divide">
 
-<%= link_to 'Show', device_group_show_path(@device_group.name, @device) %> |
-<%= link_to 'Back', device_types_path(@device_group.name) %>
+<a href="<%= device_types_path(@device_group.name) %>" class="btn btn-default"><span class="glyphicon glyphicon-arrow-left"></span>&nbsp;Back</a>
+
+<hr class="hr-divide">

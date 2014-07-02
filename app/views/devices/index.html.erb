@@ -1,4 +1,21 @@
 <div class="row">
+  <div class="col-xs-12">
+    <div class="pull-right">
+      <%= form_tag(devices_path, :method => "get", id: "search-form", class: "navbar-form navbar-right") do %>
+        <div class="form-group">
+          <div class="input-group">
+            <%= text_field_tag :search, params[:search], placeholder: "Search Devices...", class:"form-control" %>
+            <span class="input-group-btn">
+              <button class="btn btn-default" type="submit"><span class="glyphicon glyphicon-search"></span></button>
+            </span>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<div class="row">
   <div class="col-md-2 hidden-xs hidden-sm">
     <h3><small>Device Types:</small></h3>
     <ul class="nav nav-pills nav-stacked">
@@ -53,7 +70,7 @@
                             <a data-toggle="collapse" href="#<%= device.id %>"><%= device.name %></a>
                           </strong> &nbsp;&nbsp;&nbsp;
                           <% if device.checkedout %>
-                            <div class="label label-danger">
+                            <div class="label label-default">
                               Loaned
                             </div>
                           <% end %>
@@ -80,10 +97,10 @@
                     <div class="panel-footer">
                       <div class="btn-group btn-group-justified">
                         <div class="btn-group">
-                          <a href="<%= device_group_edit_path(device.device_group.name, device) %>" class="btn btn-warning" role="button">Edit</a>
+                          <a href="<%= device_group_edit_path(device.device_group.name, device) %>" class="btn btn-default" role="button">Edit</a>
                         </div>
                         <div class="btn-group">
-                          <a data-confirm="Are you sure?" data-method="delete" href="<%= device_group_show_path(device.device_group.name, device) %>" rel="nofollow" class="btn btn-danger" role="button">Delete</a>
+                          <a data-confirm="Are you sure?" data-method="delete" href="<%= device_group_show_path(device.device_group.name, device) %>" rel="nofollow" class="btn btn-inverse" role="button">Delete</a>
                         </div>
                       </div>
                     </div>

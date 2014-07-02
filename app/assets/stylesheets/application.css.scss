@@ -38,7 +38,18 @@ ul.nav-pills li.active {
 }
 
 .nav-pills > li.active > a {
-	background-color: #545454!important;
+	background-color: #545454 !important;
+}
+
+.btn-inverse {
+	color: white;
+	background-color: #545454 !important;
+	border-color: #cccccc;
+}
+
+.btn-inverse:hover {
+	color: white;
+	background-color: black !important;
 }
 
 
