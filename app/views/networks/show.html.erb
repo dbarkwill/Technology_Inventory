@@ -23,13 +23,14 @@
 
 <div class="row">
 	<div class="col-md-9">
-		<table class="table datatable">
+		<div class="panel panel-default">
+		<div class="panel-body">
+		<table class="table datatable table-striped">
 			<thead>
 				<tr>
 					<th>IP Address</th>
 					<th>Device Name</th>
 					<th>MAC Address</th>
-					<th>Description</th>
 					<th>Device Type</th>
 				</tr>
 			</thead>
@@ -39,9 +40,8 @@
 						<td><%= h %></td>
 						<% @current_device = @devices.detect{|d| d.addresses.detect{|a| a.address.to_s == h.to_s}} 
 							if @current_device %>
-								<td><%= @current_device.name %></td>
+								<td><%= link_to "#{@current_device.name}", device_group_show_path(@current_device.device_group.name, @current_device) %></td>
 								<td><%= @current_device.MAC %></td>
-								<td><%= @current_device.notes %></td>
 								<td><%= @current_device.device_group.name.singularize %></td>
 								<% @current_device = nil %>
 							<% else %>
@@ -51,6 +51,8 @@
 				<% end %>
 			</tbody>
 		</table>
+		</div>
+		</div>
 	</div>
 	<div class="col-md-3">
 		<div class="panel panel-default" >
