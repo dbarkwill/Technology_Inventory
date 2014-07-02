@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  resources :people
+
   get 'kb/tags/:tag' => 'articles#index', as: :tag
 
   post 'kb/link' => 'articles#link'
