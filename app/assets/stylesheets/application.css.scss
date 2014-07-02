@@ -25,5 +25,21 @@ body{
   margin: 40px 0; /* Space out the Bootstrap <hr> more */
 }
 
+.panel-heading a {
+	color: black;
+}
+
+ul.nav-stacked a {
+	color: black;
+}
+
+ul.nav-pills li.active {
+	background-color: white !important;
+}
+
+.nav-pills > li.active > a {
+	background-color: #545454!important;
+}
+
 
 @import 'bootstrap'
