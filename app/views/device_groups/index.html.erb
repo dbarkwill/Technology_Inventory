@@ -6,7 +6,7 @@
     <div class="pull-right">
       <br>
       <div class="btn-group">
-        <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown">
+        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
           <span class="glyphicon glyphicon-plus"></span>&nbsp;<span class="caret"></span>
         </button>
         <ul class="dropdown-menu dropdown-menu-right" role="menu">
@@ -18,23 +18,27 @@
 </div>
 <hr class="hr-divide">
 <div class="row">
-  <% @device_groups.each do |device_group| %>
-    <div class="col-md-4">
-      <div class="panel panel-default">
-        <div class="panel-heading">
-          <div class="row">
-            <div class="col-xs-8">
-              <h2 class="panel-title">
-                <a href="<%= device_group_path(device_group) %>"><%= device_group.name %></a>
-              </h2>
-            </div>
-            <div class="col-xs-4">
-              <a href="<%= edit_device_group_path(device_group) %>" class="btn btn-warning btn-block btn-sm" role="button">Edit</a>
+  <div class="panel panel-default">
+    <div class="panel-body">
+      <% @device_groups.each do |device_group| %>
+        <div class="col-md-4">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <div class="row">
+                <div class="col-xs-8">
+                  <h2 class="panel-title">
+                    <a href="<%= device_group_path(device_group) %>"><%= device_group.name %></a>
+                  </h2>
+                </div>
+                <div class="col-xs-4">
+                  <a href="<%= edit_device_group_path(device_group) %>" class="btn btn-default btn-block btn-sm" role="button">Edit</a>
+                </div>
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      <% end %>
     </div>
-  <% end %>
+  </div>
 </div>
 <hr class="hr-divide">
