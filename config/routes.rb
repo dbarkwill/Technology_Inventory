@@ -8,6 +8,8 @@ Rails.application.routes.draw do
 
   get 'kb/linkable_type' => 'articles#linkable_type_select', as: :linkable_select_article
 
+  get 'checkout/device_group' => 'checkout_histories#device_group_select', as: :device_type_loan
+
   resources :articles, :path => "kb"
 
   resources :checkout_histories, :path => "checkout"

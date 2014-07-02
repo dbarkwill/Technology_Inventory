@@ -15,6 +15,11 @@ class CheckoutHistoriesController < ApplicationController
   # GET /checkout_histories/new
   def new
     @checkout_history = CheckoutHistory.new
+    @dgs = Array.new
+    DeviceGroup.all.each do |dg|
+      @dgs << dg if dg.devices.count > 0
+    end
+    @device_groups = @dgs.each.map { |dg| [dg.name, dg.id] }
   end
 
   def checkin
@@ -36,16 +41,18 @@ class CheckoutHistoriesController < ApplicationController
 
   end
 
-  
+  def device_group_select
+    @checkout_history = CheckoutHistory.new
+    @device_group = DeviceGroup.find_by(:id => params[:device_type])
+    @devices = @device_group.devices.all.map { |d| [d.name, d.id]}
+  end
 
   # POST /checkout_histories
   # POST /checkout_histories.json
   def create
     @checkout_history = CheckoutHistory.new(checkout_history_params)
 
-    @device = Device.find_by(:id => params[:device_id])
-    @checkout_history.device = @device
-
+    @device = @checkout_history.device
 
     @device.checkedout = true
     @device.logs.create(:message => "Device loaned to #{@checkout_history.name}")
