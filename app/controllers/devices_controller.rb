@@ -24,6 +24,10 @@ class DevicesController < ApplicationController
 
 
 
+    elsif params[:group] == 'all'
+      @devices = Device.all
+      @device_group = DeviceGroup.new
+      @device_group.name = "Devices"
     else
       @devices = @device_group.devices.all
     end

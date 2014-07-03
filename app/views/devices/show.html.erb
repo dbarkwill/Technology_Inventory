@@ -149,9 +149,21 @@
       </div>
     </div>
   </div>
-</div>
 <hr class="hr-divide">
-<a href="<%= device_types_path(@device_group.name) %>" class="btn btn-default"><span class="glyphicon glyphicon-arrow-left"></span>&nbsp;Back</a>
+<div class="row hidden-xs hiddem-sm">
+  <div class="col-xs-12">
+    <a href="<%= device_types_path(@device_group.name) %>" class="btn btn-default">
+      <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;Back
+    </a>
+  </div>
+</div>
+<div class="row visible-xs visible-sm">
+  <div class="col-xs-12">
+    <a href="<%= device_types_path(@device_group.name) %>" class="btn btn-block btn-default">
+      <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;Back
+    </a>
+  </div>
+</div>
 <hr class="hr-divide">
 
 

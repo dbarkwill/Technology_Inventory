@@ -1,16 +1,19 @@
 <div class="row">
   <div class="col-xs-12">
     <div class="pull-right">
-      <%= form_tag(devices_path, :method => "get", id: "search-form", class: "navbar-form navbar-right") do %>
-        <div class="form-group">
-          <div class="input-group">
-            <%= text_field_tag :search, params[:search], placeholder: "Search Devices...", class:"form-control" %>
-            <span class="input-group-btn">
-              <button class="btn btn-default" type="submit"><span class="glyphicon glyphicon-search"></span></button>
-            </span>
+      <div id="search" class="search-form hidden-sm hidden-xs">
+        <%= form_tag(devices_path, :method => "get", id: "search-form", class: "navbar-form navbar-right") do %>
+          <div class="form-group">
+            <%= label_tag :search %><br>
+            <div class="input-group">
+              <%= text_field_tag :search, params[:search], placeholder: "Search Devices...", class:"form-control" %>
+              <span class="input-group-btn">
+                <button class="btn btn-default" type="submit"><span class="glyphicon glyphicon-search"></span></button>
+              </span>
+            </div>
           </div>
-        </div>
-      <% end %>
+        <% end %>
+      </div>
     </div>
   </div>
 </div>
@@ -22,6 +25,10 @@
       <% @device_types.each do |group| %>
         <li <%= cp(device_types_path(group.name)) %> > <%= link_to "#{group.name}", device_types_path(group.name) %> </li>
       <% end %>
+    </ul>
+    <h3><small>Device Tasks:</small></h3>
+    <ul class="nav nav-pills nav-stacked">
+      <li><%= link_to "Loan Device", checkout_histories_path %></li>
     </ul>
   </div>
   <div class="col-md-10">
@@ -39,7 +46,7 @@
       <div class="col-xs-2">
         <div class="pull-right">
           <br>
-          <% unless params[:search] %>
+          <% unless params[:search] || params[:group] == 'all' %>
             <div class="btn-group">
               <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
                 <span class="glyphicon glyphicon-plus"></span>&nbsp;<span class="caret"></span>

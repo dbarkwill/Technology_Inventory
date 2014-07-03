@@ -52,5 +52,22 @@ ul.nav-pills li.active {
 	background-color: black !important;
 }
 
+.search-form {
+	background-color: #222222 !important;
+	padding: 20px;
+	padding-bottom: 80px;
+	margin-top: -35px;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	border-bottom-left-radius: 5px;
+	border-bottom-right-radius: 5px;
+	box-shadow: 2px 2px 5px #888888;
+}
+
+.search-form label {
+	color: white;
+}
+
 
 @import 'bootstrap'
