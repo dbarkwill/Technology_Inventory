@@ -49,3 +49,6 @@ gem 'jquery-datatables-rails', git: 'git://github.com/rweng/jquery-datatables-ra
 
 # JQuery and Turbolinks
 gem 'jquery-turbolinks'
+
+# Devise Authentication
+gem 'devise'
