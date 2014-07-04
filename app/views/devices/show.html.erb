@@ -63,16 +63,18 @@
         </div>
       <% end %>
     <% end %>
-    <div class="col-md-12">
-      <div class="panel panel-default">
-        <div class="panel-heading">
-          <h3 class="panel-title">Notes</h3>
-        </div>
-        <div class="panel-body">
-          <%= @device.notes %>
+    <% unless @device.notes == '' || @device.notes == nil %>
+      <div class="col-md-12">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title">Notes</h3>
+          </div>
+          <div class="panel-body">
+            <%= @device.notes %>
+          </div>
         </div>
       </div>
-    </div>
+    <% end %>
   </div>
   <div class="col-md-3">
     <div class="col-xs-12">
@@ -84,8 +86,7 @@
           <% if @device.addresses.count > 0 %>
             <% @device.addresses.each do |a| %>
               <li class="list-group-item">
-                <%= a.address %> - 
-                <%= a.network.name %>
+                <%= a.address %><span class="hidden-md"> - <%= a.network.name %></span>
                 <div class="pull-right">
                   <%= link_to 'X', a, method: :delete, class:"label label-danger" %>
                 </div>
