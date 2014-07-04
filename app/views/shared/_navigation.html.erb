@@ -29,7 +29,11 @@
         <li><%= link_to 'Device Groups', device_groups_path %></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        
+        <% if current_user %>
+          <p class="navbar-text">Signed in as <%= current_user.email %></p>
+        <% else %>
+          <li><%= link_to 'Login', new_user_session_path %></li>
+        <% end %>
       </ul>
     </div><!--/.nav-collapse -->
   </div>
