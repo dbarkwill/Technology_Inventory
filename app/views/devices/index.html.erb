@@ -21,15 +21,19 @@
 <div class="row">
   <div class="col-md-2 hidden-xs hidden-sm">
     <h3><small>Device Types:</small></h3>
-    <ul class="nav nav-pills nav-stacked">
-      <% @device_types.each do |group| %>
-        <li <%= cp(device_types_path(group.name)) %> > <%= link_to "#{group.name}", device_types_path(group.name) %> </li>
-      <% end %>
-    </ul>
+    <div class="bs-docs-sidebar">
+      <ul class="nav bs-docs-sidenav">
+        <% @device_types.each do |group| %>
+          <li <%= cp(device_types_path(group.name)) %> > <%= link_to "#{group.name}", device_types_path(group.name) %> </li>
+        <% end %>
+      </ul>
+    </div>
     <h3><small>Device Tasks:</small></h3>
-    <ul class="nav nav-pills nav-stacked">
-      <li><%= link_to "Loan Device", checkout_histories_path %></li>
-    </ul>
+    <div class="bs-docs-sidebar">
+      <ul class="nav bs-docs-sidenav">
+        <li><%= link_to "Loan Device", checkout_histories_path %></li>
+      </ul>
+    </div>
   </div>
   <div class="col-md-10">
     <div class="row">
