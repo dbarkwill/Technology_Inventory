@@ -1,9 +1,24 @@
-<h1>Create Device Group</h1>
+<div class="row">
+	<div class="col-md-3">
+		<%= render 'shared/admin_sidebar' %>
+	</div>
+	<div class="col-md-9">
+		<div class="row">
+			<div class="col-md-6 col-md-offset-1">
+				<br><br>
+				<div class="panel panel-default">
+					<div class="panel-body">
+					<h1>Create Device Group</h1>
 
-<hr class="hr-divide">
+					<hr class="hr-divide">
 
-<%= render 'form' %>
+					<%= render 'form' %>
 
-<hr class="hr-divide">
+					</div>
+				</div>
 
-<a href="<%= device_groups_path %>" class="btn btn-default"><span class="glyphicon glyphicon-arrow-left"></span>&nbsp;Back</a>
+				<a href="<%= admin_device_groups_path %>" class="btn btn-default"><span class="glyphicon glyphicon-arrow-left"></span>&nbsp;Back</a>
+			</div>
+		</div>
+	</div>
+</div>
