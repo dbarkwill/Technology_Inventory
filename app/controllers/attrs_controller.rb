@@ -30,7 +30,7 @@ class AttrsController < ApplicationController
 
     respond_to do |format|
       if @attr.save
-        format.html { redirect_to @attr.device_group, notice: 'Attr was successfully created.' }
+        format.html { redirect_to @attr.device_group, notice: 'Attribute was successfully created.' }
         format.json { render :show, status: :created, location: @attr }
       else
         format.html { render :new }
@@ -44,7 +44,7 @@ class AttrsController < ApplicationController
   def update
     respond_to do |format|
       if @attr.update(attr_params)
-        format.html { redirect_to @attr.device_group, notice: 'Attr was successfully updated.' }
+        format.html { redirect_to @attr.device_group, notice: 'Attribute was successfully updated.' }
         format.json { render :show, status: :ok, location: @attr }
       else
         format.html { render :edit }
@@ -56,9 +56,10 @@ class AttrsController < ApplicationController
   # DELETE /attrs/1
   # DELETE /attrs/1.json
   def destroy
+    @group = @attr.device_group
     @attr.destroy
     respond_to do |format|
-      format.html { redirect_to attrs_url, notice: 'Attr was successfully destroyed.' }
+      format.html { redirect_to @group, notice: 'Attribute was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

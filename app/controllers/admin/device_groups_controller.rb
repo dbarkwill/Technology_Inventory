@@ -1,4 +1,4 @@
-class DeviceGroupsController < ApplicationController
+class Admin::DeviceGroupsController < ApplicationController
   before_action :set_device_group, only: [:show, :edit, :update, :destroy]
 
   # GET /device_groups

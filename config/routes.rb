@@ -3,6 +3,13 @@ Rails.application.routes.draw do
   devise_for :users
   resources :people
 
+  namespace :admin do
+    get '', to: 'dashboard#index', as: :dashboard
+    resources :users
+    resources :device_groups
+  end
+
+
   get 'kb/tags/:tag' => 'articles#index', as: :tag
 
   post 'kb/link' => 'articles#link'
@@ -20,8 +27,6 @@ Rails.application.routes.draw do
   resources :logs
 
   resources :attrs
-
-  resources :device_groups
 
   get 'devices/:group' => 'devices#index', as: :device_types
   get 'devices/:group/new' => 'devices#new', as: :device_group_new

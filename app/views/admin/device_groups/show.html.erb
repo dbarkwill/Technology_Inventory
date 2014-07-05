@@ -11,9 +11,9 @@
 		        </button>
 		        <ul class="dropdown-menu dropdown-menu-right" role="menu">
 		          <li><a data-toggle="modal" data-target="#addAttribute">Add attribute</a></li>
-		          <li><%= link_to "Create New Device Group", new_device_group_path %></li>
-		          <li><%= link_to "Edit Device Group", edit_device_group_path(@device_group) %></li>
-		          <li><%= link_to "Delete Device Group", device_group_path(@device_group), method: :delete, data: { confirm: 'Are you sure?' } %></li>
+		          <li><%= link_to "Create New Device Group", new_admin_device_group_path %></li>
+		          <li><%= link_to "Edit Device Group", edit_admin_device_group_path(@device_group) %></li>
+		          <li><%= link_to "Delete Device Group", admin_device_group_path(@device_group), method: :delete, data: { confirm: 'Are you sure?' } %></li>
 		        </ul>
 		      </div>
 		</div>
@@ -65,7 +65,7 @@
 <hr class="hr-divide">
 <div class="row">
 	<div class="col-md-12">
-		<a href="<%= device_groups_path %>" class="btn btn-default"><span class="glyphicon glyphicon-arrow-left"></span>&nbsp;Back</a>
+		<a href="<%= admin_device_groups_path %>" class="btn btn-default"><span class="glyphicon glyphicon-arrow-left"></span>&nbsp;Back</a>
 	</div>
 </div>
 
