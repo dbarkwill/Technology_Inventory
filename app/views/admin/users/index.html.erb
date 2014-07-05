@@ -28,6 +28,8 @@
 					<table class="table">
 						<thead>
 							<tr>
+								<th>First Name</th>
+								<th>Last Name</th>
 								<th>Email</th>
 								<th width="200"></th>
 							</tr>
@@ -35,9 +37,11 @@
 						<tbody>
 							<% @users.each do |user| %>
 								<tr>
+									<td><%= user.first_name %></td>
+									<td><%= user.last_name %></td>
 									<td><%= user.email %></td>
 									<td>
-										<a href="#" class="label label-default">Edit</a>&nbsp;&nbsp;
+										<%= link_to 'Edit', edit_admin_user_path(user), class:'label label-default' %>&nbsp;&nbsp;
 										<a href="#" class="label label-default">Delete</a>
 									</td>
 								</tr>
