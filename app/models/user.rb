@@ -4,6 +4,8 @@ class User < ActiveRecord::Base
   devise :database_authenticatable,
          :recoverable, :rememberable, :trackable, :validatable
 
+  has_many :articles
+
   def name
   	return "#{self.first_name} #{self.last_name}"
   end

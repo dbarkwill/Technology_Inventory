@@ -4,6 +4,7 @@ class Article < ActiveRecord::Base
 	has_many :links, :dependent => :destroy
 	has_many :devices, :through => :links, :source => :linkable, :source_type => "Device"
 	has_many :device_groups, :through => :links, :source => :linkable, :source_type => "DeviceGroup"
+	belongs_to :user
 
 	def self.tagged_with(name)
 		Tag.find_by_name!(name).articles
