@@ -76,19 +76,20 @@ ul.nav-pills li.active {
     font-weight: 500;
     color: #999;
 }
+/* color: 563d7c */
 .bs-docs-sidebar .nav>li>a:hover, .bs-docs-sidebar .nav>li>a:focus {
     padding-left: 19px;
-    color: #563d7c;
+    color: #222222;
     text-decoration: none;
     background-color: transparent;
-    border-left: 1px solid #563d7c;
+    border-left: 1px solid #222222;
 }
 .bs-docs-sidebar .nav>.active>a, .bs-docs-sidebar .nav>.active:hover>a, .bs-docs-sidebar .nav>.active:focus>a {
     padding-left: 18px;
     font-weight: 700;
-    color: #563d7c;
+    color: #222222;
     background-color: transparent;
-    border-left: 2px solid #563d7c;
+    border-left: 2px solid #222222;
 }
 .bs-docs-sidebar .nav .nav {
     padding-bottom: 10px;
@@ -100,6 +101,7 @@ ul.nav-pills li.active {
     font-size: 12px;
     font-weight: 400;
 }
+
 .bs-docs-sidebar .nav .nav>li>a:hover, .bs-docs-sidebar .nav .nav>li>a:focus {
     padding-left: 29px;
 }

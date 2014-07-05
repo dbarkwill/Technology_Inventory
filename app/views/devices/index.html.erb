@@ -19,12 +19,12 @@
 </div>
 
 <div class="row">
-  <div class="col-md-2 hidden-xs hidden-sm">
+  <div class="col-md-3 hidden-xs hidden-sm">
     <h3><small>Device Types:</small></h3>
     <div class="bs-docs-sidebar">
       <ul class="nav bs-docs-sidenav">
         <% @device_types.each do |group| %>
-          <li <%= cp(device_types_path(group.name)) %> > <%= link_to "#{group.name}", device_types_path(group.name) %> </li>
+          <li <%= cp(device_types_path(group.name)) %> > <%= link_to "#{group.name} (#{group.devices.count})", device_types_path(group.name) %> </li>
         <% end %>
       </ul>
     </div>
@@ -35,7 +35,7 @@
       </ul>
     </div>
   </div>
-  <div class="col-md-10">
+  <div class="col-md-9">
     <div class="row">
       <div class="col-xs-10">
         <h1>
