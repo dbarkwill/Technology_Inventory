@@ -79,18 +79,22 @@
 <hr class="hr-divide">
 
 <div class="row">
-  <div class="col-md-4">
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        <h3 class="panel-title">
-          Extension
-        </h3>
+  <% if @devices.count > 0 %>
+    <% @devices.each do |device| %>
+      <div class="col-md-4">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title">
+              <%= device.device_group.name.singularize %>
+            </h3>
+          </div>
+          <div class="panel-body">
+            <%= device.name %>
+          </div>
+        </div>
       </div>
-      <div class="panel-body">
-        <%= @person.extension %>
-      </div>
-    </div>
-  </div>
+    <% end %>
+  <% end %>
 </div>
 
 <hr class="hr-divide">

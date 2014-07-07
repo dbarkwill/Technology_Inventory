@@ -10,6 +10,11 @@ class PeopleController < ApplicationController
   # GET /people/1
   # GET /people/1.json
   def show
+    @attr = AttrDevice.search(@person.name).order("created_at DESC")
+    @devices = Array.new
+    @attr.each do |attr|
+      @devices << attr.device
+    end
   end
 
   # GET /people/new

@@ -1,8 +1,74 @@
-<h1>Editing Article</h1>
-
-<hr class="hr-divide">
-
-<%= render 'form' %>
+<br>
+<div class="row">
+	<div class="col-md-9">
+		<div class="panel panel-default">
+			<div class="panel-body">
+				<%= render 'form' %>
+			</div>
+		</div>
+	</div>
+	<div class="col-md-3 hidden-xs hidden-sm">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h3 class="panel-title">
+					<span class="glyphicon glyphicon-tag"> Tags
+				</h3>
+			</div>
+			<div class="panel-body">
+				<%= @article.tag_list %>
+			</div>
+		</div>
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h3 class="panel-title">
+					<span class="glyphicon glyphicon-user"> Author
+				</h3>
+			</div>
+			<div class="panel-body">
+				<%= @article.user.name %>
+			</div>
+		</div>
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h3 class="panel-title">
+					<span class="glyphicon glyphicon-time"> Created
+				</h3>
+			</div>
+			<div class="panel-body">
+				<%= @article.created_at.to_time.strftime("%-m-%-d-%Y") %>
+			</div>
+		</div>
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h3 class="panel-title">
+					<span class="glyphicon glyphicon-time"> Updated
+				</h3>
+			</div>
+			<div class="panel-body">
+				<%= @article.updated_at.to_time.strftime("%-m-%-d-%Y") %>
+			</div>
+		</div>
+		<% if @article.devices.count > 0 || @article.device_groups.count > 0 %>
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h3 class="panel-title">
+						<span class="glyphicon glyphicon-link"> Linked
+					</h3>
+				</div>
+				<div class="panel-body">
+					<ul class="list-unstyled">
+				    <% @article.devices.each do |device| %>
+				    	<li><%= device.name %></li>
+				    <% end %>
+				    <% @article.device_groups.each do |device_group| %>
+				    	<li><%= device_group.name %></li>
+				    <% end %>
+			    </ul>
+				</div>
+			</div>
+		<% end %>
+	</div>
+</div>
 
 <hr class="hr-divide">
 

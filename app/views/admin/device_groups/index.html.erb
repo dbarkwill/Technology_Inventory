@@ -26,27 +26,34 @@
       <div class="panel panel-default">
         <div class="panel-body">
           <br>
-          <% @device_groups.each do |device_group| %>
-            <div class="col-md-4">
-              <div class="panel panel-default">
-                <div class="panel-heading">
-                  <div class="row">
-                    <div class="col-xs-8">
-                      <h2 class="panel-title">
-                        <a href="<%= admin_device_group_path(device_group) %>"><%= device_group.name %></a>
-                      </h2>
-                    </div>
-                    <div class="col-xs-4">
-                      <a href="<%= edit_admin_device_group_path(device_group) %>" class="btn btn-default btn-block btn-sm" role="button">Edit</a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          <% end %>
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th># of Devices</th>
+                <th width="200"></th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @device_groups.each do |device_group| %>
+                <tr>
+                  <td><%= link_to device_group.name, admin_device_group_path(device_group) %></td>
+                  <td><%= device_group.devices.count %></td>
+                  <td>
+                    <%= link_to "Edit", edit_admin_device_group_path(device_group), class:"label label-default" %>
+                    <%= link_to "Delete", admin_device_group_path(device_group), method:"delete", class:"label label-default" %>
+                  </td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
         </div>
       </div>
     </div>
   <hr class="hr-divide">
   </div>
 </div>
+
+
+
+
