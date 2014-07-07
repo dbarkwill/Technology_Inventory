@@ -1,5 +1,31 @@
-<h1>Edit Network</h1>
-
-<%= render 'form' %>
-
-<a href="<%= networks_path %>" class="btn btn-default"><span class="glyphicon glyphicon-arrow-left"></span>&nbsp;Back</a>
+<div class="row">
+	<div class="col-md-6 col-md-offset-3">
+		<div class="panel panel-default">
+			<div class="panel-body">
+				<h1>Edit Network</h1>
+				<hr class="hr-divide">
+				<%= render 'form' %>
+			</div>
+		</div>
+	</div>
+	<div class="col-md-3 hidden-sm hidden-xs">
+		<h3>Help</h3>
+		<p>
+			<strong>Name:</strong> The name of the network, used for referencing the network on other parts of the website.
+		</p>
+		<p>
+			<strong>Network:</strong> The network address of the new network, with the subnet. <br>Ex: 192.168.0.1/24
+		</p>
+		<p>
+			<strong>vLAN:</strong> The virtual lan tag of the network, if there is one. If not, leave it blank.
+		</p>
+		<p>
+			<strong>Description:</strong> A description for the network, for reference.
+		</p>
+	</div>
+</div>
+<div class="row">
+	<div class="col-md-6 col-md-offset-3">
+		<a href="<%= networks_path %>" class="btn btn-default"><span class="glyphicon glyphicon-arrow-left"></span>&nbsp;Back</a>
+	</div>
+</div>

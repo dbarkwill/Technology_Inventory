@@ -1,4 +1,4 @@
-<hr class="hr-divide">
+
 <%= form_for(@network) do |f| %>
   <% if @network.errors.any? %>
     <div id="error_explanation">
@@ -12,19 +12,19 @@
     </div>
   <% end %>
 <div class="row">
-  <div class="col-md-4">
+  <div class="col-md-12">
     <div class="form-group">
       <%= f.label :name %><br>
       <%= f.text_field :name, class:"form-control" %>
     </div>
   </div>
-  <div class="col-md-4">
+  <div class="col-md-12">
     <div class="form-group">
       <%= f.label :network %><br>
       <%= f.text_field :network, class:"form-control" %>
     </div>
   </div>
-  <div class="col-md-4">
+  <div class="col-md-12">
     <div class="form-group">
       <%= f.label :vlan, "vLAN" %><br>
       <%= f.number_field :vlan, class:"form-control" %>
@@ -37,13 +37,12 @@
     </div>
   </div>
 </div>
-<br>
+<hr class="hr-divide">
 <div class="row">
   <div class="col-md-12">
     <div class="actions">
-      <%= f.submit class:"btn btn-primary" %>
+      <%= f.submit class:"btn btn-default" %>
     </div>
   </div>
 </div>
 <% end %>
-<hr class="hr-divide">
