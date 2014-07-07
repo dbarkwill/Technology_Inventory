@@ -64,7 +64,7 @@ class AddressesController < ApplicationController
     @device = @address.device
     @address.destroy
     respond_to do |format|
-      format.html { redirect_to @device, notice: 'Address was successfully destroyed.' }
+      format.html { redirect_to(:controller => 'devices', :action => 'show', :group => @device.device_group.name, :id => @device) }
       format.json { head :no_content }
     end
   end

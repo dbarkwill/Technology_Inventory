@@ -65,7 +65,7 @@
 	    	</div>
 	    	<div class="panel-body">
 			    <ul class="list-unstyled">
-				    <li><%= @article.user.name %></li>
+				    <li><%= @article.user.try(:name) %></li>
 			    </ul>
 			</div>
 		</div>

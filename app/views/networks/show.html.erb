@@ -10,6 +10,7 @@
 		          <span class="glyphicon glyphicon-cog"></span>&nbsp;<span class="caret"></span>
 		        </button>
 		        <ul class="dropdown-menu dropdown-menu-right" role="menu">
+		        	<li><a data-toggle="modal" data-target="#add_address" href="#">Add current device to network</a></li>
 		          <li><%= link_to "Create New Network", new_network_path %></li>
 		          <li><%= link_to "Edit Network", edit_network_path(@network) %></li>
 		          <li><%= link_to "Delete Network", network_path(@network), method: :delete, data: { confirm: 'Are you sure?' } %></li>
@@ -87,4 +88,47 @@
   } );
 </script>
 
+<div class="modal fade" id="add_address" tabindex="-1" role="dialog" aria-labelledby="add_address" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel">Add device to network</h4>
+      </div>
+      <div class="modal-body">
+        <%= form_for @network, url: {action: "add_address"}, method: "post" do  %>
+        	<div class="form-group">
+        		<%= label_tag :address, "Address" %>
+        		<%= text_field_tag :address, '',class:'form-control' %>
+        	</div>
+          <div class="form-group">
+            <%= label_tag :device_group, "Type to Link to" %>
+            <%= select_tag :device_group, options_for_select(@device_groups), :prompt => 'Please select', class:'form-control' %>
+          </div>
+          	<%= hidden_field_tag :network_id, @network.id %>
+          <div class="form-group" id="device_list">
+          </div>
+          
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+         <%= submit_tag "Add Device",  class:"btn btn-default" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
 
+<script>
+  $(document).ready(function() {
+    $('#device_group').change(function() {
+        $.ajax({
+           url: "<%= get_device_list_network_path %>",
+           data: {
+               device_group: $("#device_group option:selected").val()
+           },
+           dataType: "script"
+        });
+    });
+  });
+</script>

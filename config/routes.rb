@@ -15,6 +15,9 @@ Rails.application.routes.draw do
     resources :device_groups
   end
 
+  get 'networks/device_list' => 'networks#get_device_list', as: :get_device_list_network
+  post 'networks/add_address' => 'networks#add_address', as: :add_address_network
+
 
   get 'kb/tags/:tag' => 'articles#index', as: :tag
 
