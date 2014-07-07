@@ -8,6 +8,8 @@ class ArticlesController < ApplicationController
   def index
     if params[:tag]
       @articles = Article.tagged_with(params[:tag])
+    elsif params[:search]
+      @articles = Article.search(params[:search])
     else
       @articles = Article.all
     end

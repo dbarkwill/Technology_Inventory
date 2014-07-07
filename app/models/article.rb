@@ -23,5 +23,9 @@ class Article < ActiveRecord::Base
 			Tag.where(name: n.strip).first_or_create!
 		end
 	end
+
+	def self.search(query)
+	  where("title like ? OR summary like ? OR content like ?", "%#{query}%", "%#{query}%", "%#{query}%") 
+	end
 	
 end
