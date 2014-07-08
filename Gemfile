@@ -52,3 +52,6 @@ gem 'jquery-turbolinks'
 
 # Devise Authentication
 gem 'devise'
+
+# Pundit Authorization
+gem 'pundit'
