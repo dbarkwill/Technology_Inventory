@@ -28,22 +28,25 @@
 			<div class="panel panel-default">
 				<div class="panel-body">
 					<p>
-					<strong>First Name:</strong> <%= @user.first_name %>
+						<strong>First Name:</strong> <%= @user.first_name %>
 					</p>
 					<p>
-					<strong>Last Name:</strong> <%= @user.last_name %>
+						<strong>Last Name:</strong> <%= @user.last_name %>
 					</p>
 					<p>
-					<strong>Email:</strong> <%= @user.email %>
+						<strong>Email:</strong> <%= @user.email %>
 					</p>
 					<p>
-					<strong>Sign in Count:</strong> <%= @user.sign_in_count %>
+						<strong>Role:</strong> <%= @user.role.titleize %>
 					</p>
 					<p>
-					<strong>Last Sign in Time:</strong> <%= @user.last_sign_in_at %>
+						<strong>Sign in Count:</strong> <%= @user.sign_in_count %>
 					</p>
 					<p>
-					<strong>Last Sign in IP:</strong> <%= @user.last_sign_in_ip %>
+						<strong>Last Sign in Time:</strong> <%= @user.last_sign_in_at %>
+					</p>
+					<p>
+						<strong>Last Sign in IP:</strong> <%= @user.last_sign_in_ip %>
 					</p>
 				</div>
 			</div>
