@@ -11,13 +11,13 @@
     </div>
   <% end %>
 <div class="row">
-  <div class="col-md-4">
+  <div class="col-md-12">
     <div class="form-group">
       <%= f.label :name %><br>
       <%= f.text_field :name, class:"form-control" %>
     </div>
   </div>
-  <div class="col-md-4">
+  <div class="col-md-12">
     <div class="form-group">
       <%= f.label :asset_tag %><br>
       <%= f.text_field :asset_tag, class:"form-control" %>
@@ -27,7 +27,7 @@
   <% if @device.device_group %>
     <% @attr_list.each do |a| %>
       <%= f.fields_for a, index: a.attr.id do |attr_fields| %>
-        <div class="col-md-4">
+        <div class="col-md-12">
           <div class="form-group">
             <%= attr_fields.label :value, "#{a.attr.name} #{a.attr.unit}" %><br>
             <%= attribute_form_generator(attr_fields, a) %>
@@ -43,6 +43,7 @@
     </div>
   </div>
 </div>
+<hr class="hr-divide">
 <div class="row">
   <div class="col-md-12">
   <br>
