@@ -2,12 +2,12 @@
 	<div class="col-md-6 col-md-offset-3">
 		<div class="panel panel-default">
 			<div class="panel-body">
-				<h1>Edit <%= @device_group.name.singularize %></h1>
+				<h1>edit <%= @device_group.name.singularize.downcase %></h1>
 				<hr class="hr-divide">
 				<%= render 'form' %>
 			</div>
 		</div>
-		<a href="<%= device_types_path(@device_group.name) %>" class="btn btn-default"><span class="glyphicon glyphicon-arrow-left"></span>&nbsp;Back</a>
+		<a href="<%= device_types_path(@device_group.name) %>" class="btn btn-default"><span class="glyphicon glyphicon-arrow-left"></span>&nbsp;back</a>
 	</div>
 </div>
 <hr class="hr-divide">

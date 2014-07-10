@@ -47,7 +47,7 @@ Rails.application.routes.draw do
 
   resources :devices
 
-  root 'networks#index'
+  root 'static_pages#home'
 
   resources :addresses
 

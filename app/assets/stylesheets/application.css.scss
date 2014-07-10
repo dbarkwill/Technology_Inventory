@@ -20,6 +20,7 @@
  @import 'bootstrap';
 
 body{
+    font-family: 'Open Sans',Arial,Helvetica,Sans-Serif;
 	padding-top: 70px;
 	background-color: #EEEEEE !important;
 }
@@ -29,7 +30,19 @@ body{
 }
 
 .panel-heading a {
-	color: black;
+	color: #FBFBFB;
+}
+
+.container .jumbotron {
+    background-color: #303030;
+    border-radius: 0px;
+    color: #FBFBFB;
+}
+
+.panel-default > .panel-heading {
+    background-color: #303030 !important;
+    border-radius: 0px;
+    color: #FBFBFB;
 }
 
 ul.nav-stacked a {
@@ -137,6 +150,7 @@ ul.nav-pills li.active {
 
 .panel {
     border-radius: 0px;
+    border: 1px solid #C5C5C5;
 }
 
 .btn {
@@ -145,10 +159,16 @@ ul.nav-pills li.active {
 }
 
 .label {
+    font-family: 'Open Sans',Arial,Helvetica,Sans-Serif;
     border-radius: 0px;
 }
 
 .form-control {
+    border-radius: 0px;
+}
+
+.modal-content {
+    margin-top: 100px;
     border-radius: 0px;
 }
 

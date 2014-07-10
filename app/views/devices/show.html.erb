@@ -156,14 +156,14 @@
 <div class="row hidden-xs hiddem-sm">
   <div class="col-xs-12">
     <a href="<%= device_types_path(@device_group.name) %>" class="btn btn-default">
-      <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;Back
+      <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;back
     </a>
   </div>
 </div>
 <div class="row visible-xs visible-sm">
   <div class="col-xs-12">
     <a href="<%= device_types_path(@device_group.name) %>" class="btn btn-block btn-default">
-      <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;Back
+      <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;back
     </a>
   </div>
 </div>
@@ -177,7 +177,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h4 class="modal-title" id="myModalLabel">Add IP Address</h4>
+        <h4 class="modal-title" id="myModalLabel">add ip address</h4>
       </div>
       <div class="modal-body">
         <%= form_for(@new_ip) do |f| %>
@@ -193,7 +193,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-         <%= f.submit "Add IP Address",  class:"btn btn-primary" %>
+         <%= f.submit "add address",  class:"btn btn-default" %>
         <% end %>
       </div>
     </div>
