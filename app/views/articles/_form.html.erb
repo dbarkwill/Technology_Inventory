@@ -10,35 +10,48 @@
       </ul>
     </div>
   <% end %>
+
 <div class="row">
   <div class="col-md-4">
-    <div class="form-group">
-      <%= f.label :title %><br>
-      <%= f.text_field :title, class:"form-control" %>
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <div class="form-group">
+          <%= f.label :title %><br>
+          <%= f.text_field :title, class:"form-control" %>
+        </div>
+        <div class="form-group">
+          <%= f.label :tag_list, "Tags (seperated by commas)" %><br>
+          <%= f.text_field :tag_list, class:"form-control" %>
+        </div>
+        <div class="form-group">
+          <%= f.check_box :published %> <%= f.label :published,'Publish to Knowledge Base' %>
+        </div>
+        <div class="form-group">
+          <%= f.check_box :front_page %> <%= f.label :front_page,'Publish to Front Page' %>
+        </div>
+      </div>
     </div>
   </div>
-</div>
-<div class="row">
-  <div class="col-md-4">
-    <div class="form-group">
-      <%= f.label :tag_list, "Tags (seperated by commas)" %><br>
-      <%= f.text_field :tag_list, class:"form-control" %>
+  <div class="col-md-8">
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <div class="form-group">
+          <%= f.label :summary %><br>
+          <%= f.text_area :summary, class:"form-control", rows:"8" %>
+        </div>
+      </div>
     </div>
   </div>
 </div>
 <div class="row">
   <div class="col-md-12">
-    <div class="form-group">
-      <%= f.label :summary %><br>
-      <%= f.text_area :summary, class:"form-control", rows:"5" %>
-    </div>
-  </div>
-</div>
-<div class="row">
-  <div class="col-md-12">
-    <div class="form-group">
-      <%= f.label :content %><br>
-      <%= f.text_area :content, rows:"20" %>
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <div class="form-group">
+          <%= f.label :content %><br>
+          <%= f.text_area :content, rows:"20"  %>
+        </div>
+      </div>
     </div>
   </div>
 </div>
@@ -51,7 +64,7 @@
 <script src="//tinymce.cachefly.net/4.1/tinymce.min.js"></script>
 <script>
         tinymce.init({
-          selector:'textarea',
+          selector:'textarea#article_content',
           plugins: "table code textpattern fullscreen hr textcolor link advlist ",
           toolbar: "undo redo | bold italic underline | alignleft aligncenter alignright alignjustify | formatselect | fontselect | fontsizeselect | bullist numlist outdent indent |  removeformat ",
           tools: "inserttable",

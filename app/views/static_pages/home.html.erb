@@ -2,24 +2,34 @@
 <h1>tracksIT</h1>
 </div>
 <% if user_signed_in? %>
-	<div class="row">
-		<div class="col-md-3">
-			<div class="panel panel-default">
-				<div class="panel-body">
-					<h3>Article Title</h3>
-					<h5>written by Dakota Barkwill</h5>
-					<h5>on June 13, 2014</h5>
+	<% if @articles.count > 0 %>
+		<% @articles.each do |article| %>
+		<div class="row">
+			<div class="col-md-3">
+				<div class="panel panel-default">
+					<div class="panel-body">
+						<h3><%= article.title %></h3>
+						<h5>written by <%= article.user.name %></h5>
+						<h5>on <%= article.updated_at %></h5>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-9">
+				<div class="panel panel-default">
+					<div class="panel-body">
+						<%= raw article.content %>
+					</div>
 				</div>
 			</div>
 		</div>
-		<div class="col-md-9">
-			<div class="panel panel-default">
-				<div class="panel-body">
-					<p>article content</p>
-				</div>
+		<% end %>
+	<% else %>
+		<div class="panel panel-default">
+			<div class="panel-body">
+				<h3>You can publish articles from the knowledge base to the front page by selecting "Publish to Front Page" when editing a document</h3>
 			</div>
 		</div>
-	</div>
+	<% end %>
 <% else %>
 	<div class="row">
 		<div class="col-md-4">
