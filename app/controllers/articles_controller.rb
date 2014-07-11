@@ -7,11 +7,11 @@ class ArticlesController < ApplicationController
   # GET /articles.json
   def index
     if params[:tag]
-      @articles = Article.tagged_with(params[:tag])
+      @articles = Article.tagged_with(params[:tag]).where(:published => true)
     elsif params[:search]
-      @articles = Article.search(params[:search])
+      @articles = Article.search(params[:search]).where(:published => true)
     else
-      @articles = Article.all
+      @articles = Article.all.where(:published => true)
     end
 
     @tags = Array.new

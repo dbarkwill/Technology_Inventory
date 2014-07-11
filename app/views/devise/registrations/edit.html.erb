@@ -4,7 +4,7 @@
       <div class="panel-body">
         <h2>edit profile</h2>
         <hr class="hr-divide">
-        <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+        <%= form_for(resource, as: resource_name, url: user_registration_path(resource), html: { method: :put }) do |f| %>
           <%= devise_error_messages! %>
           <div class="form-group">
             <%= f.label :first_name %><br />
@@ -47,7 +47,7 @@
     <h3>cancel my account</h3>
     <p>
       Click below to close your account. Your account will need to be recreated by an administrator in the future.
-      <%= button_to "cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete, class:'btn btn-danger' %>
+      <%= button_to "cancel my account", user_registration_path(resource), data: { confirm: "Are you sure?" }, method: :delete, class:'btn btn-danger' %>
     </p>
   </div>
 </div>

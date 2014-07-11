@@ -4,14 +4,16 @@ Rails.application.routes.draw do
 
   as :user do
     get 'users/edit' => 'devise/registrations#edit', :as => 'edit_user_registration'
-    put 'users' => 'devise/registrations#update', :as => 'registration'
+    put 'users/:id' => 'devise/registrations#update', :as => 'user_registration'
   end
 
   resources :people
 
   namespace :admin do
     get '', to: 'dashboard#index', as: :dashboard
-    resources :users
+    resources :users do
+      get 'delete'
+    end
     resources :device_groups
   end
 
