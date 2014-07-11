@@ -28,13 +28,15 @@ class Admin::UsersController < ApplicationController
     @user = User.create(user_params)
     @users = User.all
 
-    # respond_to do |format|
-    #   if @user.save
-    #     format.html { redirect_to admin_user_path(@user), notice: 'User was successfully created.' }
-    #   else
-    #     format.html { render :new }
-    #   end
-    # end
+    respond_to do |format|
+      if @user.save
+        format.html { redirect_to admin_user_path(@user), notice: 'User was successfully created.' }
+        format.js { render :create }
+      else
+        format.html { render :new }
+        format.js { render :create }
+      end
+    end
   end
 
   # PATCH/PUT /networks/1
@@ -42,16 +44,16 @@ class Admin::UsersController < ApplicationController
   def update
     @users = User.all
     @user = User.find(params[:id])
-    
-    @user.update_attributes(user_params)
 
-    # respond_to do |format|
-    #   if @user.update(user_params)
-    #     format.html { redirect_to admin_user_path(@user), notice: 'User was successfully updated.' }
-    #   else
-    #     format.html { render :edit }
-    #   end
-    # end
+    respond_to do |format|
+      if @user.update(user_params)
+        format.html { redirect_to admin_user_path(@user), notice: 'User was successfully updated.' }
+        format.js { render :update }
+      else
+        format.html { render :edit }
+        format.js { render :update }
+      end
+    end
   end
 
   def delete
@@ -63,9 +65,10 @@ class Admin::UsersController < ApplicationController
   def destroy
     @user.destroy
     @users = User.all
-    # respond_to do |format|
-    #   format.html { redirect_to admin_users_path, notice: 'User was successfully destroyed.' }
-    # end
+    respond_to do |format|
+      format.html { redirect_to admin_users_path, notice: 'User was successfully destroyed.' }
+      format.js { render :destroy }
+    end
   end
 
   private
