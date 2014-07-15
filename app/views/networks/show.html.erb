@@ -46,7 +46,9 @@
 								<td><%= @current_device.device_group.name.singularize %></td>
 								<% @current_device = nil %>
 							<% else %>
-								<td colspan="4"></td>
+								<td></td>
+								<td></td>
+								<td></td>
 							<% end %>
 					</tr>
 				<% end %>
@@ -84,7 +86,8 @@
 
 
   $('.datatable').dataTable( {
-    "bSort": false
+    "bSort": false,
+    "iDisplayLength": 64
   } );
 </script>
 
