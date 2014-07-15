@@ -26,7 +26,10 @@ $ rails s
 This will get the server running and will prepopulate the database with all of the default device groups, as well as the administrator user. 
 
 The default login is:
+
+```
 email: admin@testing.com
 password: password
+```
 
 Feel free to change this information once you are up and running. 
