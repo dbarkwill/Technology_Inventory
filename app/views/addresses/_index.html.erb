@@ -1,0 +1,14 @@
+<% if @device.addresses.count > 0 %>
+	<% @device.addresses.each do |a| %>
+		<li class="list-group-item">
+			<%= a.address %><span class="hidden-md"> - <%= a.network.name %></span>
+			<div class="pull-right">
+				<%= link_to 'X', a, method: :delete, remote: true, class:"label label-danger" %>
+			</div>
+		</li>
+	<% end %>
+<% else %>
+	<li class="list-group-item">
+		An IP address has not been assigned to this <%= @device.device_group.name.singularize.downcase %>. Click below to add one.
+	</li>
+<% end %>

@@ -82,13 +82,13 @@
         <div class="panel-heading">
           <h3 class="panel-title">IP Addresses</h3>
         </div>
-          <ul class="list-group">
+          <ul class="list-group" id="address-index">
           <% if @device.addresses.count > 0 %>
             <% @device.addresses.each do |a| %>
               <li class="list-group-item">
                 <%= a.address %><span class="hidden-md"> - <%= a.network.name %></span>
                 <div class="pull-right">
-                  <%= link_to 'X', a, method: :delete, class:"label label-danger" %>
+                  <%= link_to 'X', a, method: :delete, remote: true, class:"label label-danger" %>
                 </div>
               </li>
             <% end %>
@@ -99,9 +99,7 @@
           <% end %>
         </ul>
         <div class="panel-footer">
-          <button data-toggle="modal" data-target="#addIP" class="btn btn-default btn-block">
-            Add IP Address
-          </button>
+          <%= link_to "Add IP Address", new_address_path(:device_id => @device.id),remote: true, class:"btn btn-default btn-block" %>
         </div>
       </div>
       <div class="panel panel-default">
@@ -169,36 +167,9 @@
 </div>
 <hr class="hr-divide">
 
-
-
-
-<div class="modal fade" id="addIP" tabindex="-1" role="dialog" aria-labelledby="addIP" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h4 class="modal-title" id="myModalLabel">add ip address</h4>
-      </div>
-      <div class="modal-body">
-        <%= form_for(@new_ip) do |f| %>
-          <div class="form-group">
-            <%= f.label :network_id, "Network" %>
-            <%= f.collection_select :network_id, Network.all, :id, :name, {:include_blank => "Please Select"}, {:class => "form-control"} %>
-          </div>
-          <div class="form-group">
-            <%= f.label :address %><br>
-            <%= f.text_field :address, class:"form-control" %>
-          </div>
-          <%= hidden_field_tag :device_id, @device.id %>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-         <%= f.submit "add address",  class:"btn btn-default" %>
-        <% end %>
-      </div>
-    </div>
-  </div>
+<div class="modal fade" id="address-modal" tabindex="-1" role="dialog" aria-labelledby="address-modal" aria-hidden="true">
 </div>
+
 
 <% if @device.logs.count > 5 %>
   <div class="modal fade" id="viewHistory" tabindex="-1" role="dialog" aria-labelledby="viewHistory" aria-hidden="true">
