@@ -39,7 +39,10 @@ class AddressesController < ApplicationController
           format.json { render json: @address.errors, status: :unprocessable_entity }
         end
       else
-        format.html { redirect_to @address.device, notice: 'Address is in the wrong format.'}
+        format.html { 
+          flash[:error] = 'Address is not valid for that network'
+          redirect_to :controller => 'devices', :action => 'show', :group => @device.device_group.name, :id => @device
+        }
       end
     end
   end
