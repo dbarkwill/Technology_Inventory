@@ -15,13 +15,13 @@ Getting Started
 
 To setup the development environment:
 
-'''
+```
 $ git clone https://github.com/dbarkwill/Technology_Inventory
 $ bundle install
 $ rake db:migrate
 $ rake db:seed
 $ rails s
-'''
+```
 
 This will get the server running and will prepopulate the database with all of the default device groups, as well as the administrator user. 
 
