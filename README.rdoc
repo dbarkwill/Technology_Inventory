@@ -1,28 +1,32 @@
-== README
+Technology Inventory
+=====================
+<i>Helping to organize every day IT<i>
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Objective
+---------------------
+Technology Inventory is a project that helps organize your IT infrastructure. Everything from Networks, Devices, and People can all be organized in an easy to view manner. Devices can be related to multiple different networks and to the People whom they belong to.
 
-Things you may want to cover:
+Technology Inventory also helps organize documentation through the creation of knowledge base articles. Articles can be related to devices and device groups to help keep tabs on configurations and important information on everything. 
 
-* Ruby version
+This project is a continuous endevor. There is plans for more features to be added, with several already in development.
 
-* System dependencies
+Getting Started
+---------------------
 
-* Configuration
+To setup the development environment:
 
-* Database creation
+'''
+$ git clone https://github.com/dbarkwill/Technology_Inventory
+$ bundle install
+$ rake db:migrate
+$ rake db:seed
+$ rails s
+'''
 
-* Database initialization
+This will get the server running and will prepopulate the database with all of the default device groups, as well as the administrator user. 
 
-* How to run the test suite
+The default login is:
+email: admin@testing.com
+password: password
 
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+Feel free to change this information once you are up and running. 

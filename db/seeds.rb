@@ -139,3 +139,5 @@ group0.attrs << attrb02
 group0.attrs << attrb03
 group0.attrs << attrb04
 group0.attrs << attrb05
+
+user = User.create(first_name: "The", last_name: "Administrator", email: "admin@testing.com", password:"password", role:"admin")
