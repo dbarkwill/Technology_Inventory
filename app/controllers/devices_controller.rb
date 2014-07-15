@@ -1,5 +1,5 @@
 class DevicesController < ApplicationController
-  before_action :set_device, only: [:show, :edit, :update, :destroy, :clear_history]
+  before_action :set_device, only: [:show, :edit, :update, :destroy, :clear_history, :device_info]
   before_action :set_group
 
   # GET /devices
@@ -38,6 +38,12 @@ class DevicesController < ApplicationController
   def show
     @new_ip = Address.new
     @checkout_history = CheckoutHistory.new
+  end
+
+  def device_info
+    respond_to do |format|
+      format.js { render :device_info}
+    end
   end
 
   # GET /devices/new

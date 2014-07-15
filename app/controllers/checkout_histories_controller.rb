@@ -52,18 +52,20 @@ class CheckoutHistoriesController < ApplicationController
   def create
     @checkout_history = CheckoutHistory.new(checkout_history_params)
 
-    @device = @checkout_history.device
+    unless params[:checkout_history][:device_id]
+      @checkout_history.device = Device.find_by(:id => params[:device_id])
+    end
 
-    @device.checkedout = true
-    @device.logs.create(:message => "Device loaned to #{@checkout_history.name}")
-    @device.save
+    @checkout_history.device.checkedout = true
+    @checkout_history.device.logs.create(:message => "Device loaned to #{@checkout_history.name}")
+    @checkout_history.device.save
 
     @checkout_history.checked_in = false
 
     respond_to do |format|
       if @checkout_history.save
         if params[:redir]
-          format.html { redirect_to(:controller => 'devices', :action => 'show', :group => @device.device_group.name, :id => @device) }
+          format.html { redirect_to(:controller => 'devices', :action => 'show', :group => @checkout_history.device.device_group.name, :id => @checkout_history.device) }
         else
           format.html { redirect_to checkout_histories_url, notice: 'Checkout history was successfully created.' }
           format.json { render :show, status: :created, location: @checkout_history }

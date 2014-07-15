@@ -29,22 +29,22 @@
 <hr class="hr-divider">
 <div class="row">
   <div class="col-md-9">
-    <div class="col-md-4">
-      <% if @device.checkedout %>
-        <div class="panel panel-danger">
-          <div class="panel-heading">
-            <h3 class="panel-title">Loaned Out</h3>
-          </div>
+    <% if @device.checkedout %>
+      <div class="col-md-4">
+        <div class="panel panel-default">
           <div class="panel-body">
+            <h4 class="panel-title">Loaned Out</h4>
+            <hr class="hr-divide">
             to <%= @device.checkout_histories.last.name %>
           </div>
         </div>
-      <% end %>
+      </div>
+    <% end %>
+    <div class="col-md-4">
       <div class="panel panel-default">
-        <div class="panel-heading">
-          <h3 class="panel-title">Asset Tag</h3>
-        </div>
         <div class="panel-body">
+          <h4 class="panel-title">Asset Tag</h4>
+          <hr class="hr-divide">
           <%= @device.asset_tag %>
         </div>
       </div>
@@ -53,10 +53,9 @@
       <% if attrb.value != nil && attrb.value != '' %>
         <div class="col-md-4">
           <div class="panel panel-default">
-            <div class="panel-heading">
-              <h3 class="panel-title"><%= attrb.attr.name %>
-            </div>
             <div class="panel-body">
+              <h4 class="panel-title"><%= attrb.attr.name %></h4>
+              <hr class="hr-divide">
               <%= attrb.value %>
             </div> 
           </div>
@@ -66,10 +65,9 @@
     <% unless @device.notes == '' || @device.notes == nil %>
       <div class="col-md-12">
         <div class="panel panel-default">
-          <div class="panel-heading">
-            <h3 class="panel-title">Notes</h3>
-          </div>
           <div class="panel-body">
+            <h4 class="panel-title">Notes</h4>
+            <hr class="hr-divide">
             <%= @device.notes %>
           </div>
         </div>

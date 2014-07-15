@@ -39,6 +39,8 @@ Rails.application.routes.draw do
 
   resources :attrs
 
+  
+  get 'devices/:id/device_info' => 'devices#device_info', as: :device_info
   get 'devices/:group' => 'devices#index', as: :device_types
   get 'devices/:group/new' => 'devices#new', as: :device_group_new
   get 'devices/:group/:id' => 'devices#show', as: :device_group_show
