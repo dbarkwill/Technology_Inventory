@@ -1,0 +1,13 @@
+toolbar:
+	- undo redo | formatselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent |  link | forecolor backcolor
+plugins:
+	- table
+	- code
+	- textpattern
+	- fullscreen
+	- hr
+	- textcolor
+	- link
+	- advlist
+tools:
+	- inserttable

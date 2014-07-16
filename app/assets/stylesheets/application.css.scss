@@ -221,3 +221,13 @@ ul.nav-pills li.active {
     border-radius: 0px;
     background-color: #8D0000;
 }
+
+.form-control-h1{
+    background-color: transparent;
+    border: none;
+    @extend h1;
+}
+.form-control-no-border{
+    @extend .form-control;
+    border: none;
+}

@@ -1,0 +1,127 @@
+<script type="text/javascript">
+        tinyMCE.init({
+          selector:'.tinymce',
+          plugins: "table code textpattern fullscreen hr textcolor link advlist ",
+          toolbar: "undo redo | formatselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent |  link | forecolor backcolor ",
+          tools: "inserttable",
+          table_default_attributes: {
+            class: 'table'
+          }
+        });
+</script>
+<%= form_for @article, remote: true do |f| %>
+<div class="row">
+	<div class="col-md-10">
+		<%= f.text_field :title, class:"form-control-h1" %>
+	</div>
+	<div class="col-xs-2">
+    <div class="pull-right">
+      <br>
+      <div class="btn-group">
+        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+          <span class="glyphicon glyphicon-cog"></span>&nbsp;<span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu dropdown-menu-right" role="menu">
+          <li><a data-toggle="modal" data-target="#relateArticle" href="#">Link Article</a></li>
+          <li><%= link_to "Create new Article", new_article_path %></li>
+          <li><%= link_to "Edit Article", edit_article_path(@article), remote: true, id: 'settings' %></li>
+          <li><%= link_to "Delete Article", article_path(@article), method: :delete, data: { confirm: 'Are you sure?' } %></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+<hr class="hr-divide">
+<div class="row" id="show-content">
+	<div class="col-md-9">
+			<div class="panel panel-default">
+				<div class="panel-body">
+					<div class="form-group">
+	          <%= f.label :summary %><br>
+	          <hr class="hr-divide">
+	          <%= f.text_area :summary, class:"form-control-no-border", rows:"8" %>
+	        </div>
+				</div>
+			</div>
+			<div class="panel panel-default">
+				<div class="panel-body">
+					<div class="form-group">
+		        <%= f.label :content %><br>
+		        <%= f.text_area :content, class:"tinymce", rows:"20" %>
+		      </div>
+	      </div>
+			</div>
+		</div>
+		<div class="col-md-3">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h4 class="panel-title">
+						<span class="glyphicon glyphicon-tags"></span>&nbsp;&nbsp;Tags
+					</h4>
+				</div>
+				<div class="panel-body">
+					<%= f.text_field :tag_list, class:"form-control" %>
+				</div>
+			</div>
+			<div class="panel panel-default">
+				<div class="panel-heading">
+		    		<h4 class="panel-title">
+		    			<span class="glyphicon glyphicon-time"></span>&nbsp;&nbsp; Times
+		    		</h4>
+		    	</div>
+		    	<div class="panel-body">
+				    <ul class="list-unstyled">
+					    <li>Created On: <%= @article.created_at.to_time.strftime("%-m-%-d-%Y") %></li>
+					    <li>Updated On: <%= @article.updated_at.to_time.strftime("%-m-%-d-%Y") %></li>
+				    </ul>
+				</div>
+			</div>
+			<div class="panel panel-default">
+				<div class="panel-heading">
+		    		<h4 class="panel-title">
+		    			<span class="glyphicon glyphicon-pencil"></span>&nbsp;&nbsp; Creator
+		    		</h4>
+		    	</div>
+		    	<div class="panel-body">
+				    <ul class="list-unstyled">
+					    <li><%= @article.user.try(:name) %></li>
+				    </ul>
+				</div>
+			</div>
+			<div class="panel panel-default">
+				<div class="panel-heading">
+		    		<h4 class="panel-title">
+		    			<span class="glyphicon glyphicon-link"></span>&nbsp;&nbsp; Linked To
+		    		</h4>
+		    	</div>
+		    	<div class="panel-body">
+				    <ul class="list-unstyled">
+					    <% @article.devices.each do |device| %>
+					    	<li><%= device.name %></li>
+					    <% end %>
+					    <% @article.device_groups.each do |device_group| %>
+					    	<li><%= device_group.name %></li>
+					    <% end %>
+				    </ul>
+				</div>
+			</div>
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h4 class="panel-title">
+						<span class="glyphicon glyphicon-ok"></span>&nbsp;&nbsp; Publish
+					</h4>
+				</div>
+				<div class="panel-body">
+					<div class="form-group">
+	          <%= f.check_box :published %> <%= f.label :published,'to Knowledge Base' %>
+	        </div>
+	        <div class="form-group">
+	          <%= f.check_box :front_page %> <%= f.label :front_page,'to Front Page' %>
+	        </div>
+				</div>
+			</div>
+			<%= f.submit "update article", class:"btn btn-default btn-block" %>
+			<%= link_to "cancel", @article, class:"btn btn-danger btn-block", 'data-no-turbolink' => true %>
+		</div>
+	<% end %>
+</div>

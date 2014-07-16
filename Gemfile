@@ -55,3 +55,6 @@ gem 'devise'
 
 # Pundit Authorization
 gem 'pundit'
+
+#TinyMCE
+gem 'tinymce-rails'
