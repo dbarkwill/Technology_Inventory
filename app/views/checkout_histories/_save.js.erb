@@ -1,0 +1,9 @@
+$("ul.errors").html("")
+<% if @checkout_history.errors.any? %>
+  <% @checkout_history.errors.full_messages.each do |message| %>
+    $("ul.errors").append($("<li />").html("<%= message.html_safe %>"))
+  <% end %>
+<% else %>
+  $("#checkout-index").html("<%= escape_javascript(render 'index') %>")
+  $("#loan-modal").modal("hide")
+<% end %>

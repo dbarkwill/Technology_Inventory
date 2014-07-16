@@ -15,11 +15,15 @@ class CheckoutHistoriesController < ApplicationController
   # GET /checkout_histories/new
   def new
     @checkout_history = CheckoutHistory.new
-    @dgs = Array.new
-    DeviceGroup.all.each do |dg|
-      @dgs << dg if dg.devices.count > 0
+    if params[:device_id]
+      @device = Device.find_by(:id => params[:device_id])
+    else
+      @dgs = Array.new
+      DeviceGroup.all.each do |dg|
+        @dgs << dg if dg.devices.count > 0
+      end
+      @device_groups = @dgs.each.map { |dg| [dg.name, dg.id] }
     end
-    @device_groups = @dgs.each.map { |dg| [dg.name, dg.id] }
   end
 
   def checkin
@@ -31,12 +35,16 @@ class CheckoutHistoriesController < ApplicationController
 
     respond_to do |format|
       if @checkout_history.save
-        format.html { redirect_to(:controller => 'devices', :action => 'show', :group => @device.device_group.name, :id => @device) }
-        format.json { render :show, status: :created, location: @checkout_history }
-        format.js {
-          @checkout_histories = CheckoutHistory.where(:checked_in => false)
-          render :checkin
-        }
+        if params[:redir]
+          format.js {
+            render 'devices/loan'
+          }
+        else
+          format.js {
+            @checkout_histories = CheckoutHistory.where(:checked_in => false)
+            render :checkin
+          }
+        end
       else
         format.html { render :new }
         format.json { render json: @checkout_history.errors, status: :unprocessable_entity }
@@ -52,7 +60,7 @@ class CheckoutHistoriesController < ApplicationController
   def device_group_select
     @checkout_history = CheckoutHistory.new
     @device_group = DeviceGroup.find_by(:id => params[:device_type])
-    @devices = @device_group.devices.all.map { |d| [d.name, d.id]}
+    @devices = @device_group.devices.all_checked_in.map{|d| [d.name, d.id]}
   end
 
   # POST /checkout_histories
@@ -72,15 +80,27 @@ class CheckoutHistoriesController < ApplicationController
 
     respond_to do |format|
       if @checkout_history.save
-        if params[:redir]
+        if params[:add_from_device]
           format.html { redirect_to(:controller => 'devices', :action => 'show', :group => @checkout_history.device.device_group.name, :id => @checkout_history.device) }
+          format.js {
+            @device = @checkout_history.device
+            render 'devices/loan'
+          }
         else
           format.html { redirect_to checkout_histories_url, notice: 'Checkout history was successfully created.' }
           format.json { render :show, status: :created, location: @checkout_history }
+          format.js {
+            @checkout_histories = CheckoutHistory.where(:checked_in => false)
+            render :create
+          }
         end
       else
         format.html { render :new }
         format.json { render json: @checkout_history.errors, status: :unprocessable_entity }
+        format.js {
+            @checkout_histories = CheckoutHistory.where(:checked_in => false)
+            render :create
+          }
       end
     end
   end

@@ -1,0 +1,24 @@
+<div class="panel-heading">
+  <div class="panel-title">
+    History
+  </div>
+</div>
+<ul class="list-group">
+  <% if @device.logs.count > 0 %>
+    <% @device.logs.order(created_at: :desc).limit(5).each do |log| %>
+      <li class="list-group-item">
+        On <%= log.created_at.to_time.strftime("%-m-%-d-%Y") %>:<br>
+        <%= log.message %>
+      </li>
+    <% end %>
+  <% else %>
+    <li class="list-group-item">No history for this device.</li>
+  <% end %>
+</ul>
+<% if @device.logs.count > 5 %>
+  <div class="panel-footer">
+    <button data-toggle="modal" data-target="#viewHistory" class="btn btn-default btn-block">
+      View Full History
+    </button>
+  </div>
+<% end %>
