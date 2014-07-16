@@ -21,7 +21,9 @@ Rails.application.routes.draw do
     resources :users do
       get 'delete'
     end
-    resources :device_groups
+    resources :device_groups do
+      get 'delete'
+    end
   end
 
   # Routes for networks

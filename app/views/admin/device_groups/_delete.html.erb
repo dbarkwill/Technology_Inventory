@@ -1,0 +1,15 @@
+<div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="myModalLabel">delete device group?</h4>
+      </div>
+	  <div class="modal-body">
+	    Are you sure you wish to delete <b><%= @device_group.name %></b>? This action is not recommeneded if there are any devices assigned to this group.
+	  </div>
+	  <div class="modal-footer">
+	  	<%= link_to "delete user", admin_device_group_path(@device_group), method: :delete, remote: true, class: "btn btn-danger" %>
+	    <%= link_to "cancel", "#", class: "btn", data: {dismiss: "modal"} %>
+	  </div>
+    </div>
+</div>

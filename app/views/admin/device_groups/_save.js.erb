@@ -1,0 +1,10 @@
+$("ul.errors").html("")
+<% if @device_group.errors.any? %>
+  <% @device_group.errors.full_messages.each do |message| %>
+    $("ul.errors").append($("<li />").html("<%= message.html_safe %>"))
+  <% end %>
+<% else %>
+  $("#device-group-index").html("<%= escape_javascript(render 'index') %>")
+  $("#sidebar").html("<%= escape_javascript(render 'shared/admin_sidebar') %>")
+  $("#device-group-modal").modal("hide")
+<% end %>

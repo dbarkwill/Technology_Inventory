@@ -31,9 +31,17 @@ class Admin::DeviceGroupsController < ApplicationController
       if @device_group.save
         format.html { redirect_to @device_group, notice: 'Device group was successfully created.' }
         format.json { render :show, status: :created, location: @device_group }
+        format.js {
+          @device_groups = DeviceGroup.all
+          render :create
+        }
       else
         format.html { render :new }
         format.json { render json: @device_group.errors, status: :unprocessable_entity }
+        format.js {
+          @device_groups = DeviceGroup.all
+          render :create
+        }
       end
     end
   end
@@ -45,11 +53,23 @@ class Admin::DeviceGroupsController < ApplicationController
       if @device_group.update(device_group_params)
         format.html { redirect_to @device_group, notice: 'Device group was successfully updated.' }
         format.json { render :show, status: :ok, location: @device_group }
+        format.js {
+          @device_groups = DeviceGroup.all
+          render :update
+        }
       else
         format.html { render :edit }
         format.json { render json: @device_group.errors, status: :unprocessable_entity }
+        format.js {
+          @device_groups = DeviceGroup.all
+          render :update
+        }
       end
     end
+  end
+
+  def delete
+    @device_group = DeviceGroup.find(params[:device_group_id])
   end
 
   # DELETE /device_groups/1
@@ -59,6 +79,10 @@ class Admin::DeviceGroupsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to device_groups_url, notice: 'Device group was successfully destroyed.' }
       format.json { head :no_content }
+      format.js {
+          @device_groups = DeviceGroup.all
+          render :update
+        }
     end
   end
 
