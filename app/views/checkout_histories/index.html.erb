@@ -17,32 +17,6 @@
   </div>
 </div>
 <hr class="hr-divide">
-<div class="row">
-  <% if @checkout_histories.count > 0 %>
-    <% @checkout_histories.each do |checked_out| %>
-      <div class="col-md-4">
-        <div class="panel panel-default">
-          <div class="panel-heading">
-            <h3 class="panel-title">
-              <%= checked_out.device.name %>
-            </h3>
-          </div>
-          <div class="panel-body">
-            <strong>Device Type: </strong><%= checked_out.device.device_group.name.singularize %><br>
-            <strong>Loaned Out On: </strong><%= checked_out.created_at.to_time.strftime("%-m-%-d-%Y") %><br>
-            <strong>Loaned To: </strong><%= checked_out.name %><br>
-            <strong>Asset Tag: </strong><%= checked_out.device.asset_tag %><br>
-            <strong>Notes: </strong><%= checked_out.notes %>
-          </div>
-          <div class="panel-footer">
-            <%= link_to "Check In", checkin_path(checked_out), class:"btn btn-default btn-block" %>
-          </div>
-        </div>
-      </div>
-    <% end %>
-  <% else %>
-    <div class="col-md-12">
-      <h3>No devices are loaned out at this time.</h3>
-    </div>
-  <% end %>
+<div class="row" id="checkout-index">
+  <%= render 'index' %>
 </div>

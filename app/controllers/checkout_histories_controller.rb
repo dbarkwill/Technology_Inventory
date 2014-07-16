@@ -33,9 +33,17 @@ class CheckoutHistoriesController < ApplicationController
       if @checkout_history.save
         format.html { redirect_to(:controller => 'devices', :action => 'show', :group => @device.device_group.name, :id => @device) }
         format.json { render :show, status: :created, location: @checkout_history }
+        format.js {
+          @checkout_histories = CheckoutHistory.where(:checked_in => false)
+          render :checkin
+        }
       else
         format.html { render :new }
         format.json { render json: @checkout_history.errors, status: :unprocessable_entity }
+        format.js {
+          @checkout_histories = CheckoutHistory.where(:checked_in => false)
+          render :checkin
+        }
       end
     end
 
