@@ -1,0 +1,52 @@
+<div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="myModalLabel">new network</h4>
+      </div>
+      <%= form_for @network, remote: true do |f| %>
+		  <div class="modal-body">
+		    <ul class="errors"></ul>
+		    <div class="row">
+			  <div class="col-md-8">
+			    <div class="form-group">
+			      <%= f.label :name %><br>
+			      <%= f.text_field :name, class:"form-control" %>
+			    </div>
+			    <div class="form-group">
+			      <%= f.label :network %><br>
+			      <%= f.text_field :network, class:"form-control" %>
+			    </div>
+			    <div class="form-group">
+			      <%= f.label :vlan, "vLAN" %><br>
+			      <%= f.number_field :vlan, class:"form-control" %>
+			    </div>
+			    <div class="form-group">
+			      <%= f.label :description %><br>
+			      <%= f.text_area :description, class:"form-control" %>
+			    </div>
+			  </div>
+			  <div class="col-md-4">
+			  <h3>Help</h3>
+				<p>
+					<strong>Name:</strong> The name of the network, used for referencing the network on other parts of the website.
+				</p>
+				<p>
+					<strong>Network:</strong> The network address of the new network, with the subnet. <br>Ex: 192.168.0.1/24
+				</p>
+				<p>
+					<strong>vLAN:</strong> The virtual lan tag of the network, if there is one. If not, leave it blank.
+				</p>
+				<p>
+					<strong>Description:</strong> A description for the network, for reference.
+				</p>
+			  </div>
+			</div>
+		  </div>
+		  <div class="modal-footer">
+		    <%= f.submit 'create network', class: "btn btn-primary" %>
+		    <%= link_to "cancel", "#", class: "btn", data: {dismiss: "modal"} %>
+		  </div>
+		<% end %>
+    </div>
+</div>

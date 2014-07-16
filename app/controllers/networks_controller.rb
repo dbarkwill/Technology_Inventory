@@ -58,9 +58,17 @@ class NetworksController < ApplicationController
       if @network.save
         format.html { redirect_to @network, notice: 'Network was successfully created.' }
         format.json { render :show, status: :created, location: @network }
+        format.js {
+          @networks = Network.all
+          render :create
+        }
       else
         format.html { render :new }
         format.json { render json: @network.errors, status: :unprocessable_entity }
+        format.js {
+          @networks = Network.all
+          render :create
+        }
       end
     end
   end

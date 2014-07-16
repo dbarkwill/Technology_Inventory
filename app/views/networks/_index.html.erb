@@ -1,0 +1,17 @@
+<% @networks.each do |network| %>
+  <div class="col-md-4">
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <div class="pull-right">
+          <%= link_to 'view', network, class:'btn btn-default' %>
+        </div>
+        <h4><%= network.name %></h4>
+        <hr class="hr-divide">
+        <strong>Network: </strong><%= network.network %><br>
+        <strong>vLAN: </strong><%= network.vlan %><br>
+        <strong>Static Devices: </strong><%= network.devices.count %><br>
+        <strong>Description: </strong><%= network.description %>
+      </div>
+    </div>
+  </div>
+<% end %>

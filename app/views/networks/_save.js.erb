@@ -1,0 +1,9 @@
+$("ul.errors").html("")
+<% if @network.errors.any? %>
+  <% @network.errors.full_messages.each do |message| %>
+    $("ul.errors").append($("<li />").html("<%= message.html_safe %>"))
+  <% end %>
+<% else %>
+  $("#network-index").html("<%= escape_javascript(render 'index') %>")
+  $("#network-modal").modal("hide")
+<% end %>
