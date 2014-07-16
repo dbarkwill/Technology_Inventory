@@ -35,9 +35,17 @@ class PeopleController < ApplicationController
       if @person.save
         format.html { redirect_to @person, notice: 'Person was successfully created.' }
         format.json { render :show, status: :created, location: @person }
+        format.js { 
+          @people = Person.all
+          render :create 
+        }
       else
         format.html { render :new }
         format.json { render json: @person.errors, status: :unprocessable_entity }
+        format.js { 
+          @people = Person.all
+          render :create 
+        }
       end
     end
   end
@@ -49,11 +57,24 @@ class PeopleController < ApplicationController
       if @person.update(person_params)
         format.html { redirect_to @person, notice: 'Person was successfully updated.' }
         format.json { render :show, status: :ok, location: @person }
+        format.js {
+          @people = Person.all
+          render :update
+        }
       else
         format.html { render :edit }
         format.json { render json: @person.errors, status: :unprocessable_entity }
+        format.js {
+          @people = Person.all
+          render :update
+        }
       end
     end
+  end
+
+
+  def delete
+    @person = Person.find(params[:person_id])
   end
 
   # DELETE /people/1
@@ -63,6 +84,10 @@ class PeopleController < ApplicationController
     respond_to do |format|
       format.html { redirect_to people_url, notice: 'Person was successfully destroyed.' }
       format.json { head :no_content }
+      format.js {
+        @people = Person.all
+        render :destroy
+      }
     end
   end
 

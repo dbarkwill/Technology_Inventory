@@ -7,7 +7,9 @@ Rails.application.routes.draw do
     put 'users/:id' => 'devise/registrations#update', :as => 'user_registration'
   end
 
-  resources :people
+  resources :people do
+    get 'delete'
+  end
 
   namespace :admin do
     get '', to: 'dashboard#index', as: :dashboard

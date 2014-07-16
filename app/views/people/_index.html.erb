@@ -1,0 +1,11 @@
+<% @people.each do |person| %>
+  <tr>
+    <td><%= link_to person.name, person %></td>
+    <td><%= person.extension %></td>
+    <td><%= person.email %></td>
+    <td>
+      <%= link_to 'Edit', edit_person_path(person), remote: true, class:"label label-default" %> &nbsp;
+      <%= link_to 'Delete', person_delete_path(person), remote: true, class:"label label-default" %>
+    </td>
+  </tr>
+<% end %>
