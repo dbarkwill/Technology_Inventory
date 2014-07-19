@@ -15,7 +15,7 @@
 		          <span class="glyphicon glyphicon-cog"></span>&nbsp;<span class="caret"></span>
 		        </button>
 		        <ul class="dropdown-menu dropdown-menu-right" role="menu">
-		          <li><a data-toggle="modal" data-target="#addAttribute">Add attribute</a></li>
+		          <li><%= link_to "Add attribute", new_attr_path(:device_group_id => @device_group.id), remote: true %></li>
 		          <li><%= link_to "Create New Device Group", new_admin_device_group_path %></li>
 		          <li><%= link_to "Edit Device Group", edit_admin_device_group_path(@device_group) %></li>
 		          <li><%= link_to "Delete Device Group", admin_device_group_path(@device_group), method: :delete, data: { confirm: 'Are you sure?' } %></li>
@@ -27,42 +27,8 @@
 <div class="row">
 	<h2><small>Attributes</small></h2>
 	<div class="panel panel-default">
-		<div class="panel-body">
-			<br>
-			<% @device_group.attrs.each do |attrb| %>
-				<div class="col-md-4">
-					<div class="panel panel-default">
-						<div class="panel-heading">
-							<h4 class="panel-title">
-								<strong><a data-toggle="collapse" href="#<%= attrb.id %>"><%= attrb.name %></a></strong>
-							</h4>
-						</div>
-						<div id="<%= attrb.id %>" class="panel-collapse collapse">
-							<div class="panel-body">
-								<% if attrb.style != '' && attrb.style != nil %>
-									<strong>Attribute Type: </strong><%= attrb.style %><br>
-								<% end %>
-								<% if attrb.unit != '' && attrb.unit != nil %>
-									<strong>Attribute Unit: </strong><%= attrb.unit %></br>
-								<% end %>
-								<% if attrb.values != '' && attrb.values != nil %>
-									<strong>Attribute Values: </strong><%= attrb.values %></br>
-								<% end %>
-							</div>
-							<div class="panel-footer">
-								<div class="btn-group btn-group-justified">
-					                <div class="btn-group">
-					                  <a href="<%= edit_attr_path(attrb) %>" class="btn btn-default" role="button">Edit</a>
-					                </div>
-					                <div class="btn-group">
-					                  <a data-confirm="Are you sure?" data-method="delete" href="<%= attr_path(attrb) %>" rel="nofollow" class="btn btn-inverse" role="button">Delete</a>
-					                </div>
-			              		</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			<% end %>
+		<div class="panel-body" id="attr-index">
+			<%= render 'show_index' %>
 		</div>
 	</div>
 </div>
@@ -73,43 +39,4 @@
 	</div>
 </div>
 
-
-<div class="modal fade" id="addAttribute" tabindex="-1" role="dialog" aria-labelledby="addAttribute" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h4 class="modal-title" id="myModalLabel">Add Attribute</h4>
-      </div>
-      <div class="modal-body">
-        <%= form_for(@attr_new) do |f| %>
-			<div class="form-group">
-				<%= f.label :name %><br>
-				<%= f.text_field :name, class:"form-control" %>
-				<p class="help-block">Name for the attribute.</p>
-			</div>
-			<div class="form-group">
-				<%= f.label :style %><br>
-				<%= f.select(:style, Attr.valid_styles { |value| [ value, value ] }, { :include_blank=>true }, { :class => 'form-control' }) %>
-				<p class="help-block">Type of attribute to add.</p>
-			</div>
-			<div class="form-group">
-				<%= f.label :unit %><br>
-				<%= f.text_field :unit, class:"form-control" %>
-				<p class="help-block">Unit for the attribute. Only used with text-fields.</p>
-			</div>
-			<div class="form-group">
-				<%= f.label :values %><br>
-				<%= f.text_area :values, class:"form-control" %>
-				<p class="help-block">Values for the attribute. Only used with dropdown lists.</p>
-			</div>
-			<%= hidden_field_tag :device_group_id, @device_group.id %><br>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-         <%= f.submit "Add Attribute",  class:"btn btn-primary" %>
-        <% end %>
-      </div>
-    </div>
-  </div>
-</div>
+<div class="modal fade" id="attr-modal" tabindex="-1" role="dialog" aria-labelledby="attr-modal" aria-hidden="true"></div>

@@ -1,0 +1,9 @@
+$("ul.errors").html("")
+<% if @attr.errors.any? %>
+  <% @attr.errors.full_messages.each do |message| %>
+    $("ul.errors").append($("<li />").html("<%= message.html_safe %>"))
+  <% end %>
+<% else %>
+  $("#attr-index").html("<%= escape_javascript(render 'admin/device_groups/show_index') %>")
+  $("#attr-modal").modal("hide")
+<% end %>

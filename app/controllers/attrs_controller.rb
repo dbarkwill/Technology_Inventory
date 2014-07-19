@@ -15,6 +15,7 @@ class AttrsController < ApplicationController
   # GET /attrs/new
   def new
     @attr = Attr.new
+    @device_group = DeviceGroup.find_by(:id => params[:device_group_id])
   end
 
   # GET /attrs/1/edit
@@ -32,9 +33,17 @@ class AttrsController < ApplicationController
       if @attr.save
         format.html { redirect_to admin_device_group_path(@attr.device_group), notice: 'Attribute was successfully created.' }
         format.json { render :show, status: :created, location: @attr }
+        format.js {
+          @device_group = @attr.device_group
+          render :create
+        }
       else
         format.html { render :new }
         format.json { render json: @attr.errors, status: :unprocessable_entity }
+        format.js {
+          @device_group = @attr.device_group
+          render :create
+        }
       end
     end
   end
