@@ -20,6 +20,7 @@ class AttrsController < ApplicationController
 
   # GET /attrs/1/edit
   def edit
+    @device_group = @attr.device_group
   end
 
   # POST /attrs
@@ -55,9 +56,17 @@ class AttrsController < ApplicationController
       if @attr.update(attr_params)
         format.html { redirect_to admin_device_group_path(@attr.device_group), notice: 'Attribute was successfully updated.' }
         format.json { render :show, status: :ok, location: @attr }
+        format.js {
+          @device_group = @attr.device_group
+          render :update
+        }
       else
         format.html { render :edit }
         format.json { render json: @attr.errors, status: :unprocessable_entity }
+        format.js {
+          @device_group = @attr.device_group
+          render :update
+        }
       end
     end
   end
