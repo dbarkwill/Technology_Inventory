@@ -4,39 +4,6 @@
         <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
         <h4 class="modal-title" id="myModalLabel">new attribute</h4>
       </div>
-      <%= form_for @attr, remote: true do |f| %>
-		  <div class="modal-body">
-		    <ul class="errors"></ul>
-		    <div class="row">
-			  <div class="col-md-12">
-			    <div class="form-group">
-			      <%= f.label :name %><br>
-			      <%= f.text_field :name, class:"form-control" %>
-			      <p class="help-block">Name for the attribute.</p>
-			    </div>
-			    <div class="form-group">
-			      <%= f.label :style %><br>
-						<%= f.select(:style, Attr.valid_styles { |value| [ value, value ] }, { :include_blank=>true }, { :class => 'form-control' }) %>
-						<p class="help-block">Type of attribute to add.</p>
-			    </div>
-			    <div class="form-group">
-			      <%= f.label :unit %><br>
-						<%= f.text_field :unit, class:"form-control" %>
-						<p class="help-block">Unit for the attribute. Only used with text-fields.</p>
-			    </div>
-			    <div class="form-group">
-			      <%= f.label :values %><br>
-						<%= f.text_area :values, class:"form-control" %>
-						<p class="help-block">Values for the attribute. Only used with dropdown lists.</p>
-			    </div>
-			    <%= hidden_field_tag :device_group_id, @device_group.id %>
-			  </div>
-			</div>
-		  </div>
-		  <div class="modal-footer">
-		    <%= f.submit 'create attribute', class: "btn btn-primary" %>
-		    <%= link_to "cancel", "#", class: "btn", data: {dismiss: "modal"} %>
-		  </div>
-		<% end %>
+      <%= render 'form' %>
     </div>
 </div>

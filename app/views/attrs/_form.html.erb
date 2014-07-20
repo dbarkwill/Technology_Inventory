@@ -1,38 +1,34 @@
-<%= form_for(@attr) do |f| %>
-  <% if @attr.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@attr.errors.count, "error") %> prohibited this attr from being saved:</h2>
-
-      <ul>
-      <% @attr.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-<div class="row">
-  <div class="col-md-12">
-    <div class="form-group">
-      <%= f.label :name %><br>
-      <%= f.text_field :name, class:"form-control" %>
-    </div>
-    <div class="form-group">
-      <%= f.label :style %><br>
-      <%= f.select(:style, Attr.valid_styles { |value| [ value, value ] }, { :include_blank=>true }, { :class => 'form-control' }) %>
-    </div>
-    <div class="form-group">
-      <%= f.label :unit %><br>
-      <%= f.text_field :unit, class:"form-control" %>
-    </div>
-    <div class="form-group">
-      <%= f.label :values %><br>
-      <%= f.text_area :values, class:"form-control" %>
-    </div>
-    <hr class="hr-divide">
-    <div class="actions">
-      <%= f.submit "Update Attribute",  class:"btn btn-default" %>
+<%= form_for @attr, remote: true do |f| %>
+  <div class="modal-body">
+    <ul class="errors"></ul>
+    <div class="row">
+    <div class="col-md-12">
+      <div class="form-group">
+        <%= f.label :name %><br>
+        <%= f.text_field :name, class:"form-control" %>
+        <p class="help-block">Name for the attribute.</p>
+      </div>
+      <div class="form-group">
+        <%= f.label :style %><br>
+        <%= f.select(:style, Attr.valid_styles { |value| [ value, value ] }, { :include_blank=>true }, { :class => 'form-control' }) %>
+        <p class="help-block">Type of attribute to add.</p>
+      </div>
+      <div class="form-group">
+        <%= f.label :unit %><br>
+        <%= f.text_field :unit, class:"form-control" %>
+        <p class="help-block">Unit for the attribute. Only used with text-fields.</p>
+      </div>
+      <div class="form-group">
+        <%= f.label :values %><br>
+        <%= f.text_area :values, class:"form-control" %>
+        <p class="help-block">Values for the attribute. Only used with dropdown lists.</p>
+      </div>
+      <%= hidden_field_tag :device_group_id, @device_group.id %>
     </div>
   </div>
-</div>
+  </div>
+  <div class="modal-footer">
+    <%= f.submit 'save', class: "btn btn-primary" %>
+    <%= link_to "cancel", "#", class: "btn", data: {dismiss: "modal"} %>
+  </div>
 <% end %>
-
