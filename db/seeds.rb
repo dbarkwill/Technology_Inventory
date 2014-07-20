@@ -8,13 +8,13 @@
 
 
 group1 = DeviceGroup.create(name: "Printers")
-attrb11 = Attr.create(name: "Manufacturer")
-attrb12 = Attr.create(name: "Model")
-attrb13 = Attr.create(name: "MAC")
-attrb14 = Attr.create(name: "Location")
-attrb15 = Attr.create(name: "Printer Queue")
-attrb16 = Attr.create(name: "Serial Number")
-attrb17 = Attr.create(name: "Service Tag")
+attrb11 = Attr.create(name: "Manufacturer", style:"Text Field")
+attrb12 = Attr.create(name: "Model", style:"Text Field")
+attrb13 = Attr.create(name: "MAC", style:"Text Field")
+attrb14 = Attr.create(name: "Location", style:"Text Field")
+attrb15 = Attr.create(name: "Printer Queue", style:"Text Field")
+attrb16 = Attr.create(name: "Serial Number", style:"Text Field")
+attrb17 = Attr.create(name: "Service Tag", style:"Text Field")
 
 group1.attrs << attrb11
 group1.attrs << attrb12
@@ -26,11 +26,11 @@ group1.attrs << attrb17
 
 
 group2 = DeviceGroup.create(name: "Switches")
-attrb21 = Attr.create(name: "Manufacturer")
-attrb22 = Attr.create(name: "Model")
+attrb21 = Attr.create(name: "Manufacturer", style:"Text Field")
+attrb22 = Attr.create(name: "Model", style:"Text Field")
 attrb23 = Attr.create(name: "Port Count", style:"Dropdown List", values:"8 Port, 24 Port, 48 Port, Other")
 attrb24 = Attr.create(name: "PoE Capable", style:"Dropdown List", values:"Yes - Standard PoE, Yes - UBNT 24v/48v PoE, No")
-attrb25 = Attr.create(name: "Location")
+attrb25 = Attr.create(name: "Location", style:"Text Field")
 
 group2.attrs << attrb21
 group2.attrs << attrb22
@@ -40,11 +40,11 @@ group2.attrs << attrb25
 
 
 group3 = DeviceGroup.create(name: "Cameras")
-attrb31 = Attr.create(name: "Location")
-attrb32 = Attr.create(name: "Firmware")
-attrb33 = Attr.create(name: "Model")
-attrb34 = Attr.create(name: "Manufacturer")
-attrb35 = Attr.create(name: "MAC")
+attrb31 = Attr.create(name: "Location", style:"Text Field")
+attrb32 = Attr.create(name: "Firmware", style:"Text Field")
+attrb33 = Attr.create(name: "Model", style:"Text Field")
+attrb34 = Attr.create(name: "Manufacturer", style:"Text Field")
+attrb35 = Attr.create(name: "MAC", style:"Text Field")
 
 group3.attrs << attrb31
 group3.attrs << attrb32
@@ -54,9 +54,9 @@ group3.attrs << attrb35
 
 
 group4 = DeviceGroup.create(name: "Computers")
-attrb41 = Attr.create(name: "User")
-attrb42 = Attr.create(name: "Serial Number")
-attrb43 = Attr.create(name: "Purchase Date")
+attrb41 = Attr.create(name: "User", style:"Person Select")
+attrb42 = Attr.create(name: "Serial Number", style:"Text Field")
+attrb43 = Attr.create(name: "Purchase Date", style:"Text Field")
 attrb44 = Attr.create(name: "Warranty", style:"Dropdown List", values:"In Warranty, Expired")
 
 group4.attrs << attrb41
@@ -66,12 +66,12 @@ group4.attrs << attrb44
 
 
 group5 = DeviceGroup.create(name: "Virtual Machines")
-attrb51 = Attr.create(name: "RAM", unit:"GB")
-attrb52 = Attr.create(name: "HD", unit:"GB")
+attrb51 = Attr.create(name: "RAM", unit:"GB", style:"Text Field")
+attrb52 = Attr.create(name: "HD", unit:"GB", style:"Text Field")
 attrb53 = Attr.create(name: "OS", style:"Dropdown List", values:"Microsoft Windows 7, Microsoft Windows 8, Microsoft Server 2008R2, Microsoft Server 2012R2, Linux Ubuntu, Other")
-attrb54 = Attr.create(name: "MAC")
-attrb55 = Attr.create(name: "Purpose")
-attrb56 = Attr.create(name: "Ports")
+attrb54 = Attr.create(name: "MAC", style:"Text Field")
+attrb55 = Attr.create(name: "Purpose", style:"Text Field")
+attrb56 = Attr.create(name: "Ports", style:"Text Field")
 
 group5.attrs << attrb51
 group5.attrs << attrb52
@@ -82,9 +82,9 @@ group5.attrs << attrb56
 
 
 group6 = DeviceGroup.create(name: "mFi Hardware")
-attrb61 = Attr.create(name: "Location")
-attrb62 = Attr.create(name: "Purpose")
-attrb63 = Attr.create(name: "MAC")
+attrb61 = Attr.create(name: "Location", style:"Text Field")
+attrb62 = Attr.create(name: "Purpose", style:"Text Field")
+attrb63 = Attr.create(name: "MAC", style:"Text Field")
 
 group6.attrs << attrb61
 group6.attrs << attrb62
@@ -94,7 +94,7 @@ group6.attrs << attrb63
 group7 = DeviceGroup.create(name: "iPads")
 attrb71 = Attr.create(name: "Storage", style:"Dropdown List", values:"16GB, 32GB, 64GB, 128GB")
 attrb72 = Attr.create(name: "Cellular", style:"Dropdown List", values:"ATT, Verizon, Sprint, T-Mobile, Other")
-attrb73 = Attr.create(name: "Owner")
+attrb73 = Attr.create(name: "Owner", style:"Person Select")
 
 group7.attrs << attrb71
 group7.attrs << attrb72
@@ -102,8 +102,8 @@ group7.attrs << attrb73
 
 
 group8 = DeviceGroup.create(name: "Routers")
-attrb81 = Attr.create(name: "Port Count")
-attrb82 = Attr.create(name: "Location")
+attrb81 = Attr.create(name: "Port Count", style:"Text Field")
+attrb82 = Attr.create(name: "Location", style:"Text Field")
 
 group8.attrs << attrb81
 group8.attrs << attrb82
@@ -113,10 +113,10 @@ group9 = DeviceGroup.create(name: "Physical Servers")
 attrb91 = Attr.create(name: "HD", unit:"GB")
 attrb92 = Attr.create(name: "RAM", unit:"GB")
 attrb93 = Attr.create(name: "OS", style:"Dropdown List", values:"Microsoft Windows 7, Microsoft Windows 8, Microsoft Server 2008R2, Microsoft Server 2012R2, Linux Ubuntu, Other")
-attrb94 = Attr.create(name: "Purpose")
-attrb95 = Attr.create(name: "Ports")
-attrb96 = Attr.create(name: "Manufacturer")
-attrb97 = Attr.create(name: "MAC")
+attrb94 = Attr.create(name: "Purpose", style:"Text Field")
+attrb95 = Attr.create(name: "Ports", style:"Text Field")
+attrb96 = Attr.create(name: "Manufacturer", style:"Text Field")
+attrb97 = Attr.create(name: "MAC", style:"Text Field")
 
 group9.attrs << attrb91
 group9.attrs << attrb92
@@ -128,11 +128,11 @@ group9.attrs << attrb97
 
 
 group0 = DeviceGroup.create(name: "File Storage")
-attrb01 = Attr.create(name: "Storage")
-attrb02 = Attr.create(name: "Location")
-attrb03 = Attr.create(name: "Manufacturer")
-attrb04 = Attr.create(name: "Model")
-attrb05 = Attr.create(name: "Shares")
+attrb01 = Attr.create(name: "Storage", style:"Text Field")
+attrb02 = Attr.create(name: "Location", style:"Text Field")
+attrb03 = Attr.create(name: "Manufacturer", style:"Text Field")
+attrb04 = Attr.create(name: "Model", style:"Text Field")
+attrb05 = Attr.create(name: "Shares", style:"Text Field")
 
 group0.attrs << attrb01
 group0.attrs << attrb02

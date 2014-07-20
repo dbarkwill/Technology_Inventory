@@ -1,7 +1,7 @@
 <div class="row">
   <div class="col-xs-12">
     <div class="pull-right">
-      <div id="search" class="search-form hidden-sm hidden-xs">
+      <div id="search" class="search-form hidden-sm hidden-xs" data-spy="affix">
         <%= form_tag(devices_path, :method => "get", id: "search-form", class: "navbar-form navbar-right") do %>
           <div class="form-group">
             <%= label_tag :search %><br>
@@ -17,7 +17,8 @@
     </div>
   </div>
 </div>
-
+<div class="spacer-100">
+</div>
 <div class="row">
   <div class="col-md-3 hidden-xs hidden-sm">
     <h3><small>Device Types:</small></h3>

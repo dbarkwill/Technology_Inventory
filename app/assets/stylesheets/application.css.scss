@@ -75,7 +75,6 @@ ul.nav-pills li.active {
 .search-form {
 	background-color: #222222 !important;
 	padding: 20px;
-	padding-bottom: 80px;
 	margin-top: -35px;
 	-webkit-box-sizing: border-box;
 	-moz-box-sizing: border-box;
@@ -84,6 +83,8 @@ ul.nav-pills li.active {
 	border-bottom-right-radius: 5px;
 	box-shadow: 2px 2px 5px #888888;
     border-radius:0px;
+    z-index: 990;
+    margin-bottom: 80px;
 }
 
 .panel-shadowed {
@@ -230,4 +231,7 @@ ul.nav-pills li.active {
 .form-control-no-border{
     @extend .form-control;
     border: none;
+}
+.spacer-100{
+    margin-bottom: 100px;
 }
