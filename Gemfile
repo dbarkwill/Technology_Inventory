@@ -56,5 +56,8 @@ gem 'devise'
 # Pundit Authorization
 gem 'pundit'
 
-#TinyMCE
+# TinyMCE
 gem 'tinymce-rails'
+
+# CarrierWave for file uploads
+gem 'carrierwave'
