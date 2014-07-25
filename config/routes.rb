@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  resources :uploads
+
   # Root View
   root 'static_pages#home'
 
