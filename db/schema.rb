@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140710193433) do
+ActiveRecord::Schema.define(version: 20140725024417) do
 
   create_table "addresses", force: true do |t|
     t.string   "address"
@@ -122,6 +122,14 @@ ActiveRecord::Schema.define(version: 20140710193433) do
 
   create_table "tags", force: true do |t|
     t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "uploads", force: true do |t|
+    t.string   "file"
+    t.string   "uploadable_type"
+    t.integer  "uploadable_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

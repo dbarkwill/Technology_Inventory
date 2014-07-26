@@ -10,6 +10,7 @@
           <span class="glyphicon glyphicon-cog"></span>&nbsp;<span class="caret"></span>
         </button>
         <ul class="dropdown-menu dropdown-menu-right" role="menu">
+          <li><a data-toggle="modal" data-target="#attachFile" href="#">Attach File</a></li>
           <li><a data-toggle="modal" data-target="#relateArticle" href="#">Link Article</a></li>
           <li><%= link_to "Create new Article", new_article_path, 'data-no-turbolink' => true %></li>
           <li><%= link_to "Edit Article", edit_article_path(@article), remote: true, id: 'settings' %></li>
@@ -86,6 +87,22 @@
 			    </ul>
 			</div>
 		</div>
+		<% if @article.uploads.count > 0 %>
+			<div class="panel panel-default">
+				<div class="panel-heading">
+		    		<h4 class="panel-title">
+		    			<span class="glyphicon glyphicon-link"></span>&nbsp;&nbsp; Files
+		    		</h4>
+		    	</div>
+		    	<div class="panel-body">
+				    <ul class="list-unstyled">
+					    <% @article.uploads.each do |upload| %>
+					    	<li><a href="<%= upload.file %>"><%= upload.file %></a></li>
+					    <% end %>
+				    </ul>
+				</div>
+			</div>
+		<% end %>
 	</div>
 </div>
 <hr class="hr-divide">
@@ -101,7 +118,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h4 class="modal-title" id="myModalLabel">Link Article</h4>
+        <h4 class="modal-title" id="myModalLabel">link article</h4>
       </div>
       <div class="modal-body">
         <%= form_for @article, url: {action: "link"}, method: "post" do  %>
@@ -115,8 +132,38 @@
           <%= hidden_field_tag :article, @article.id %>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-         <%= submit_tag "Link Article",  class:"btn btn-primary" %>
+        <button type="button" class="btn btn-default" data-dismiss="modal">close</button>
+         <%= submit_tag "link article",  class:"btn btn-primary" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="attachFile" tabindex="-1" role="dialog" aria-labelledby="attachFile" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel">attach file</h4>
+      </div>
+      <div class="modal-body">
+        <%= form_for @upload, method: "post", :html => {:multipart => true} do |f|  %>
+          <div class="form-group">
+            <%= f.label :file, "File" %>
+            <%= f.file_field :file, class:"form-control" %>
+            <%= f.hidden_field :file_cache %>
+          </div>
+          <div class="form-group" id="linkable_select">
+          </div>
+          
+          <%= f.hidden_field :uploadable_id, :value => @article.id %>
+          <%= f.hidden_field :uploadable_type, :value => @article.class.name %>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">close</button>
+         <%= submit_tag "attach file",  class:"btn btn-primary" %>
         <% end %>
       </div>
     </div>

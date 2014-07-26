@@ -9,6 +9,7 @@ class Device < ActiveRecord::Base
 	has_many :checkout_histories, dependent: :destroy
 	has_many :links, :as => :linkable
 	has_many :articles, :through => :links
+	has_many :uploads, :as => :uploadable, :dependent => :destroy
 
 
 	def MAC

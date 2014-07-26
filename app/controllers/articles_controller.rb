@@ -24,6 +24,7 @@ class ArticlesController < ApplicationController
   # GET /articles/1
   # GET /articles/1.json
   def show
+    @upload = Upload.new
     
   end
 
