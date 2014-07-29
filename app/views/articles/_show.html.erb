@@ -29,12 +29,30 @@
 				<%= raw @article.content %>
 			</div>
 		</div>
+		<hr class="hr-divide">
+		<h4>attached files:</h4>
+		<% if @article.uploads.count > 0 %>
+			<% @article.uploads.each do |file| %>
+				<div class="panel panel-default">
+					<div class="panel-body">
+						<div class="col-md-9">
+							<%= file.name %>
+						</div>
+						<div class="col-md-3">
+							<div class="pull-right">
+								<%= link_to 'view', upload_path(file), remote: true %>
+							</div>
+						</div>
+					</div>
+				</div>
+			<% end %>
+		<% end %>
 	</div>
 	<div class="col-md-3">
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				<h4 class="panel-title">
-					<span class="glyphicon glyphicon-tags"></span>&nbsp;&nbsp;Tags
+					<span class="glyphicon glyphicon-tags"></span>&nbsp;&nbsp; tags
 				</h4>
 			</div>
 			<div class="panel-body">
@@ -48,56 +66,31 @@
 		<div class="panel panel-default">
 			<div class="panel-heading">
 	    		<h4 class="panel-title">
-	    			<span class="glyphicon glyphicon-time"></span>&nbsp;&nbsp; Times
+	    			<span class="glyphicon glyphicon-info-sign"></span>&nbsp;&nbsp; information
 	    		</h4>
 	    	</div>
 	    	<div class="panel-body">
 			    <ul class="list-unstyled">
-				    <li>Created On: <%= @article.created_at.to_time.strftime("%-m-%-d-%Y") %></li>
-				    <li>Updated On: <%= @article.updated_at.to_time.strftime("%-m-%-d-%Y") %></li>
+				    <li>created on: <%= @article.created_at.to_time.strftime("%-m-%-d-%Y") %></li>
+				    <li>updated on: <%= @article.updated_at.to_time.strftime("%-m-%-d-%Y") %></li>
+				    <li>created by: <%= @article.user.try(:name) %></li>
 			    </ul>
 			</div>
 		</div>
-		<div class="panel panel-default">
-			<div class="panel-heading">
-	    		<h4 class="panel-title">
-	    			<span class="glyphicon glyphicon-pencil"></span>&nbsp;&nbsp; Creator
-	    		</h4>
-	    	</div>
-	    	<div class="panel-body">
-			    <ul class="list-unstyled">
-				    <li><%= @article.user.try(:name) %></li>
-			    </ul>
-			</div>
-		</div>
-		<div class="panel panel-default">
-			<div class="panel-heading">
-	    		<h4 class="panel-title">
-	    			<span class="glyphicon glyphicon-link"></span>&nbsp;&nbsp; Linked To
-	    		</h4>
-	    	</div>
-	    	<div class="panel-body">
-			    <ul class="list-unstyled">
-				    <% @article.devices.each do |device| %>
-				    	<li><%= device.name %></li>
-				    <% end %>
-				    <% @article.device_groups.each do |device_group| %>
-				    	<li><%= device_group.name %></li>
-				    <% end %>
-			    </ul>
-			</div>
-		</div>
-		<% if @article.uploads.count > 0 %>
+		<% if @article.devices.count > 0 || @article.device_groups.count > 0 %>
 			<div class="panel panel-default">
 				<div class="panel-heading">
 		    		<h4 class="panel-title">
-		    			<span class="glyphicon glyphicon-link"></span>&nbsp;&nbsp; Files
+		    			<span class="glyphicon glyphicon-link"></span>&nbsp;&nbsp; linked to
 		    		</h4>
 		    	</div>
 		    	<div class="panel-body">
 				    <ul class="list-unstyled">
-					    <% @article.uploads.each do |upload| %>
-					    	<li><a href="<%= upload.file %>"><%= upload.file %></a></li>
+					    <% @article.devices.each do |device| %>
+					    	<li><%= device.name %></li>
+					    <% end %>
+					    <% @article.device_groups.each do |device_group| %>
+					    	<li><%= device_group.name %></li>
 					    <% end %>
 				    </ul>
 				</div>
@@ -105,12 +98,12 @@
 		<% end %>
 	</div>
 </div>
-<hr class="hr-divide">
 <div class="row">
 	<div class="col-md-12">
-		<a href="<%= articles_path %>" class="btn btn-default"><span class="glyphicon glyphicon-arrow-left"></span>&nbsp;Back</a>
+		<a href="<%= articles_path %>" class="btn btn-default"><span class="glyphicon glyphicon-arrow-left"></span>&nbsp;back</a>
 	</div>
 </div>
+<hr class="hr-divide">
 
 
 <div class="modal fade" id="relateArticle" tabindex="-1" role="dialog" aria-labelledby="relateArticle" aria-hidden="true">
@@ -149,13 +142,16 @@
       </div>
       <div class="modal-body">
         <%= form_for @upload, method: "post", :html => {:multipart => true} do |f|  %>
+        	<div class="form-group">
+        		<%= f.label :name %>
+        		<%= f.text_field :name, class:"form-control" %>
+          </div>
           <div class="form-group">
             <%= f.label :file, "File" %>
             <%= f.file_field :file, class:"form-control" %>
             <%= f.hidden_field :file_cache %>
           </div>
-          <div class="form-group" id="linkable_select">
-          </div>
+          
           
           <%= f.hidden_field :uploadable_id, :value => @article.id %>
           <%= f.hidden_field :uploadable_type, :value => @article.class.name %>
@@ -169,3 +165,5 @@
     </div>
   </div>
 </div>
+
+<div class="modal fade" id="file-modal" tabindex="-1" role="dialog" aria-labelledby="file-modal" aria-hidden="true"></div>

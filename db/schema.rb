@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140725024417) do
+ActiveRecord::Schema.define(version: 20140726175214) do
 
   create_table "addresses", force: true do |t|
     t.string   "address"
@@ -132,6 +132,7 @@ ActiveRecord::Schema.define(version: 20140725024417) do
     t.integer  "uploadable_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "name"
   end
 
   create_table "users", force: true do |t|
