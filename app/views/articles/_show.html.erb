@@ -10,7 +10,7 @@
           <span class="glyphicon glyphicon-cog"></span>&nbsp;<span class="caret"></span>
         </button>
         <ul class="dropdown-menu dropdown-menu-right" role="menu">
-          <li><a data-toggle="modal" data-target="#attachFile" href="#">Attach File</a></li>
+          <li><%= link_to 'Attach File', new_upload_path(:article_id => @article.id), remote: true %></li>
           <li><a data-toggle="modal" data-target="#relateArticle" href="#">Link Article</a></li>
           <li><%= link_to "Create new Article", new_article_path, 'data-no-turbolink' => true %></li>
           <li><%= link_to "Edit Article", edit_article_path(@article), remote: true, id: 'settings' %></li>
@@ -31,22 +31,9 @@
 		</div>
 		<hr class="hr-divide">
 		<h4>attached files:</h4>
-		<% if @article.uploads.count > 0 %>
-			<% @article.uploads.each do |file| %>
-				<div class="panel panel-default">
-					<div class="panel-body">
-						<div class="col-md-9">
-							<%= file.name %>
-						</div>
-						<div class="col-md-3">
-							<div class="pull-right">
-								<%= link_to 'view', upload_path(file), remote: true %>
-							</div>
-						</div>
-					</div>
-				</div>
-			<% end %>
-		<% end %>
+		<div id="article-files">
+			<%= render 'file_list' %>
+		</div>
 	</div>
 	<div class="col-md-3">
 		<div class="panel panel-default">

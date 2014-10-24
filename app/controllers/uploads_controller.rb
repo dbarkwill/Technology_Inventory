@@ -15,6 +15,9 @@ class UploadsController < ApplicationController
   # GET /uploads/new
   def new
     @upload = Upload.new
+    if params[:article_id]
+      @item = Article.find(params[:article_id])
+    end
   end
 
   # GET /uploads/1/edit
@@ -25,14 +28,22 @@ class UploadsController < ApplicationController
   # POST /uploads.json
   def create
     @upload = Upload.new(upload_params)
-
+    if @upload.uploadable_type == 'Article'
+      @article = @upload.uploadable
+    end
     respond_to do |format|
       if @upload.save
-        format.html { redirect_to @upload, notice: 'Upload was successfully created.' }
-        format.json { render :show, status: :created, location: @upload }
+        format.html { redirect_to @person, notice: 'Person was successfully created.' }
+        format.json { render :show, status: :created, location: @person }
+        format.js { 
+          render :create 
+        }
       else
         format.html { render :new }
-        format.json { render json: @upload.errors, status: :unprocessable_entity }
+        format.json { render json: @person.errors, status: :unprocessable_entity }
+        format.js { 
+          render :create 
+        }
       end
     end
   end
@@ -69,6 +80,6 @@ class UploadsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def upload_params
-      params.require(:upload).permit(:file, :uploadable_type, :uploadable_id)
+      params.require(:upload).permit(:file, :uploadable_type, :uploadable_id, :name)
     end
 end

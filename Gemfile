@@ -61,3 +61,6 @@ gem 'tinymce-rails'
 
 # CarrierWave for file uploads
 gem 'carrierwave'
+
+# Remotipart for JS file uploads
+gem 'remotipart'

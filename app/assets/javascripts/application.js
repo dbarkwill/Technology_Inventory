@@ -11,11 +11,12 @@
 // about supported directives.
 //
 //= require jquery
+//= require jquery.remotipart
 //= require jquery.turbolinks
-//= require tinymce
 //= require jquery_ujs
+//= require tinymce
 //= require bootstrap
-//= require turbolinks
 //= require dataTables/jquery.dataTables
 //= require dataTables/jquery.dataTables.bootstrap3
+//= require turbolinks
 //= require_tree .
