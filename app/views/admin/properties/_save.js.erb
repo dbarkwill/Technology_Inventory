@@ -1,0 +1,9 @@
+$("ul.errors").html("")
+<% if @property.errors.any? %>
+  <% @property.errors.full_messages.each do |message| %>
+    $("ul.errors").append($("<li />").html("<%= message.html_safe %>"))
+  <% end %>
+<% else %>
+  $("#property-index").html("<%= escape_javascript(render 'index') %>")
+  $("#property-modal").modal("hide")
+<% end %>

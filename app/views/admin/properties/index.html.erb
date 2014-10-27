@@ -1,0 +1,43 @@
+<div class="row">
+  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
+    <%= render 'shared/admin_sidebar' %>
+  </div>
+  <div class="col-md-9">
+    <div class="row">
+      <div class="col-xs-12">
+        <h1>properties</h1>
+      </div>
+    </div>
+    <br>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="panel panel-default">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Style</th>
+                <th>Unit</th>
+                <th>Font-Awesome Style</th>
+                <th>Available Values</th>
+                <th>
+                  <div class="pull-right">
+                    <a href="<%= new_admin_property_path %>" class="btn btn-default btn-xs" data-remote="true">
+                      <span class="glyphicon glyphicon-plus"></span>
+                    </a>
+                  </div>
+                </th>
+              </tr>
+            </thead>
+            <tbody id="property-index">
+              <%= render 'index' %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  <hr class="hr-divide">
+  </div>
+</div>
+
+<div class="modal fade" id="property-modal" tabindex="-1" role="dialog" aria-labelledby="property-modal" aria-hidden="true"></div>
