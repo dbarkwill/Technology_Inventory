@@ -11,43 +11,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140726175214) do
+ActiveRecord::Schema.define(version: 20140725024417) do
 
   create_table "addresses", force: true do |t|
     t.string   "address"
+    t.integer  "network_id"
     t.integer  "device_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "network_id"
   end
 
   create_table "articles", force: true do |t|
-    t.string   "title"
-    t.text     "content"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.text     "summary"
     t.integer  "user_id"
+    t.string   "title"
+    t.text     "summary"
+    t.text     "content"
     t.boolean  "published"
     t.boolean  "front_page"
-  end
-
-  create_table "attr_devices", force: true do |t|
-    t.integer  "attr_id"
-    t.integer  "device_id"
-    t.text     "value"
     t.datetime "created_at"
     t.datetime "updated_at"
-  end
-
-  create_table "attrs", force: true do |t|
-    t.string   "name"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "device_group_id"
-    t.string   "style"
-    t.text     "values"
-    t.string   "unit"
   end
 
   create_table "checkout_histories", force: true do |t|
@@ -61,18 +43,30 @@ ActiveRecord::Schema.define(version: 20140726175214) do
 
   create_table "device_groups", force: true do |t|
     t.string   "name"
+    t.string   "color"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "device_groups_properties", id: false, force: true do |t|
+    t.integer "device_group_id"
+    t.integer "property_id"
+  end
+
+  create_table "device_properties", force: true do |t|
+    t.integer  "property_id"
+    t.integer  "device_id"
+    t.text     "value"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "devices", force: true do |t|
     t.string   "name"
-    t.string   "asset_tag"
-    t.text     "notes"
-    t.datetime "created_at"
-    t.datetime "updated_at"
     t.integer  "device_group_id"
     t.boolean  "checkedout"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "links", force: true do |t|
@@ -110,6 +104,16 @@ ActiveRecord::Schema.define(version: 20140726175214) do
     t.datetime "updated_at"
   end
 
+  create_table "properties", force: true do |t|
+    t.string   "name"
+    t.string   "style"
+    t.string   "unit"
+    t.string   "fa_style"
+    t.text     "values"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "taggings", force: true do |t|
     t.integer  "tag_id"
     t.integer  "article_id"
@@ -130,9 +134,9 @@ ActiveRecord::Schema.define(version: 20140726175214) do
     t.string   "file"
     t.string   "uploadable_type"
     t.integer  "uploadable_id"
+    t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "name"
   end
 
   create_table "users", force: true do |t|
@@ -146,11 +150,11 @@ ActiveRecord::Schema.define(version: 20140726175214) do
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
-    t.datetime "created_at"
-    t.datetime "updated_at"
     t.string   "first_name"
     t.string   "last_name"
     t.integer  "role"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

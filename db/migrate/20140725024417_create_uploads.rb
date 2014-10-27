@@ -4,6 +4,7 @@ class CreateUploads < ActiveRecord::Migration
       t.string :file
       t.string :uploadable_type
       t.integer :uploadable_id
+      t.string :name
 
       t.timestamps
     end

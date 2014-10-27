@@ -25,6 +25,10 @@ Rails.application.routes.draw do
     end
     resources :device_groups do
       get 'delete'
+      get 'add_property' => 'device_groups#add_property', as: :add_property
+    end
+    resources :properties do
+      get 'delete'
     end
   end
 

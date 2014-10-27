@@ -10,8 +10,9 @@
 						<% DeviceGroup.all.each do |group| %>
 							<li <%= cp(admin_device_group_path(group)) %> ><%= link_to group.name, admin_device_group_path(group) %></li>
 						<% end %>
+						
 					</ul>
 				</li>
-
+				<li <%= cp(admin_properties_path) %> ><%= link_to 'Properties', admin_properties_path %></li>
 			</ul>
 		</div>

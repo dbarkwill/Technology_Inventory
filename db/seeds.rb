@@ -7,137 +7,120 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 
-group1 = DeviceGroup.create(name: "Printers")
-attrb11 = Attr.create(name: "Manufacturer", style:"Text Field")
-attrb12 = Attr.create(name: "Model", style:"Text Field")
-attrb13 = Attr.create(name: "MAC", style:"Text Field")
-attrb14 = Attr.create(name: "Location", style:"Text Field")
-attrb15 = Attr.create(name: "Printer Queue", style:"Text Field")
-attrb16 = Attr.create(name: "Serial Number", style:"Text Field")
-attrb17 = Attr.create(name: "Service Tag", style:"Text Field")
+######################
+###   Properties   ###
+######################
 
-group1.attrs << attrb11
-group1.attrs << attrb12
-group1.attrs << attrb13
-group1.attrs << attrb14
-group1.attrs << attrb15
-group1.attrs << attrb16
-group1.attrs << attrb17
+asset_tag = Property.create(name: "Asset Tag", style:"Text Field")
+manufacturer = Property.create(name: "Manufacturer", style:"Text Field")
+model = Property.create(name: "Model", style:"Text Field")
+mac = Property.create(name: "MAC", style:"Text Field")
+location = Property.create(name: "Location", style:"Text Field")
+printer_queue = Property.create(name: "Printer Queue", style:"Text Field")
+serial_number = Property.create(name: "Serial Number", style:"Text Field")
+service_tag = Property.create(name: "Service Tag", style:"Text Field")
+port_count = Property.create(name: "Port Count", style:"Dropdown List", values:"8 Port, 24 Port, 48 Port, Other")
+poe = Property.create(name: "PoE Capable", style:"Dropdown List", values:"Yes - Standard PoE, Yes - UBNT 24v/48v PoE, No")
+firmware = Property.create(name: "Firmware", style:"Text Field")
+user = Property.create(name: "User", style:"Person Select")
+purchase_date = Property.create(name: "Purchase Date", style:"Text Field")
+warranty = Property.create(name: "Warranty", style:"Dropdown List", values:"In Warranty, Expired")
+ram = Property.create(name: "RAM", unit:"GB", style:"Text Field")
+hdd = Property.create(name: "HD", unit:"GB", style:"Text Field")
+os = Property.create(name: "OS", style:"Dropdown List", values:"Microsoft Windows 7, Microsoft Windows 8, Microsoft Server 2008R2, Microsoft Server 2012R2, Linux Ubuntu, Other")
+purpose = Property.create(name: "Purpose", style:"Text Field")
+ports = Property.create(name: "Ports", style:"Text Field")
+flash_storage = Property.create(name: "Flash Storage", style:"Dropdown List", values:"16GB, 32GB, 64GB, 128GB")
+carrier = Property.create(name: "Cellular Carrier", style:"Dropdown List", values:"ATT, Verizon, Sprint, T-Mobile, Other")
+storage = Property.create(name: "Storage", style:"Text Field")
+file_shares = Property.create(name: "File Shares", style:"Text Field")
+hd_count = Property.create(name: "Number of HDs", style:"Text Field")
 
+#########################
+###   Device Groups   ###
+#########################
+printers = DeviceGroup.create(name: "Printers")
+switches = DeviceGroup.create(name: "Switches")
+cameras = DeviceGroup.create(name: "Cameras")
+computers = DeviceGroup.create(name: "Computers")
+virtual_machines = DeviceGroup.create(name: "Virtual Machines")
+mfi_hardware = DeviceGroup.create(name: "mFi Hardware")
+ipads = DeviceGroup.create(name: "iPads")
+routers = DeviceGroup.create(name: "Routers")
+physical_servers = DeviceGroup.create(name: "Physical Servers")
+file_storage = DeviceGroup.create(name: "File Storage")
 
-group2 = DeviceGroup.create(name: "Switches")
-attrb21 = Attr.create(name: "Manufacturer", style:"Text Field")
-attrb22 = Attr.create(name: "Model", style:"Text Field")
-attrb23 = Attr.create(name: "Port Count", style:"Dropdown List", values:"8 Port, 24 Port, 48 Port, Other")
-attrb24 = Attr.create(name: "PoE Capable", style:"Dropdown List", values:"Yes - Standard PoE, Yes - UBNT 24v/48v PoE, No")
-attrb25 = Attr.create(name: "Location", style:"Text Field")
+###################################
+###   Device Group Properties   ###
+###################################
+printers.properties << asset_tag
+printers.properties << manufacturer
+printers.properties << model
+printers.properties << mac
+printers.properties << location
+printers.properties << printer_queue
+printers.properties << serial_number
+printers.properties << service_tag
 
-group2.attrs << attrb21
-group2.attrs << attrb22
-group2.attrs << attrb23
-group2.attrs << attrb24
-group2.attrs << attrb25
+switches.properties << asset_tag
+switches.properties << manufacturer
+switches.properties << model
+switches.properties << port_count
+switches.properties << poe
+switches.properties << location
 
+cameras.properties << asset_tag
+cameras.properties << location
+cameras.properties << firmware
+cameras.properties << model
+cameras.properties << manufacturer
+cameras.properties << mac
 
-group3 = DeviceGroup.create(name: "Cameras")
-attrb31 = Attr.create(name: "Location", style:"Text Field")
-attrb32 = Attr.create(name: "Firmware", style:"Text Field")
-attrb33 = Attr.create(name: "Model", style:"Text Field")
-attrb34 = Attr.create(name: "Manufacturer", style:"Text Field")
-attrb35 = Attr.create(name: "MAC", style:"Text Field")
+computers.properties << asset_tag
+computers.properties << user
+computers.properties << serial_number
+computers.properties << purchase_date
+computers.properties << warranty
 
-group3.attrs << attrb31
-group3.attrs << attrb32
-group3.attrs << attrb33
-group3.attrs << attrb34
-group3.attrs << attrb35
+virtual_machines.properties << ram
+virtual_machines.properties << hdd
+virtual_machines.properties << os
+virtual_machines.properties << mac
+virtual_machines.properties << purpose
+virtual_machines.properties << ports
 
+mfi_hardware.properties << asset_tag
+mfi_hardware.properties << location
+mfi_hardware.properties << purpose
+mfi_hardware.properties << mac
 
-group4 = DeviceGroup.create(name: "Computers")
-attrb41 = Attr.create(name: "User", style:"Person Select")
-attrb42 = Attr.create(name: "Serial Number", style:"Text Field")
-attrb43 = Attr.create(name: "Purchase Date", style:"Text Field")
-attrb44 = Attr.create(name: "Warranty", style:"Dropdown List", values:"In Warranty, Expired")
+ipads.properties << asset_tag
+ipads.properties << flash_storage
+ipads.properties << carrier
+ipads.properties << user
 
-group4.attrs << attrb41
-group4.attrs << attrb42
-group4.attrs << attrb43
-group4.attrs << attrb44
+routers.properties << port_count
+routers.properties << location
 
+physical_servers.properties << asset_tag
+physical_servers.properties << hdd
+physical_servers.properties << ram
+physical_servers.properties << os
+physical_servers.properties << purpose
+physical_servers.properties << ports
+physical_servers.properties << manufacturer
+physical_servers.properties << mac
+physical_servers.properties << purchase_date
 
-group5 = DeviceGroup.create(name: "Virtual Machines")
-attrb51 = Attr.create(name: "RAM", unit:"GB", style:"Text Field")
-attrb52 = Attr.create(name: "HD", unit:"GB", style:"Text Field")
-attrb53 = Attr.create(name: "OS", style:"Dropdown List", values:"Microsoft Windows 7, Microsoft Windows 8, Microsoft Server 2008R2, Microsoft Server 2012R2, Linux Ubuntu, Other")
-attrb54 = Attr.create(name: "MAC", style:"Text Field")
-attrb55 = Attr.create(name: "Purpose", style:"Text Field")
-attrb56 = Attr.create(name: "Ports", style:"Text Field")
+file_storage.properties << asset_tag
+file_storage.properties << storage
+file_storage.properties << hd_count
+file_storage.properties << location
+file_storage.properties << manufacturer
+file_storage.properties << model
+file_storage.properties << file_shares
 
-group5.attrs << attrb51
-group5.attrs << attrb52
-group5.attrs << attrb53
-group5.attrs << attrb54
-group5.attrs << attrb55
-group5.attrs << attrb56
-
-
-group6 = DeviceGroup.create(name: "mFi Hardware")
-attrb61 = Attr.create(name: "Location", style:"Text Field")
-attrb62 = Attr.create(name: "Purpose", style:"Text Field")
-attrb63 = Attr.create(name: "MAC", style:"Text Field")
-
-group6.attrs << attrb61
-group6.attrs << attrb62
-group6.attrs << attrb63
-
-
-group7 = DeviceGroup.create(name: "iPads")
-attrb71 = Attr.create(name: "Storage", style:"Dropdown List", values:"16GB, 32GB, 64GB, 128GB")
-attrb72 = Attr.create(name: "Cellular", style:"Dropdown List", values:"ATT, Verizon, Sprint, T-Mobile, Other")
-attrb73 = Attr.create(name: "Owner", style:"Person Select")
-
-group7.attrs << attrb71
-group7.attrs << attrb72
-group7.attrs << attrb73
-
-
-group8 = DeviceGroup.create(name: "Routers")
-attrb81 = Attr.create(name: "Port Count", style:"Text Field")
-attrb82 = Attr.create(name: "Location", style:"Text Field")
-
-group8.attrs << attrb81
-group8.attrs << attrb82
-
-
-group9 = DeviceGroup.create(name: "Physical Servers")
-attrb91 = Attr.create(name: "HD", unit:"GB")
-attrb92 = Attr.create(name: "RAM", unit:"GB")
-attrb93 = Attr.create(name: "OS", style:"Dropdown List", values:"Microsoft Windows 7, Microsoft Windows 8, Microsoft Server 2008R2, Microsoft Server 2012R2, Linux Ubuntu, Other")
-attrb94 = Attr.create(name: "Purpose", style:"Text Field")
-attrb95 = Attr.create(name: "Ports", style:"Text Field")
-attrb96 = Attr.create(name: "Manufacturer", style:"Text Field")
-attrb97 = Attr.create(name: "MAC", style:"Text Field")
-
-group9.attrs << attrb91
-group9.attrs << attrb92
-group9.attrs << attrb93
-group9.attrs << attrb94
-group9.attrs << attrb95
-group9.attrs << attrb96
-group9.attrs << attrb97
-
-
-group0 = DeviceGroup.create(name: "File Storage")
-attrb01 = Attr.create(name: "Storage", style:"Text Field")
-attrb02 = Attr.create(name: "Location", style:"Text Field")
-attrb03 = Attr.create(name: "Manufacturer", style:"Text Field")
-attrb04 = Attr.create(name: "Model", style:"Text Field")
-attrb05 = Attr.create(name: "Shares", style:"Text Field")
-
-group0.attrs << attrb01
-group0.attrs << attrb02
-group0.attrs << attrb03
-group0.attrs << attrb04
-group0.attrs << attrb05
-
+#################
+###   Users   ###
+#################
 user = User.create(first_name: "The", last_name: "Administrator", email: "admin@testing.com", password:"password", role:"admin")

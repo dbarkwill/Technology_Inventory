@@ -11,18 +11,16 @@ class DevicesController < ApplicationController
       @device_search.each do |device|
         @devices << device
       end
-      @attr_devices_search = AttrDevice.search(params[:search]).order("created_at DESC")
-      @attr_devices_search.each do |attr_device|
-        unless @devices.include? attr_device.device
-          @devices << attr_device.device
+      @device_properties_search = DeviceProperty.search(params[:search]).order("created_at DESC")
+      @device_properties_search.each do |device_property|
+        unless @devices.include? device_property.device
+          @devices << device_property.device
         end
       end
       if @devices.empty?
         @device_group = DeviceGroup.new
         @device_group.name = "Device"
       end
-
-
 
     elsif params[:group] == 'all'
       @devices = Device.all
@@ -31,6 +29,7 @@ class DevicesController < ApplicationController
     else
       @devices = @device_group.devices.all
     end
+    @devices_array = @devices.in_groups(2, false)
   end
 
   # GET /devices/1
@@ -38,6 +37,7 @@ class DevicesController < ApplicationController
   def show
     @new_ip = Address.new
     @checkout_history = CheckoutHistory.new
+    @device_properties_array = @device.device_properties.all.in_groups(2, false)
   end
 
   def device_info
@@ -50,25 +50,25 @@ class DevicesController < ApplicationController
   def new
     @device = Device.new
     @device.device_group = @device_group
-    @attr_list = Array.new
-    @device.attrs.each do |property|
-      @prop = AttrDevice.find_by(:attr => property, :device => @device)
-      if !@prop
-        @prop = AttrDevice.new(:attr => property, :device => @device)
+    @property_list = Array.new
+    @device.properties.each do |property|
+      @property = DeviceProperty.find_by(:property => property, :device => @device)
+      if !@property
+        @property = DeviceProperty.new(:property => property, :device => @device)
       end
-      @attr_list << @prop
+      @property_list << @property
     end
   end
 
   # GET /devices/1/edit
   def edit
-    @attr_list = Array.new
-    @device.attrs.each do |property|
-      @prop = AttrDevice.find_by(:attr => property, :device => @device)
-      if !@prop
-        @prop = AttrDevice.new(:attr => property, :device => @device)
+    @property_list = Array.new
+    @device.properties.each do |property|
+      @property = DeviceProperty.find_by(:property => property, :device => @device)
+      if !@property
+        @property = DeviceProperty.new(:property => property, :device => @device)
       end
-      @attr_list << @prop
+      @property_list << @property
     end
   end
 
@@ -78,9 +78,9 @@ class DevicesController < ApplicationController
     @device = Device.new(device_params)
     @device.device_group = DeviceGroup.find_by(:id => params[:device_group_id])
 
-    params[:device][:attr_device].each do |key,value|
-      @attr = Attr.find_by(:id => key)
-      @attr_device = AttrDevice.create(:attr => @attr, :device => @device, :value => value[:value])
+    params[:device][:device_property].each do |key,value|
+      @property = Property.find_by(:id => key)
+      DeviceProperty.create(:property => @property, :device => @device, :value => value[:value])
     end
 
     respond_to do |format|
@@ -98,26 +98,18 @@ class DevicesController < ApplicationController
   # PATCH/PUT /devices/1
   # PATCH/PUT /devices/1.json
   def update
-    params[:device][:attr_device].each do |key, value|
-      @attr = @device.attr_devices.find_or_create_by(:attr_id => key)
-      if @attr.value != value[:value]
-        @device.logs.create(:message => "#{@attr.attr.name} changed from #{@attr.value} to #{value[:value]}.")
-        @attr.value = value[:value]
-        @attr.save
+    params[:device][:device_property].each do |key, value|
+      @device_property = @device.device_properties.find_or_create_by(:property_id => key)
+      if @device_property.value != value[:value]
+        @device.logs.create(:message => "#{@device_property.property.name} changed from #{@device_property.value} to #{value[:value]}.")
+        @device_property.value = value[:value]
+        @device_property.save
       end
     end
 
     if @device.name != params[:device][:name]
       @device.logs.create(:message => "Device name changed from #{@device.name} to #{params[:device][:name]}.")
     end
-
-    if @device.asset_tag != params[:device][:asset_tag]
-      @device.logs.create(:message => "Device asset tag changed from #{@device.asset_tag} to #{params[:device][:asset_tag]}.")
-    end 
-
-    if @device.notes != params[:device][:notes]
-      @device.logs.create(:message => "Device notes were updated.")
-    end  
 
     respond_to do |format|
       if @device.update(device_params)

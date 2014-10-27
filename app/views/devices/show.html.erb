@@ -1,25 +1,26 @@
 <div class="row">
-  <div class="col-xs-10">
-  <h2>
-    <%= @device.name %>
-    <small><%=@device.device_group.name.singularize %></small>
-  </h2>
-  </div>
-  <div class="col-xs-2">
-    <div class="pull-right">
-      <br>
-      <div class="btn-group">
-        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-          <span class="glyphicon glyphicon-cog"></span>&nbsp;<span class="caret"></span>
-        </button>
-        <ul class="dropdown-menu dropdown-menu-right" role="menu" id="show-menu">
-          <%= render 'show_menu' %>
-        </ul>
+  <div class="col-md-12">
+    <div class="col-md-10">
+      <h2>
+        <%= @device.name %>
+        <small><%=@device.device_group.name.singularize %></small>
+      </h2>
+    </div>
+    <div class="col-md-2">
+      <div class="pull-right">
+        <br>
+        <div class="btn-group">
+          <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+            <span class="glyphicon glyphicon-cog"></span>&nbsp;<span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu dropdown-menu-right" role="menu" id="show-menu">
+            <%= render 'show_menu' %>
+          </ul>
+        </div>
       </div>
     </div>
   </div>
 </div>
-<hr class="hr-divider">
 <div class="row">
   <div class="col-md-9" id="device-attrs">
     <%= render 'device_attrs' %>

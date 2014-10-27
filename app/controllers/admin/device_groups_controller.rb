@@ -10,7 +10,6 @@ class Admin::DeviceGroupsController < ApplicationController
   # GET /device_groups/1
   # GET /device_groups/1.json
   def show
-    @attr_new = Attr.new
   end
 
   # GET /device_groups/new
@@ -20,6 +19,16 @@ class Admin::DeviceGroupsController < ApplicationController
 
   # GET /device_groups/1/edit
   def edit
+  end
+
+  # GET /device_groups/1/add_property
+  def add_property
+    @device_group = DeviceGroup.find_by_id(params[:device_group_id])
+    @p = Array.new
+      Property.all.each do |p|
+        @p << p if !@device_group.properties.all.exists? p
+      end
+      @properties = @p.each.map { |p| [p.name, p.id] }
   end
 
   # POST /device_groups
@@ -49,6 +58,10 @@ class Admin::DeviceGroupsController < ApplicationController
   # PATCH/PUT /device_groups/1
   # PATCH/PUT /device_groups/1.json
   def update
+    if params[:device_group][:properties]
+      @property = Property.find(params[:device_group][:properties])
+      @device_group.properties << @property
+    end
     respond_to do |format|
       if @device_group.update(device_group_params)
         format.html { redirect_to @device_group, notice: 'Device group was successfully updated.' }

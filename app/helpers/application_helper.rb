@@ -1,21 +1,21 @@
 module ApplicationHelper
 
-	def attribute_form_generator(attr_fields, attributeObj)
-		case attributeObj.attr.style.to_s
+	def property_form_generator(property_field, propertyObj)
+		case propertyObj.property.style.to_s
 		when 'Text Field'
-			return attr_fields.text_field :value,  class:"form-control"
+			return property_field.text_field :value,  class:"form-control"
 		when 'Text Area'
-			return attr_fields.text_area :value,  class:"form-control"
+			return property_field.text_area :value,  class:"form-control"
 		when 'Dropdown List'
-			values = attributeObj.attr.values.split(",").each {|v| v.strip!}
-			return attr_fields.select :value, options_for_select(values, :selected => attributeObj.value), { :prompt => true}, { class:"form-control"}
+			values = propertyObj.property.values.split(",").each {|v| v.strip!}
+			return property_field.select :value, options_for_select(values, :selected => propertyObj.value), { :prompt => true}, { class:"form-control"}
 			#return values
 		when 'Person Select'
 			values = Person.all.map {|person| [person.name, person.name]}
-			return attr_fields.select :value, options_for_select(values, :selected => attributeObj.value), { :prompt => true}, { class:"form-control"}
+			return property_field.select :value, options_for_select(values, :selected => propertyObj.value), { :prompt => true}, { class:"form-control"}
 			#return values
 		else
-			return attr_fields.text_field :value, class:"form-control"
+			return property_field.text_field :value, class:"form-control"
 		end
 	end
 

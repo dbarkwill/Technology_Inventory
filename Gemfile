@@ -64,3 +64,6 @@ gem 'carrierwave'
 
 # Remotipart for JS file uploads
 gem 'remotipart'
+
+# Fontawesome Icons
+gem 'font-awesome-rails'

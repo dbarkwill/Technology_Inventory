@@ -1,44 +1,17 @@
-<% if @device.checkedout %>
-  <div class="col-md-4">
+<% @device_properties_array.each do |device_properties_list| %>
+  <div class="col-md-6">
     <div class="panel panel-default">
-      <div class="panel-body">
-        <h4 class="panel-title">Loaned Out</h4>
-        <hr class="hr-divide">
-        to <%= @device.checkout_histories.last.name %>
-      </div>
-    </div>
-  </div>
-<% end %>
-<div class="col-md-4">
-  <div class="panel panel-default">
-    <div class="panel-body">
-      <h4 class="panel-title">Asset Tag</h4>
-      <hr class="hr-divide">
-      <%= @device.asset_tag %>
-    </div>
-  </div>
-</div>
-<% @device.attr_devices.each do |attrb| %>
-  <% if attrb.value != nil && attrb.value != '' %>
-    <div class="col-md-4">
-      <div class="panel panel-default">
-        <div class="panel-body">
-          <h4 class="panel-title"><%= attrb.attr.name %></h4>
-          <hr class="hr-divide">
-          <%= attrb.value %>
-        </div> 
-      </div>
-    </div>
-  <% end %>
-<% end %>
-<% unless @device.notes == '' || @device.notes == nil %>
-  <div class="col-md-12">
-    <div class="panel panel-default">
-      <div class="panel-body">
-        <h4 class="panel-title">Notes</h4>
-        <hr class="hr-divide">
-        <%= @device.notes %>
-      </div>
+      <ul class="list-group">
+        <% device_properties_list.each do |device_property| %>
+          <li class="list-group-item">
+            <h4>
+              <%= fa_icon "#{device_property.property.fa_style}" %>
+              <strong><%= device_property.property.name %>:</strong>
+              <span class="pull-right"><%= device_property.value %></span>
+            </h4>
+          </li>
+        <% end %>
+      </ul>
     </div>
   </div>
 <% end %>
