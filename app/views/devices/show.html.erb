@@ -3,7 +3,7 @@
     <div class="col-md-10">
       <h2>
         <%= @device.name %>
-        <small><%=@device.device_group.name.singularize %></small>
+        <small><%=@device.device_group.name.singularize.downcase %></small>
       </h2>
     </div>
     <div class="col-md-2">
