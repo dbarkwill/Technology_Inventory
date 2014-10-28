@@ -24,11 +24,11 @@ class Admin::DeviceGroupsController < ApplicationController
   # GET /device_groups/1/add_property
   def add_property
     @device_group = DeviceGroup.find_by_id(params[:device_group_id])
-    @p = Array.new
-      Property.all.each do |p|
-        @p << p if !@device_group.properties.all.exists? p
-      end
-      @properties = @p.each.map { |p| [p.name, p.id] }
+    p = Array.new
+    Property.all.each do |property|
+      p << property unless @device_group.properties.all.exists? property
+    end
+    @properties_array = p.in_groups(3, false)
   end
 
   # POST /device_groups
@@ -58,9 +58,11 @@ class Admin::DeviceGroupsController < ApplicationController
   # PATCH/PUT /device_groups/1
   # PATCH/PUT /device_groups/1.json
   def update
-    if params[:device_group][:properties]
-      @property = Property.find(params[:device_group][:properties])
-      @device_group.properties << @property
+    if params[:device_group][:property_ids]
+      params[:device_group][:property_ids].each do |property_id|
+          @property = Property.find(property_id)
+          @device_group.properties << @property
+      end
     end
     respond_to do |format|
       if @device_group.update(device_group_params)
@@ -96,6 +98,31 @@ class Admin::DeviceGroupsController < ApplicationController
           @device_groups = DeviceGroup.all
           render :update
         }
+    end
+  end
+
+  def remove_property
+    @property = Property.find(params[:property_id])
+    @device_group = DeviceGroup.find(params[:device_group_id])
+    @device_group.properties.delete(@property)
+    respond_to do |format|
+      format.js {
+        render :refresh_properties
+      }
+    end
+  end
+
+  def remove_property_from_all
+    @property = Property.find(params[:property_id])
+    @device_group = DeviceGroup.find(params[:device_group_id])
+    @device_group.properties.delete(@property)
+    @property.device_properties.each do |device_property|
+      device_property.destroy
+    end
+    respond_to do |format|
+      format.js {
+        render :refresh_properties
+      }
     end
   end
 

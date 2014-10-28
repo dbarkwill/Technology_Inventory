@@ -23,8 +23,8 @@
 						    	<span class="glyphicon glyphicon-remove"></span>
 							</button>
 							<ul class="dropdown-menu" role="menu">
-						    	<li><a href="#">Remove Property</a></li>
-						    	<li><a href="#">Remove Property and Delete from Existing Devices</a></li>
+						    	<li><%= link_to "Remove Property", admin_device_group_remove_property_path(@device_group.id, property.id), method: :delete, data: { confirm: 'Are you sure?' }, remote: true %></li>
+						    	<li><%= link_to "Remove Property and Delete from Existing Devices", admin_device_group_remove_property_from_all_path(@device_group.id, property.id), method: :delete, data: { confirm: 'Are you sure?' }, remote: true %></li>
 							</ul>
 						</div>
 					</li>

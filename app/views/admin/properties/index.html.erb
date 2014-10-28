@@ -20,11 +20,11 @@
                 <th>Unit</th>
                 <th>Font-Awesome Style</th>
                 <th>Available Values</th>
-                <th>
+                <th width="200">
                   <div class="pull-right">
-                    <a href="<%= new_admin_property_path %>" class="btn btn-default btn-xs" data-remote="true">
+                    <%= link_to new_admin_property_path, class:"btn btn-default btn-xs", remote: true do %>
                       <span class="glyphicon glyphicon-plus"></span>
-                    </a>
+                    <% end %>
                   </div>
                 </th>
               </tr>

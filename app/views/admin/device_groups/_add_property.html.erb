@@ -9,9 +9,15 @@
 		    <ul class="errors"></ul>
 		    <div class="row">
 		      <div class="col-md-12">
-		        <div class="form-group">
-		          <%= f.label 'Property', :properties %>
-		          <%= f.select :properties, options_for_select(@properties), class:'form-control',:prompt => "Please select..." %>
+		      	<div class="form-group">
+			        <% @properties_array.each do |property_group| %>
+			        	<div class="col-md-4">
+			        		<% property_group.each do |property| %>
+			        			<%= check_box_tag "device_group[property_ids][]", property.id %>
+			        			<%= property.name %><br>
+			        		<% end %>
+			        	</div>
+			        <% end %>
 		        </div>
 		      </div>
 		    </div>

@@ -26,6 +26,8 @@ Rails.application.routes.draw do
     resources :device_groups do
       get 'delete'
       get 'add_property' => 'device_groups#add_property', as: :add_property
+      delete 'remove_property/:property_id' => 'device_groups#remove_property', as: :remove_property
+      delete 'remove_property_all/:property_id' => 'device_groups#remove_property_from_all', as: :remove_property_from_all
     end
     resources :properties do
       get 'delete'
