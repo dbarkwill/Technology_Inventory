@@ -22,16 +22,16 @@
   </div>
 </div>
 <div class="row">
-  <div class="col-md-9" id="device-attrs">
+  <div class="col-md-8" id="device-attrs">
     <%= render 'device_attrs' %>
   </div>
-  <div class="col-md-3">
+  <div class="col-md-4">
     <div class="col-xs-12">
       <div class="panel panel-default">
         <div class="panel-heading">
           <h3 class="panel-title">IP Addresses</h3>
         </div>
-          <ul class="list-group" id="address-index">
+        <ul class="list-group" id="address-index">
           <% if @device.addresses.count > 0 %>
             <% @device.addresses.each do |a| %>
               <li class="list-group-item">
@@ -56,42 +56,38 @@
       </div>
       <% if @device.articles.count > 0 || @device.device_group.articles.count > 0 %>
         <div class="panel panel-default">
-            <div class="panel-heading">
-              <div class="panel-title">
-                Linked Articles
-              </div>
-            </div>
-            <div class="panel-body">
-              <ul class="list-unstyled">
-                <% @device.articles.each do |article| %>
-                  <li><%= link_to "#{article.title}", article %></li>
-                <% end %>
-                <% @device.device_group.articles.each do |article| %>
-                  <li><%= link_to "#{article.title}", article %></li>
-                <% end %>
-              </ul>
+          <div class="panel-heading">
+            <div class="panel-title">
+              Linked Articles
             </div>
           </div>
-        <% end %>
-      </div>
+          <div class="panel-body">
+            <ul class="list-unstyled">
+              <% @device.articles.each do |article| %>
+                <li><%= link_to "#{article.title}", article %></li>
+              <% end %>
+              <% @device.device_group.articles.each do |article| %>
+                <li><%= link_to "#{article.title}", article %></li>
+              <% end %>
+            </ul>
+          </div>
+        </div>
+      <% end %>
     </div>
   </div>
-<hr class="hr-divide">
-<div class="row hidden-xs hiddem-sm">
-  <div class="col-xs-12">
-    <a href="<%= device_types_path(@device_group.name) %>" class="btn btn-default">
-      <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;back
-    </a>
-  </div>
+</div>
+<div class="col-md-12 hidden-xs hiddem-sm">
+  <%= link_to device_types_path(@device_group.name), class:"btn btn-default" do %>
+    <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;back
+  <% end %>
 </div>
 <div class="row visible-xs visible-sm">
   <div class="col-xs-12">
-    <a href="<%= device_types_path(@device_group.name) %>" class="btn btn-block btn-default">
+    <%= link_to device_types_path(@device_group.name), class:"btn btn-default" do %>
       <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;back
-    </a>
+    <% end %>
   </div>
 </div>
-<hr class="hr-divide">
 
 <div class="modal fade" id="address-modal" tabindex="-1" role="dialog" aria-labelledby="address-modal" aria-hidden="true">
 </div>

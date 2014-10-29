@@ -10,7 +10,7 @@
 		          <span class="glyphicon glyphicon-cog"></span>&nbsp;<span class="caret"></span>
 		        </button>
 		        <ul class="dropdown-menu dropdown-menu-right" role="menu">
-		        	<li><a data-toggle="modal" data-target="#add_address" href="#">Add current device to network</a></li>
+		          <li><%= link_to "Add current device to network", network_add_address_path(@network), remote: true %></li>
 		          <li><%= link_to "Create New Network", new_network_path %></li>
 		          <li><%= link_to "Edit Network", edit_network_path(@network) %></li>
 		          <li><%= link_to "Delete Network", network_path(@network), method: :delete, data: { confirm: 'Are you sure?' } %></li>
@@ -19,119 +19,26 @@
 		</div>
 	</div>
 </div>
-
-<hr class="hr-divide">
-
+<br>
 <div class="row">
 	<div class="col-md-9">
-		<div class="panel panel-default">
-		<div class="panel-body">
-		<table class="table datatable table-striped">
-			<thead>
-				<tr>
-					<th>IP Address</th>
-					<th>Device Name</th>
-					<th>MAC Address</th>
-					<th>Device Type</th>
-				</tr>
-			</thead>
-			<tbody>
-				<% @ip_list.each_host do |h| %>
-					<tr>
-						<td><%= h %></td>
-						<% @current_device = @devices.detect{|d| d.addresses.detect{|a| a.address.to_s == h.to_s}} 
-							if @current_device %>
-								<td><%= link_to "#{@current_device.name}", device_group_show_path(@current_device.device_group.name, @current_device) %></td>
-								<td><%= @current_device.MAC %></td>
-								<td><%= @current_device.device_group.name.singularize %></td>
-								<% @current_device = nil %>
-							<% else %>
-								<td></td>
-								<td></td>
-								<td></td>
-							<% end %>
-					</tr>
-				<% end %>
-			</tbody>
-		</table>
-		</div>
+		<div id='network-show-index'>
+			<%= render 'show_index' %>
 		</div>
 	</div>
 	<div class="col-md-3">
-		<div class="panel panel-default" data-spy="affix" data-offset-top="100" id="networks">
-			<div class="panel-heading">
-				<div class="panel-title">
-					Network Information
-				</div>
-			</div>
-			<ul class="list-group">
-				<li class="list-group-item"><strong>Name: </strong><%= @network.name %></li>
-				<li class="list-group-item"><strong>Network: </strong><%= @network.network %></li>
-				<li class="list-group-item"><strong>vLAN: </strong><%= @network.vlan %></li>
-				<li class="list-group-item"><strong>Static Devices: </strong><%= @network.devices.count %></li>
-				<li class="list-group-item"><strong>Description: </strong><%= @network.description %></li>
-			</ul>
-			<div class="panel-footer">
-				<a href="<%= networks_path %>" class="btn btn-block btn-default">View All Networks</a>
-			</div>
+		<div id="network-show-sidebar" %>
+			<%= render 'show_sidebar' %>
 		</div>
 	</div>
 </div>
 
-
-
-
-
 <script>
-
-
   $('.datatable').dataTable( {
     "bSort": false,
     "iDisplayLength": 64
   } );
 </script>
 
-<div class="modal fade" id="add_address" tabindex="-1" role="dialog" aria-labelledby="add_address" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h4 class="modal-title" id="myModalLabel">Add device to network</h4>
-      </div>
-      <div class="modal-body">
-        <%= form_for @network, url: {action: "add_address"}, method: "post" do  %>
-        	<div class="form-group">
-        		<%= label_tag :address, "Address" %>
-        		<%= text_field_tag :address, '',class:'form-control' %>
-        	</div>
-          <div class="form-group">
-            <%= label_tag :device_group, "Type to Link to" %>
-            <%= select_tag :device_group, options_for_select(@device_groups), :prompt => 'Please select', class:'form-control' %>
-          </div>
-          	<%= hidden_field_tag :network_id, @network.id %>
-          <div class="form-group" id="device_list">
-          </div>
-          
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-         <%= submit_tag "Add Device",  class:"btn btn-default" %>
-        <% end %>
-      </div>
-    </div>
-  </div>
+<div class="modal fade" id="address-modal" tabindex="-1" role="dialog" aria-labelledby="address-modal" aria-hidden="true">
 </div>
-
-<script>
-  $(document).ready(function() {
-    $('#device_group').change(function() {
-        $.ajax({
-           url: "<%= get_device_list_network_path %>",
-           data: {
-               device_group: $("#device_group option:selected").val()
-           },
-           dataType: "script"
-        });
-    });
-  });
-</script>

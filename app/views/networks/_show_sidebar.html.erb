@@ -1,0 +1,17 @@
+<div class="panel panel-default" data-spy="affix" data-offset-top="100" id="networks">
+	<div class="panel-heading">
+		<div class="panel-title">
+			Network Information
+		</div>
+	</div>
+		<ul class="list-group">
+			<li class="list-group-item"><strong>Name: </strong><%= @network.name %></li>
+			<li class="list-group-item"><strong>Network: </strong><%= @network.network %></li>
+			<li class="list-group-item"><strong>vLAN: </strong><%= @network.vlan %></li>
+			<li class="list-group-item"><strong>Static Devices: </strong><%= @network.devices.count %></li>
+			<li class="list-group-item"><strong>Description: </strong><%= @network.description %></li>
+		</ul>
+	<div class="panel-footer">
+		<a href="<%= networks_path %>" class="btn btn-block btn-default">View All Networks</a>
+	</div>
+</div>

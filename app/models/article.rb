@@ -7,6 +7,8 @@ class Article < ActiveRecord::Base
 	belongs_to :user
 	has_many :uploads, :as => :uploadable, :dependent => :destroy
 
+	scope :published, where(:published => true)
+
 	def self.tagged_with(name)
 		Tag.find_by_name!(name).articles
 	end

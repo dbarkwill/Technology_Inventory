@@ -36,8 +36,11 @@ Rails.application.routes.draw do
 
   # Routes for networks
   get 'networks/device_list' => 'networks#get_device_list', as: :get_device_list_network
-  post 'networks/add_address' => 'networks#add_address', as: :add_address_network
-  resources :networks
+  resources :networks do
+    get 'add_address' => 'networks#add_address', as: :add_address
+    post 'save_address' => 'networks#save_address', as: :save_address
+  end
+
 
   # Routes for articles
   get 'kb/tags/:tag' => 'articles#index', as: :tag

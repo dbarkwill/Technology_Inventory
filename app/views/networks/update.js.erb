@@ -1,0 +1,10 @@
+$("ul.errors").html("")
+<% if @network.errors.any? %>
+  <% @network.errors.values.each do |message| %>
+    $("ul.errors").append($("<li />").html('<%= "#{message[0]}" %>'))
+  <% end %>
+<% else %>
+  $("#network-show-index").html("<%= escape_javascript(render 'show_index') %>")
+  $("#network-show-sidebar").html("<%= escape_javascript(render 'show_sidebar') %>")
+  $("#address-modal").modal("hide")
+<% end %>

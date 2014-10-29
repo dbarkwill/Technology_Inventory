@@ -4,5 +4,6 @@ class Admin::DashboardController < ApplicationController
 
 	def index
 		authorize self
+		@pending_published = Article.where(:published => false)
 	end
 end

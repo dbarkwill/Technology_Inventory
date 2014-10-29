@@ -1,0 +1,45 @@
+<div class="modal-dialog">
+  <div class="modal-content">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+      <h4 class="modal-title" id="myModalLabel">add device to network</h4>
+    </div>
+    <%= form_for @network, remote: true do |f| %>
+      <div class="modal-body">
+      <ul class="errors"></ul>
+        <%= f.fields_for :addresses, f.object.addresses.build do |f_address| %>
+          <div class="form-group">
+            <%= f_address.label :address, "Address" %>
+            <%= f_address.text_field :address, class:'form-control' %>
+          </div>
+          <div class="form-group">
+            <%= label_tag :device_group, "Type to Link to" %>
+            <%= select_tag :device_group, options_for_select(@device_groups), :prompt => 'Please select', class:'form-control' %>
+          </div>
+          <div class="form-group" id="device_list">
+            <%= f_address.label :device %><br>
+            <%= f_address.collection_select :device_id, Device.all, :id, :name, {:include_blank => "Please select above..."}, {:class => "form-control"} %>
+          </div>
+        <% end %>
+      </div>
+      <div class="modal-footer">
+         <%= f.submit "Add Device",  class:"btn btn-default" %>
+         <%= link_to "cancel", "#", class: "btn", data: {dismiss: "modal"} %>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<script>
+  $(document).ready(function() {
+    $('#device_group').change(function() {
+        $.ajax({
+           url: "<%= get_device_list_network_path %>",
+           data: {
+               device_group: $("#device_group option:selected").val()
+           },
+           dataType: "script"
+        });
+    });
+  });
+</script>

@@ -36,9 +36,9 @@ class AddressesController < ApplicationController
     @device = @address.device
     @address.destroy
     respond_to do |format|
-      format.html { redirect_to(:controller => 'devices', :action => 'show', :group => @device.device_group.name, :id => @device) }
+      format.html { redirect_to  }
       format.json { head :no_content }
-      format.js { render :destroy}
+      format.js {render inline: "location.reload();" }
     end
   end
 

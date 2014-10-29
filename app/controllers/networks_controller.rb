@@ -11,8 +11,7 @@ class NetworksController < ApplicationController
   # GET /networks/1.json
   def show
     @ip_list = IPAddress(@network.network)
-    @devices = @network.devices.all
-    @device_groups = DeviceGroup.all.map { |group| [group.name, group.id] }
+    @network_ips = @network.addresses
   end
 
   # GET /networks/new
@@ -21,24 +20,38 @@ class NetworksController < ApplicationController
   end
 
   def add_address
-    @device = Device.find_by(:id => params[:device_id])
-    @address = Address.new(:address => params[:address])
-    @network = Network.find_by(:id => params[:network_id])
-    @address.device = @device
-    @address.network = @network
-    
-    if @device
-      respond_to do |format|
-        if @address.save
-          format.html { redirect_to @network, notice: 'Device added to address.' }
-        else
-          format.html { redirect_to @network, error: 'Problem adding device to address. Try again.' }
-        end
+    @network = Network.find(params[:network_id])
+
+    device_groups = Array.new
+      DeviceGroup.all.each do |device_group|
+        device_groups << device_group if device_group.devices.count > 0
       end
-    else
-      redirect_to @network, error: 'Problem adding device to address. Try again.' 
-    end
+      @device_groups = device_groups.each.map { |device_group| [device_group.name, device_group.id] }
   end
+
+  def save_address
+    
+  end
+
+  # def add_address
+  #   @device = Device.find_by(:id => params[:device_id])
+  #   @address = Address.new(:address => params[:address])
+  #   @network = Network.find_by(:id => params[:network_id])
+  #   @address.device = @device
+  #   @address.network = @network
+    
+  #   if @device
+  #     respond_to do |format|
+  #       if @address.save
+  #         format.html { redirect_to @network, notice: 'Device added to address.' }
+  #       else
+  #         format.html { redirect_to @network, error: 'Problem adding device to address. Try again.' }
+  #       end
+  #     end
+  #   else
+  #     redirect_to @network, error: 'Problem adding device to address. Try again.' 
+  #   end
+  # end
 
   def get_device_list
     @devices = DeviceGroup.find_by(:id => params[:device_group]).devices.all
@@ -76,13 +89,22 @@ class NetworksController < ApplicationController
   # PATCH/PUT /networks/1
   # PATCH/PUT /networks/1.json
   def update
+
     respond_to do |format|
       if @network.update(network_params)
         format.html { redirect_to @network, notice: 'Network was successfully updated.' }
         format.json { render :show, status: :ok, location: @network }
+        format.js { 
+          @ip_list = IPAddress(@network.network)
+          @network_ips = @network.addresses
+          render :update
+        }
       else
         format.html { render :edit }
         format.json { render json: @network.errors, status: :unprocessable_entity }
+        format.js { 
+          render :update
+        }
       end
     end
   end
@@ -105,6 +127,6 @@ class NetworksController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def network_params
-      params.require(:network).permit(:name, :network, :vlan, :description)
+      params.require(:network).permit(:name, :network, :vlan, :description, addresses_attributes: [:id, :address, :device_id, :network_id, :device, :network])
     end
 end

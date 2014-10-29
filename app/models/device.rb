@@ -13,9 +13,9 @@ class Device < ActiveRecord::Base
 
 
 	def MAC
-		self.devices_properties.each do |attrb|
-			if attrb.attr.name.to_s == 'MAC'
-				@MacAddress = attrb.value
+		self.device_properties.each do |device_property|
+			if device_property.property.name.to_s == 'MAC'
+				@MacAddress = device_property.value
 			end
 		end
 		return @MacAddress if @MacAddress
