@@ -20,3 +20,4 @@
 //= require dataTables/jquery.dataTables.bootstrap3
 //= require turbolinks
 //= require_tree .
+

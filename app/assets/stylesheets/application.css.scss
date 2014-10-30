@@ -240,3 +240,14 @@ ul.nav-pills li.active {
 #networks.affix{
     top: 80px;
 }
+
+.form-control-search{
+    @extend .form-control-h1;
+    width: 90%;
+}
+
+.panel-search-heading{
+    @extend .panel-heading;
+    padding: 1px;
+    padding-left: 15px;
+}

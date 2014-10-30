@@ -22,7 +22,7 @@ class Device < ActiveRecord::Base
 	end
 
 	def self.search(query)
-	  where("asset_tag like ? OR name like ? OR notes like ?", "%#{query}%", "%#{query}%", "%#{query}%") 
+	  where("name like ?", "%#{query}%") 
 	end
 
 	def self.all_checked_in

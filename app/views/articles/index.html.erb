@@ -1,23 +1,4 @@
 <div class="row">
-  <div class="col-xs-12">
-    <div class="pull-right">
-      <div id="search" class="search-form hidden-sm hidden-xs">
-        <%= form_tag(articles_path, :method => "get", id: "search-form", class: "navbar-form navbar-right") do %>
-          <div class="form-group">
-            <%= label_tag 'search', :search %><br>
-            <div class="input-group">
-              <%= text_field_tag :search, params[:search], placeholder: "search articles...", class:"form-control" %>
-              <span class="input-group-btn">
-                <button class="btn btn-default" type="submit"><span class="glyphicon glyphicon-search"></span></button>
-              </span>
-            </div>
-          </div>
-        <% end %>
-      </div>
-    </div>
-  </div>
-</div>
-<div class="row">
   <div class="col-xs-10">
     <% if params[:search] %>
       <h1>search results<small> for "<%= params[:search]%>"</small></h1>

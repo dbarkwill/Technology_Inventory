@@ -5,6 +5,10 @@ Rails.application.routes.draw do
   # Root View
   root 'static_pages#home'
 
+  # Seach Methods
+  get 'search/new' => 'searches#new', :as => 'new_search'
+  get 'search/results' => 'searches#search', :as => 'search'
+
   # Devise Configuration
   devise_for :users
   as :user do

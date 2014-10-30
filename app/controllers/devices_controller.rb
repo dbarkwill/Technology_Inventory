@@ -5,24 +5,8 @@ class DevicesController < ApplicationController
   # GET /devices
   # GET /devices.json
   def index
-    if params[:search]
-      @devices = Array.new
-      @device_search = Device.search(params[:search]).order("created_at DESC")
-      @device_search.each do |device|
-        @devices << device
-      end
-      @device_properties_search = DeviceProperty.search(params[:search]).order("created_at DESC")
-      @device_properties_search.each do |device_property|
-        unless @devices.include? device_property.device
-          @devices << device_property.device
-        end
-      end
-      if @devices.empty?
-        @device_group = DeviceGroup.new
-        @device_group.name = "Device"
-      end
 
-    elsif params[:group] == 'all'
+    if params[:group] == 'all'
       @devices = Device.all
       @device_group = DeviceGroup.new
       @device_group.name = "Devices"

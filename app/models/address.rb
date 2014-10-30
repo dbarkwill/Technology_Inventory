@@ -18,5 +18,9 @@ class Address < ActiveRecord::Base
 		end
 	end
 
+	def self.search(query)
+	  where("address like ?", "%#{query}%") 
+	end
+
 	
 end
