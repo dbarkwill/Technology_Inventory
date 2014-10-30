@@ -4,4 +4,6 @@ class DeviceGroup < ActiveRecord::Base
 
 	has_many :links, :as => :linkable
 	has_many :articles, :through => :links
+
+	accepts_nested_attributes_for :properties
 end

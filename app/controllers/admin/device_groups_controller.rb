@@ -31,6 +31,10 @@ class Admin::DeviceGroupsController < ApplicationController
     @properties_array = p.in_groups(3, false)
   end
 
+  def create_property
+    @device_group = DeviceGroup.find_by_id(params[:device_group_id])
+  end
+
   # POST /device_groups
   # POST /device_groups.json
   def create
@@ -134,6 +138,6 @@ class Admin::DeviceGroupsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def device_group_params
-      params.require(:device_group).permit(:name)
+      params.require(:device_group).permit(:name, properties_attributes: [:id, :name, :style, :unit, :values, :fa_style])
     end
 end

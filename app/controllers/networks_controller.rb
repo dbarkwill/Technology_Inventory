@@ -33,25 +33,6 @@ class NetworksController < ApplicationController
     
   end
 
-  # def add_address
-  #   @device = Device.find_by(:id => params[:device_id])
-  #   @address = Address.new(:address => params[:address])
-  #   @network = Network.find_by(:id => params[:network_id])
-  #   @address.device = @device
-  #   @address.network = @network
-    
-  #   if @device
-  #     respond_to do |format|
-  #       if @address.save
-  #         format.html { redirect_to @network, notice: 'Device added to address.' }
-  #       else
-  #         format.html { redirect_to @network, error: 'Problem adding device to address. Try again.' }
-  #       end
-  #     end
-  #   else
-  #     redirect_to @network, error: 'Problem adding device to address. Try again.' 
-  #   end
-  # end
 
   def get_device_list
     @devices = DeviceGroup.find_by(:id => params[:device_group]).devices.all
