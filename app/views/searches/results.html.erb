@@ -27,7 +27,7 @@
 		<div class="list-group">
 			<% @article_results.limit(5).each do |article| %>
 				<%= link_to article_path(article), class:"list-group-item" do %>  
-                    <h4><strong><%= article.name %>:</strong> <%= article.tags %></h4>
+                    <h4><strong><%= article.title %></strong></h4>
                 <% end %>
 			<% end %>
 		</div>

@@ -28,7 +28,7 @@ class Article < ActiveRecord::Base
 	end
 
 	def self.search(query)
-	  where("title like ? OR summary like ? OR content like ?", "%#{query}%", "%#{query}%", "%#{query}%") 
+		where("title like ? OR summary like ? OR content like ?", "%#{query}%", "%#{query}%", "%#{query}%").where(:published =>  true)
 	end
 	
 end
