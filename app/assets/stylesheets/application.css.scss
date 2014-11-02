@@ -251,3 +251,7 @@ ul.nav-pills li.active {
     padding: 1px;
     padding-left: 15px;
 }
+
+.form-control-search:focus{
+    outline-width: 0;
+}

@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  sku: MyString
+  name: MyString
+  description: MyText
+  cost: 1.5
+  on_hand_quantity: 1
+  loaned_out_quantity: 1
+  in_use_quantity: 1
+  serial_numbers: MyText
+  inventory_category_id: 1
+
+two:
+  sku: MyString
+  name: MyString
+  description: MyText
+  cost: 1.5
+  on_hand_quantity: 1
+  loaned_out_quantity: 1
+  in_use_quantity: 1
+  serial_numbers: MyText
+  inventory_category_id: 1

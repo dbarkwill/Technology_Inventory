@@ -1,0 +1,9 @@
+$("ul.errors").html("")
+<% if @inventory_item.errors.any? %>
+  <% @inventory_item.errors.full_messages.each do |message| %>
+    $("ul.errors").append($("<li />").html("<%= message.html_safe %>"))
+  <% end %>
+<% else %>
+  $("#inventory-item-index").html("<%= escape_javascript(render 'index') %>")
+  $("#inventory-item-modal").modal("hide")
+<% end %>

@@ -1,0 +1,53 @@
+<%= form_for(@inventory_item) do |f| %>
+  <% if @inventory_item.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@inventory_item.errors.count, "error") %> prohibited this inventory_item from being saved:</h2>
+
+      <ul>
+      <% @inventory_item.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :sku %><br>
+    <%= f.text_field :sku %>
+  </div>
+  <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :description %><br>
+    <%= f.text_area :description %>
+  </div>
+  <div class="field">
+    <%= f.label :cost %><br>
+    <%= f.text_field :cost %>
+  </div>
+  <div class="field">
+    <%= f.label :on_hand_quantity %><br>
+    <%= f.number_field :on_hand_quantity %>
+  </div>
+  <div class="field">
+    <%= f.label :loaned_out_quantity %><br>
+    <%= f.number_field :loaned_out_quantity %>
+  </div>
+  <div class="field">
+    <%= f.label :in_use_quantity %><br>
+    <%= f.number_field :in_use_quantity %>
+  </div>
+  <div class="field">
+    <%= f.label :serial_numbers %><br>
+    <%= f.text_area :serial_numbers %>
+  </div>
+  <div class="field">
+    <%= f.label :inventory_category_id %><br>
+    <%= f.number_field :inventory_category_id %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

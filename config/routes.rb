@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  resources :inventory_items
+
   resources :uploads
 
   # Root View

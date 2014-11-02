@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140725024417) do
+ActiveRecord::Schema.define(version: 20141102023827) do
 
   create_table "addresses", force: true do |t|
     t.string   "address"
@@ -67,6 +67,21 @@ ActiveRecord::Schema.define(version: 20140725024417) do
     t.boolean  "checkedout"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "inventory_items", force: true do |t|
+    t.string   "sku"
+    t.string   "name"
+    t.text     "description"
+    t.float    "cost"
+    t.integer  "on_hand_quantity"
+    t.integer  "loaned_out_quantity"
+    t.integer  "in_use_quantity"
+    t.text     "serial_numbers"
+    t.integer  "inventory_category_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.boolean  "serial_required"
   end
 
   create_table "links", force: true do |t|
