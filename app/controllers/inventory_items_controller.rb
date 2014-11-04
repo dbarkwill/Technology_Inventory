@@ -4,7 +4,12 @@ class InventoryItemsController < ApplicationController
   # GET /inventory_items
   # GET /inventory_items.json
   def index
-    @inventory_items = InventoryItem.all
+    if params[:category]
+      @inventory_items = InventoryItem.where(:inventory_category_id => params[:category])
+    else
+      @inventory_items = InventoryItem.all
+    end
+    
   end
 
   # GET /inventory_items/1
@@ -12,9 +17,30 @@ class InventoryItemsController < ApplicationController
   def show
   end
 
+  # GET /inventory_items/search_by_sku{sku}
+  def search_by_sku
+    @results = InventoryItem.search_by_sku(params[:sku])
+    if @results.count == 1
+      render :sku_result, :layout => false, :content_type => 'text/html'
+    else
+      head 200, content_type: "text/html"
+    end
+  end
+
   # GET /inventory_items/new
   def new
     @inventory_item = InventoryItem.new
+  end
+
+  # AJAX POST /inventory_items/receive
+  def receive
+    params[:receiving].each do |receive|
+      unless receive[:sku].blank?
+        inventory_item = InventoryItem.find_by_sku(receive[:sku])
+        inventory_item.update_attributes({'on_hand_quantity' => inventory_item.on_hand_quantity.to_i + receive[:amount].to_i})
+      end
+    end
+    @inventory_items = InventoryItem.all
   end
 
   # GET /inventory_items/1/edit
@@ -77,6 +103,6 @@ class InventoryItemsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def inventory_item_params
-      params.require(:inventory_item).permit(:sku, :name, :description, :cost, :on_hand_quantity, :loaned_out_quantity, :in_use_quantity, :serial_numbers, :inventory_category_id)
+      params.require(:inventory_item).permit(:sku, :name, :description, :cost, :on_hand_quantity, :loaned_out_quantity, :in_use_quantity, :serial_numbers, :inventory_category_id, :new_inventory_category_name, :serial_required)
     end
 end

@@ -1,0 +1,5 @@
+<tr>
+	<td><%= @results.first.sku %><%= hidden_field_tag 'receiving[][sku]', @results.first.sku %></td>
+	<td><%= @results.first.name %></td>
+	<td><%= text_field_tag 'receiving[][amount]', nil, class:'form-control' %></td>
+</tr>

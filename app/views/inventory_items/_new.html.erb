@@ -18,16 +18,18 @@
 							<%= f.text_field :name, class:'form-control' %>
 						</div>
 						<div class="form-group">
+							<%= f.label :inventory_category_id, 'Category' %>
+							<%= f.collection_select :inventory_category_id, InventoryCategory.all, :id, :name, {:include_blank => "Please Select"}, {:class => "form-control"} %><br>
+							<p>or create new</p>
+							<%= f.text_field :new_inventory_category_name, class:'form-control' %>
+						</div>
+						<div class="form-group">
 							<%= f.label :description %>
 							<%= f.text_area :description, class:'form-control' %>
 						</div>
 						<div class="form-group">
 							<%= f.label :cost %>
 							<%= f.text_field :cost, class:'form-control' %>
-						</div>
-						<div class="form-group">
-							<%= f.label :inventory_category_id, 'Category' %>
-							<%= f.number_field :inventory_category_id, class:'form-control' %>
 						</div>
 						<div class="form-group">
 							<%= f.label :serial_number_required, 'Serial Number Required?' %>&nbsp;&nbsp;

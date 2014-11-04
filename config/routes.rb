@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
 
+  get 'inventory_items/new_receiving' => 'inventory_items#new_receiving', :as => "new_receiving"
+  post 'inventory_items/receive' => 'inventory_items#receive', :as => "receive"
+  get 'inventory_items/search_by_sku' => 'inventory_items#search_by_sku'
   resources :inventory_items
 
   resources :uploads
