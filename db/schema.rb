@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141102150522) do
+ActiveRecord::Schema.define(version: 20141104181707) do
 
   create_table "addresses", force: true do |t|
     t.string   "address"
@@ -94,6 +94,22 @@ ActiveRecord::Schema.define(version: 20141102150522) do
     t.integer  "article_id"
     t.integer  "linkable_id"
     t.string   "linkable_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "loan_line_items", force: true do |t|
+    t.string   "identifier"
+    t.text     "description"
+    t.integer  "quantity"
+    t.boolean  "returned"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "loans", force: true do |t|
+    t.string   "loanee"
+    t.string   "notes"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

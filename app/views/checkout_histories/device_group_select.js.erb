@@ -1,1 +1,0 @@
-$('#devices_select').empty().append("<%= escape_javascript(label_tag :device_id, 'Device') %><%= escape_javascript(select :checkout_history, :device_id, options_for_select(@devices), {} ,{:class => 'form-control' })%>");

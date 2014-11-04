@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  resources :loans
+
   get 'inventory_items/new_receiving' => 'inventory_items#new_receiving', :as => "new_receiving"
   post 'inventory_items/receive' => 'inventory_items#receive', :as => "receive"
   get 'inventory_items/search_by_sku' => 'inventory_items#search_by_sku'
@@ -60,11 +62,6 @@ Rails.application.routes.draw do
   post 'kb/link' => 'articles#link'
   get 'kb/linkable_type' => 'articles#linkable_type_select', as: :linkable_select_article
   resources :articles, :path => "kb"
-
-  # Routes for checkout histories
-  get 'checkout/device_group' => 'checkout_histories#device_group_select', as: :device_type_loan
-  get 'checkin/:id' => 'checkout_histories#checkin', as: :checkin
-  resources :checkout_histories, :path => "checkout"
 
   # Routes for Logs
   resources :logs
