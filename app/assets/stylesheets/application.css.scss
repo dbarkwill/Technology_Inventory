@@ -255,3 +255,7 @@ ul.nav-pills li.active {
 .form-control-search:focus{
     outline-width: 0;
 }
+
+div.panel-default > ul.nav-stacked > li.active {
+    background-color: #A8A8A8;
+}

@@ -3,7 +3,10 @@ Rails.application.routes.draw do
   get 'inventory_items/new_receiving' => 'inventory_items#new_receiving', :as => "new_receiving"
   post 'inventory_items/receive' => 'inventory_items#receive', :as => "receive"
   get 'inventory_items/search_by_sku' => 'inventory_items#search_by_sku'
-  resources :inventory_items
+  get 'inventory_items/:id/enter_serial_numbers' => 'inventory_items#enter_serial_numbers', :as => "enter_serial_numbers"
+  resources :inventory_items do
+    get 'delete'
+  end
 
   resources :uploads
 

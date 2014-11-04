@@ -26,8 +26,9 @@
   <div class="col-md-3">
     <div class="panel panel-default">
       <ul class="nav nav-stacked" role="tablist">
+        <li><%= link_to 'All Items', inventory_items_path %></li>
         <% InventoryCategory.all.each do |category| %>
-          <li>
+          <li <%= cp(inventory_items_path(:category => category.id)) %> >
             <%= link_to category.name, inventory_items_path(:category => category.id) %>
           </li>
         <% end %>

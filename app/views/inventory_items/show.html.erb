@@ -3,8 +3,21 @@
     <h2><%= @inventory_item.name %></h2>
   </div>
   <div class="col-md-2">
+    <br>
     <div class="pull-right">
-      <%= link_to 'edit', edit_inventory_item_path(@inventory_item), class:'btn btn-default' %>
+      <div class="btn-group pull-right">
+        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+          <span class="glyphicon glyphicon-cog"></span> <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu" role="menu">
+          <li><%= link_to 'Edit', edit_inventory_item_path(@inventory_item) %></li>
+          <% if @inventory_item.serial_required? %>
+            <li><%= link_to 'Edit Serial Numbers', enter_serial_numbers_path(@inventory_item), remote: true %></li>
+          <% end %>
+          <li class="divider"></li>
+          <li><%= link_to 'Remove Item from Inventory', inventory_item_delete_path(@inventory_item), remote: true %></li>
+        </ul>
+      </div>
     </div>
   </div>
 </div>
@@ -71,18 +84,25 @@
         </tbody>
       </table>
     </div>
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        <h4 class="panel-title">Serial Numbers</h4>
+    <% if @inventory_item.serial_required? %>
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h4 class="panel-title">Serial Numbers</h4>
+        </div>
+        <ul class="list-group">
+          <% @inventory_item.serial_numbers.each do |serial_number| %>
+            <li class="list-group-item"><%= serial_number %></li>
+          <% end %>
+        </ul>
+        <% if @inventory_item.total_quantity > @inventory_item.serial_numbers.count %>
+          <div class="panel-footer">
+            <p>
+              The quantity of serial numbers is less than the total quantity of items. Please enter more serial numbers from the menu above.
+            </p>
+          </div>
+        <% end %>
       </div>
-      <ul class="list-group">
-        <li class="list-group-item">20948288923789</li>
-        <li class="list-group-item">20948288923789</li>
-        <li class="list-group-item">20948288923789</li>
-        <li class="list-group-item">20948288923789</li>
-        <li class="list-group-item">20948288923789</li>
-      </ul>
-    </div>
+    <% end %>
   </div>
 </div>
 <div class="row">
@@ -91,4 +111,6 @@
       <span class="glyphicon glyphicon-arrow-left"></span> &nbsp;back
     <% end %>
   </div>
+</div>
+<div class="modal fade" id="inventory-item-modal" tabindex="-1" role="dialog" aria-labelledby="inventory-item-modal" aria-hidden="true">
 </div>

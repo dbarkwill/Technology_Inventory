@@ -1,6 +1,23 @@
-<h1>edit inventory item</h1>
-
-<%= render 'form' %>
-
-<%= link_to 'Show', @inventory_item %> |
-<%= link_to 'Back', inventory_items_path %>
+<div class="row">
+	<div class="col-md-6 col-md-offset-3">
+		<h1>edit inventory item</h1>
+	</div>
+</div>
+<div class="row">
+	<div class="col-md-6 col-md-offset-3">
+		<div class="panel panel-default">
+			<div class="panel-body">
+				<%= render 'form' %>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="row">
+	<div class="col-md-6 col-md-offset-3">
+		<%= link_to @inventory_item, class:"btn btn-default" do %>
+			<span class="glyphicon glyphicon-arrow-left"></span>&nbsp;back
+		<% end %>
+	</div>
+</div>
+<br>
+<br>
