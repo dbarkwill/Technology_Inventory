@@ -1,14 +1,61 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <strong>Loanee:</strong>
-  <%= @loan.loanee %>
-</p>
-
-<p>
-  <strong>Notes:</strong>
-  <%= @loan.notes %>
-</p>
-
-<%= link_to 'Edit', edit_loan_path(@loan) %> |
-<%= link_to 'Back', loans_path %>
+<div class="row">
+	<div class="col-md-10">
+		<h2>loan information</h2>
+	</div>
+	<div class="col-md-2">
+		<br>
+		<div class="pull-right">
+			<% unless @loan.closed? %>
+				<%= form_tag close_loan_path(@loan), method:'patch' do %>
+					<%= submit_tag 'close loan', class:'btn btn-danger' %>
+				<% end %>
+			<% end %>
+		</div>
+	</div>
+</div>
+<br>
+<div class="row">
+	<div class="col-md-6">
+		<div class="panel panel-default">
+			<ul class="list-group">
+				<li class="list-group-item">
+					<h4>Name:</h4>
+					<p><%= @loan.loanee %></p>
+				</li>
+				<li class="list-group-item">
+					<h4>Notes:</h4>
+					<p><%= @loan.notes %></p>
+				</li>
+			</ul>
+		</div>
+	</div>
+</div>
+<div class="row">
+	<div class="col-md-12">
+		<div class="panel panel-default">
+			<table class="table">
+				<thead>
+					<tr>
+						<th width='200'>SKU / Asset Tag</th>
+						<th>Type</th>
+						<th>Description</th>
+						<th width='100'>Quantity</th>
+					</tr>
+				</thead>
+				<tbody>
+					<% @loan.loan_line_items.each do |line_item| %>
+						<tr>
+							<td><%= line_item.identifier %></td>
+							<td><%= line_item.loanable_type %></td>
+							<td><%= line_item.description %></td>
+							<td><%= line_item.quantity %></td>
+						</tr>
+					<% end %>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+<%= link_to loans_path, class:'btn btn-default' do %>
+	<span class="glyphicon glyphicon-arrow-left"></span>&nbsp;back
+<% end %>

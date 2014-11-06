@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
 
+
+  get 'loans/search_by_sku_or_asset_tag' => 'loans#search_by_sku_or_asset_tag'
+  patch 'loans/:id/close' => 'loans#close', :as => "close_loan"
   resources :loans
 
   get 'inventory_items/new_receiving' => 'inventory_items#new_receiving', :as => "new_receiving"

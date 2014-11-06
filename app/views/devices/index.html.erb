@@ -8,12 +8,6 @@
         <% end %>
       </ul>
     </div>
-    <h3><small>Device Tasks:</small></h3>
-    <div class="bs-docs-sidebar">
-      <ul class="nav bs-docs-sidenav">
-        <li><%= link_to "Loan Device", checkout_histories_path %></li>
-      </ul>
-    </div>
   </div>
   <div class="col-md-9">
     <div class="row">
@@ -45,7 +39,7 @@
             <div class="panel panel-default">
               <div class="list-group">
                 <% devices.each do |device| %>
-                  <% css = 'list-group-item-danger' if device.checkedout? %>
+                  <% css = 'list-group-item-danger' if device.loaned? %>
                   <%= link_to device_info_path(device), class:"list-group-item #{css}", remote: true do %>  
                     <h4><%= device.name %></h4>
                   <% end %>

@@ -5,6 +5,10 @@ class CreateLoanLineItems < ActiveRecord::Migration
       t.text :description
       t.integer :quantity
       t.boolean :returned
+      t.integer :loan_id
+      t.integer :loanable_id
+      t.string :loanable_type
+      t.boolean :returned
 
       t.timestamps
     end

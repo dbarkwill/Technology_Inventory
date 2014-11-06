@@ -11,9 +11,9 @@
 					</div>
 				</div>
 				<hr class="hr-divide">
-				<% if @device.checkedout %>
+				<% if @device.loaned %>
 					<div class="alert alert-danger">
-						Device was loaned to <%= @device.checkout_histories.last.name %> on <%= @device.checkout_histories.last.created_at.to_time.strftime("%-m-%-d-%Y") %>
+						Device was loaned to <%= @device.loans.last.loanee %> on <%= @device.loans.last.created_at.to_time.strftime("%-m-%-d-%Y") %>
 					</div>
 					<hr class="hr-divide">
 				<% end %>

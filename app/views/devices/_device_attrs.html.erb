@@ -1,3 +1,16 @@
+<% if @device.loaned? %>
+  <div class="col-md-12">
+    <div class="panel panel-default">
+      <ul class="list-group">
+        <li class="list-group-item list-group-item-danger">
+          <h4>
+            Device loaned to <strong><%= @device.loans.last.loanee %></strong> on <strong><%= @device.loans.last.created_at.to_time.strftime("%-m-%-d-%Y") %></strong>
+          </h4>
+        </li>
+      </ul>
+    </div>
+  </div>
+<% end %>
 <% @device_properties_array.each do |device_properties_list| %>
   <div class="col-md-6">
     <div class="panel panel-default">

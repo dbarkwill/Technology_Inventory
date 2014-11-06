@@ -32,15 +32,6 @@ ActiveRecord::Schema.define(version: 20141104181707) do
     t.datetime "updated_at"
   end
 
-  create_table "checkout_histories", force: true do |t|
-    t.integer  "device_id"
-    t.string   "name"
-    t.text     "notes"
-    t.boolean  "checked_in"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "device_groups", force: true do |t|
     t.string   "name"
     t.string   "color"
@@ -64,7 +55,7 @@ ActiveRecord::Schema.define(version: 20141104181707) do
   create_table "devices", force: true do |t|
     t.string   "name"
     t.integer  "device_group_id"
-    t.boolean  "checkedout"
+    t.boolean  "loaned"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -85,9 +76,9 @@ ActiveRecord::Schema.define(version: 20141104181707) do
     t.integer  "in_use_quantity"
     t.text     "serial_numbers"
     t.integer  "inventory_category_id"
+    t.boolean  "serial_required"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "serial_required"
   end
 
   create_table "links", force: true do |t|
@@ -103,6 +94,9 @@ ActiveRecord::Schema.define(version: 20141104181707) do
     t.text     "description"
     t.integer  "quantity"
     t.boolean  "returned"
+    t.integer  "loan_id"
+    t.integer  "loanable_id"
+    t.string   "loanable_type"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -110,6 +104,7 @@ ActiveRecord::Schema.define(version: 20141104181707) do
   create_table "loans", force: true do |t|
     t.string   "loanee"
     t.string   "notes"
+    t.boolean  "closed"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

@@ -4,6 +4,8 @@ class InventoryItem < ActiveRecord::Base
 	attr_accessor :raw_serial_number_list
 	serialize :serial_numbers
 	before_save :create_inventory_category_from_name
+	has_many :loan_line_items, :as => :loanable
+	has_many :loans, :through => :loan_line_items
 
 	def create_inventory_category_from_name
 		create_inventory_category(:name => new_inventory_category_name) unless new_inventory_category_name.blank?

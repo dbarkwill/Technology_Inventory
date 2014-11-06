@@ -3,7 +3,7 @@ class CreateDevices < ActiveRecord::Migration
     create_table :devices do |t|
       t.string :name
       t.integer :device_group_id
-      t.boolean :checkedout
+      t.boolean :loaned
       t.timestamps
     end
   end

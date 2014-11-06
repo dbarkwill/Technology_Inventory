@@ -1,0 +1,14 @@
+<tr>
+	<td>
+		<%= @inventoryResults.first.sku %>
+		<%= hidden_field_tag 'loan[loan_line_items_attributes][][identifier]', @inventoryResults.first.sku %>
+		<%= hidden_field_tag 'loan[loan_line_items_attributes][][loanable_id]', @inventoryResults.first.id %>
+		<%= hidden_field_tag 'loan[loan_line_items_attributes][][loanable_type]', 'InventoryItem' %>
+	</td>
+	<td>
+		<%= text_area_tag 'loan[loan_line_items_attributes][][description]', @inventoryResults.first.description, class:'form-control' %>
+	</td>
+	<td>
+		<%= text_field_tag 'loan[loan_line_items_attributes][][quantity]', nil, class:'form-control' %>
+	</td>
+</tr>

@@ -10,7 +10,8 @@ class Device < ActiveRecord::Base
 	has_many :links, :as => :linkable
 	has_many :articles, :through => :links
 	has_many :uploads, :as => :uploadable, :dependent => :destroy
-
+	has_many :loan_line_items, :as => :loanable
+	has_many :loans, :through => :loan_line_items
 
 	def MAC
 		self.device_properties.each do |device_property|
@@ -22,10 +23,7 @@ class Device < ActiveRecord::Base
 	end
 
 	def self.search(query)
-	  where("name like ?", "%#{query}%") 
+		where("name like ?", "%#{query}%") 
 	end
 
-	def self.all_checked_in
-		where(:checkedout => false)
-	end
 end

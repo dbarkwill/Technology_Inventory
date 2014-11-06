@@ -4,7 +4,8 @@ class LoansController < ApplicationController
   # GET /loans
   # GET /loans.json
   def index
-    @loans = Loan.all
+    @open_loans = Loan.where("closed = ?", false)
+    @closed_loans = Loan.where("closed = ?", true)
   end
 
   # GET /loans/1
@@ -17,6 +18,24 @@ class LoansController < ApplicationController
     @loan = Loan.new
   end
 
+  def search_by_sku_or_asset_tag
+    asset_tag = Property.find_by_name('Asset Tag')
+    @inventoryResults = InventoryItem.search_by_sku(params[:query])
+    @devicePropertiesResults = DeviceProperty.find_by_property_id_and_value(asset_tag.id, params[:query])
+
+    if @inventoryResults.count == 1
+      render :search_result_inventory, :layout => false, :content_type => 'text/html'
+    elsif @devicePropertiesResults
+      if @devicePropertiesResults.device.loaned == true
+        head 200, content_type: "text/html"
+      else
+        render :search_result_device, :layout => false, :content_type => 'text/html'
+      end
+    else
+       head 200, content_type: "text/html"
+    end
+  end
+
   # GET /loans/1/edit
   def edit
   end
@@ -25,16 +44,47 @@ class LoansController < ApplicationController
   # POST /loans.json
   def create
     @loan = Loan.new(loan_params)
+    @loan.closed = false
 
     respond_to do |format|
       if @loan.save
         format.html { redirect_to @loan, notice: 'Loan was successfully created.' }
         format.json { render :show, status: :created, location: @loan }
+        format.js {
+          @open_loans = Loan.find_by_closed(false)
+          @closed_loans = Loan.find_by_closed(true)
+          render :create
+        }
       else
         format.html { render :new }
         format.json { render json: @loan.errors, status: :unprocessable_entity }
+        format.js {
+          @open_loans = Loan.find_by_closed(false)
+          @closed_loans = Loan.find_by_closed(true)
+          render :create
+        }
       end
     end
+  end
+
+  # PATCH/PUT /loans/1/close
+  def close
+    @loan = Loan.find_by_id(params[:id])
+    @loan.loan_line_items.each do |line_item|
+      if line_item.loanable_type == 'Device'
+        line_item.loanable.loaned = false
+        line_item.loanable.save
+      elsif line_item.loanable_type == 'InventoryItem'
+        line_item.loanable.loaned_out_quantity -= line_item.quantity
+        line_item.loanable.on_hand_quantity += line_item.quantity
+        line_item.loanable.save
+      end
+      line_item.returned = true
+      line_item.save
+    end
+    @loan.closed = true
+    @loan.save
+    redirect_to loans_url, notice: 'Loan was successfully closed.'
   end
 
   # PATCH/PUT /loans/1
@@ -69,6 +119,6 @@ class LoansController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def loan_params
-      params.require(:loan).permit(:loanee, :notes)
+      params.require(:loan).permit(:loanee, :notes, loan_line_items_attributes: [:id, :loan_id, :identifier, :description, :quantity, :loanable_id, :loanable_type, :loan, :loanable])
     end
 end

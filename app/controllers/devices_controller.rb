@@ -20,7 +20,6 @@ class DevicesController < ApplicationController
   # GET /devices/1.json
   def show
     @new_ip = Address.new
-    @checkout_history = CheckoutHistory.new
     @device_properties_array = @device.device_properties.all.in_groups(2, false)
   end
 

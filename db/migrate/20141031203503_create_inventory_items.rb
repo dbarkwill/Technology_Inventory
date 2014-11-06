@@ -10,6 +10,7 @@ class CreateInventoryItems < ActiveRecord::Migration
       t.integer :in_use_quantity
       t.text :serial_numbers
       t.integer :inventory_category_id
+      t.boolean :serial_required
 
       t.timestamps
     end

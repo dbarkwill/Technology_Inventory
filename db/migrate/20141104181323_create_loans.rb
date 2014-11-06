@@ -3,6 +3,7 @@ class CreateLoans < ActiveRecord::Migration
     create_table :loans do |t|
       t.string :loanee
       t.string :notes
+      t.boolean :closed
 
       t.timestamps
     end
