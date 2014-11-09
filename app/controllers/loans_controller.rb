@@ -51,16 +51,16 @@ class LoansController < ApplicationController
         format.html { redirect_to @loan, notice: 'Loan was successfully created.' }
         format.json { render :show, status: :created, location: @loan }
         format.js {
-          @open_loans = Loan.find_by_closed(false)
-          @closed_loans = Loan.find_by_closed(true)
+          @open_loans = Loan.where("closed = ?", false)
+          @closed_loans = Loan.where("closed = ?", true)
           render :create
         }
       else
         format.html { render :new }
         format.json { render json: @loan.errors, status: :unprocessable_entity }
         format.js {
-          @open_loans = Loan.find_by_closed(false)
-          @closed_loans = Loan.find_by_closed(true)
+          @open_loans = Loan.where("closed = ?", false)
+          @closed_loans = Loan.where("closed = ?", true)
           render :create
         }
       end
