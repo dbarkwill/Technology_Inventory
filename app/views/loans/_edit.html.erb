@@ -23,6 +23,7 @@
                   <th width="200">SKU / Asset Tag</th>
                   <th>Description</th>
                   <th width="100">Quantity</th>
+                  <th width="100">Remove?</th>
                 </tr>
               </thead>
               <tbody>
@@ -31,6 +32,7 @@
                     <td><%= li.text_field :identifier, disabled: true, class:'form-control search' %></td>
                     <td><%= li.text_area :description, disabled: true, class:'form-control' %></td>
                     <td><%= li.text_field :quantity, disabled: true, class:'form-control' %></td>
+                    <td><%= li.check_box :_destroy %></td>
                   </tr>
                 <% end %>
               </tbody>

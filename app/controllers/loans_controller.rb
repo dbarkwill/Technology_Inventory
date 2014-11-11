@@ -99,9 +99,15 @@ class LoansController < ApplicationController
       if @loan.update(loan_params)
         format.html { redirect_to @loan, notice: 'Loan was successfully updated.' }
         format.json { render :show, status: :ok, location: @loan }
+        format.js {
+          render :update
+        }
       else
         format.html { render :edit }
         format.json { render json: @loan.errors, status: :unprocessable_entity }
+        format.js {
+          render :update
+        }
       end
     end
   end
@@ -124,6 +130,6 @@ class LoansController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def loan_params
-      params.require(:loan).permit(:loanee, :notes, :loan_line_items_attributes => [:id, :loan_id, :identifier, :description, :quantity, :loanable_id, :loanable_type, :loan, :loanable])
+      params.require(:loan).permit(:loanee, :notes, :loan_line_items_attributes => [:id, :loan_id, :identifier, :description, :quantity, :loanable_id, :loanable_type, :loan, :loanable, :_destroy])
     end
 end
