@@ -1,11 +1,12 @@
 <div class="row">
-	<div class="col-md-10">
+	<div class="col-md-8">
 		<h2>loan information</h2>
 	</div>
-	<div class="col-md-2">
+	<div class="col-md-4">
 		<br>
 		<div class="pull-right">
 			<% unless @loan.closed? %>
+				<%= link_to 'edit', edit_loan_path(@loan), class:'btn btn-warning', remote: true %>
 				<%= form_tag close_loan_path(@loan), method:'patch' do %>
 					<%= submit_tag 'close loan', class:'btn btn-danger' %>
 				<% end %>
@@ -59,3 +60,6 @@
 <%= link_to loans_path, class:'btn btn-default' do %>
 	<span class="glyphicon glyphicon-arrow-left"></span>&nbsp;back
 <% end %>
+
+<div class="modal fade" id="loan-modal" tabindex="-1" role="dialog" aria-labelledby="loan-modal" aria-hidden="true">
+</div>

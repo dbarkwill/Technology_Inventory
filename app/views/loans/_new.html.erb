@@ -25,11 +25,8 @@
 									<th width="100">Quantity</th>
 								</tr>
 							</thead>
-							<tbody class="hidden template">
-								<%= render 'loan_line_item_fields', :f => f, :child_index => '' %>
-							</tbody>
 							<tbody>
-								<%= render 'loan_line_item_fields', :f => f, :child_index => '' %>
+								<%= render 'loan_line_item_fields', :f => f, :child_index => Time.now.to_i %>
 							</tbody>
 						</table>
 						<%= link_to 'add line item', '#', class:'add-line-item' %>
@@ -45,11 +42,13 @@
 </div>
 
 <script>
-$(document).ready(function() { 
+$(document).ready(function() {
 	$('.add-line-item').on('click', function(event) {
-	  var template = $('.template').html();
-	  $('#loan tr:last').after(template);
-	  event.preventDefault();
+		var unique_id = new Date().getTime();
+		var template = "<%= escape_javascript(render 'loan_line_items_template') %>";
+		var html = template.replace(/replace/g, unique_id);
+		$('#loan tr:last').after(html);
+		event.preventDefault();
 	});
 });
 
@@ -60,29 +59,31 @@ var currentSearchField;
 function detectSearch(event){
 	clearTimeout($.data(this, 'timer'));
 	currentSearchField = this
-    if (event.keyCode == 13)
-      search(true);
-    else
-      $(this).data('timer', setTimeout(search, 500));
+		if (event.keyCode == 13)
+			search(true);
+		else
+			$(this).data('timer', setTimeout(search, 500));
 }
 
 function search(force, element) {
-    var existingString = $(currentSearchField).val();
-    if (!force && existingString.length < 3) return; //wasn't enter, not > 2 char
-    var request = $.ajax({
-    	type: "GET",
-    	url: 'loans/search_by_sku_or_asset_tag',
-    	data: {query: existingString},
-    	dataType: "html"
-    });
+		var existingString = $(currentSearchField).val();
+		if (!force && existingString.length < 3) return; //wasn't enter, not > 2 char
+		var request = $.ajax({
+			type: "GET",
+			url: 'loans/search_by_sku_or_asset_tag',
+			data: {query: existingString},
+			dataType: "html"
+		});
 
-    request.done(function(response, status, jqXHR){
-    	if( !$.trim(response)) {
-    		$(currentSearchField).parent().parent().css( "background-color", "red" );
-    	} else {
-    		tableRow = $(currentSearchField).parent().parent();
-	    	tableRow.replaceWith(response);
-	    }
-    });
+		request.done(function(response, status, jqXHR){
+			if( !$.trim(response)) {
+				$(currentSearchField).parent().parent().css( "background-color", "red" );
+			} else {
+				var unique_id = new Date().getTime();
+				tableRow = $(currentSearchField).parent().parent();
+				html = response.replace(/replace/g, unique_id);
+				tableRow.replaceWith(html);
+			}
+		});
 }
 </script>

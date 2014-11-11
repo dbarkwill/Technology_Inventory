@@ -1,4 +1,4 @@
-<%= f.fields_for :loan_line_items, LoanLineItem.new, :child_index => child_index do |li| %>
+<%= f.fields_for :loan_line_items, :child_index => child_index do |li| %>
 	<tr>
 		<td><%= li.text_field :identifier, class:'form-control search' %></td>
 		<td><%= li.text_area :description, class:'form-control' %></td>

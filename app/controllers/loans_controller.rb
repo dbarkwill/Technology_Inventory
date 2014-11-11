@@ -16,6 +16,11 @@ class LoansController < ApplicationController
   # GET /loans/new
   def new
     @loan = Loan.new
+    @loan.loan_line_items.build
+  end
+
+  def loan_line_item_fields
+    render partial: loan_line_item_fields
   end
 
   def search_by_sku_or_asset_tag
@@ -119,6 +124,6 @@ class LoansController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def loan_params
-      params.require(:loan).permit(:loanee, :notes, loan_line_items_attributes: [:id, :loan_id, :identifier, :description, :quantity, :loanable_id, :loanable_type, :loan, :loanable])
+      params.require(:loan).permit(:loanee, :notes, :loan_line_items_attributes => [:id, :loan_id, :identifier, :description, :quantity, :loanable_id, :loanable_type, :loan, :loanable])
     end
 end
