@@ -3,12 +3,24 @@
     <div class="panel panel-default">
       <ul class="list-group">
         <li class="list-group-item">
-          <h4>Name:</h4>
-          <p><%= @loan.loanee %></p>
+          <div class="row">
+            <div class="col-md-3">
+              <h4>Name:</h4>
+            </div>
+            <div class="col-md-9">
+              <h4><%= @loan.loanee %></h4>
+            </div>
+          </div>
         </li>
         <li class="list-group-item">
-          <h4>Notes:</h4>
-          <p><%= @loan.notes %></p>
+          <div class="row">
+            <div class="col-md-3">
+              <h4>Notes:</h4>
+            </div>
+            <div class="col-md-9">
+              <h4><%= @loan.notes %></h4>
+            </div>
+          </div>
         </li>
       </ul>
     </div>
@@ -17,26 +29,50 @@
 <div class="row">
   <div class="col-md-12">
     <div class="panel panel-default">
-      <table class="table">
-        <thead>
-          <tr>
-            <th width='200'>SKU / Asset Tag</th>
-            <th>Type</th>
-            <th>Description</th>
-            <th width='100'>Quantity</th>
-          </tr>
-        </thead>
-        <tbody>
-          <% @loan.loan_line_items.each do |line_item| %>
-            <tr>
-              <td><%= line_item.identifier %></td>
-              <td><%= line_item.loanable_type %></td>
-              <td><%= line_item.description %></td>
-              <td><%= line_item.quantity %></td>
-            </tr>
-          <% end %>
-        </tbody>
-      </table>
+      <div class="panel-heading">
+        <div class="row">
+          <div class="col-md-2">
+            <h4>SKU / Asset Tag</h4>
+          </div>
+          <div class="col-md-8">
+            <h4>Description</h4>
+          </div>
+          <div class="col-md-2">
+            <div class="pull-right">
+              <h4>Quantity</h4>
+            </div>
+          </div>
+        </div>
+      </div>
+      <ul class="list-group">
+        <% @loan.loan_line_items.each do |line_item| %>
+          <li class="list-group-item">
+            <div class="row">
+              <div class="col-md-2">
+                <% if line_item.loanable_type == 'Device' %>
+                  <%= link_to device_group_show_path(line_item.loanable.device_group.name, line_item.loanable) do %>
+                    <h4><%= line_item.identifier %></h4>
+                  <% end %>
+                <% elsif line_item.loanable_type == 'InventoryItem' %>
+                  <%= link_to inventory_item_path(line_item.loanable) do %>
+                    <h4><%= line_item.identifier %></h4>
+                  <% end %>
+                <% else %>
+                  <h4><%= line_item.identifier %></h4>
+                <% end %>
+              </div>
+              <div class="col-md-9">
+                <h4><%= line_item.description %></h4>
+              </div>
+              <div class="col-md-1">
+                <div class="pull-right">
+                  <h4><%= line_item.quantity %></h4>
+                </div>
+              </div>
+            </div>
+          </li>
+        <% end %>
+      </ul>
     </div>
   </div>
 </div>
