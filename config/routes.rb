@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  get 'wiki/:page_name' => 'wiki#show', :as => "wiki_show"
 
   get 'loans/search_by_sku_or_asset_tag' => 'loans#search_by_sku_or_asset_tag'
   patch 'loans/:id/close' => 'loans#close', :as => "close_loan"
@@ -85,7 +86,7 @@ Rails.application.routes.draw do
   # Routes for addresses
   resources :addresses
 
-  
+
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
