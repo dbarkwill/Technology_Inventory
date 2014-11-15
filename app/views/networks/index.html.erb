@@ -1,31 +1,18 @@
-<h1>Listing networks</h1>
-
-<table class="table">
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Network</th>
-      <th>Vlan</th>
-      <th>Description</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @networks.each do |network| %>
-      <tr>
-        <td><%= network.name %></td>
-        <td><%= network.network %></td>
-        <td><%= network.vlan %></td>
-        <td><%= network.description %></td>
-        <td><%= link_to 'Show', network %></td>
-        <td><%= link_to 'Edit', edit_network_path(network) %></td>
-        <td><%= link_to 'Destroy', network, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
+<div class="row">
+  <div class="col-xs-10">
+    <h1>networks</h1>
+  </div>
+  <div class="col-xs-2">
+    <div class="pull-right">
+      <br>
+      <%= link_to new_network_path, class:"btn btn-default", remote: true do %>
+        <span class="glyphicon glyphicon-plus"></span>
+      <% end %>
+    </div>
+  </div>
+</div>
 <br>
-
-<%= link_to 'New Network', new_network_path %>
+<div class="row" id="network-index">
+  <%= render 'index' %>
+</div>
+<div class="modal fade" id="network-modal" tabindex="-1" role="dialog" aria-labelledby="network-modal" aria-hidden="true"></div>

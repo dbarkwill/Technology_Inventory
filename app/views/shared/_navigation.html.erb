@@ -1,4 +1,4 @@
-<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -7,16 +7,50 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="#">IT Documentation</a>
+      <%= link_to 'tracksIT', root_path, class:"navbar-brand"%>
     </div>
     <div class="navbar-collapse collapse">
-      <ul class="nav navbar-nav">
-        <li><%= link_to 'Device Groups', device_groups_path %></li>
-        <li><%= link_to 'Attributes', attrs_path %></li>
-        <li><%= link_to 'Devices', devices_path %></li>
-      </ul>
+      <% if current_user %>
+        <ul class="nav navbar-nav">
+          <li><%= link_to "Knowledge Base", articles_path %></li>
+          <li><%= link_to 'Networks', networks_path %></li>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Devices <b class="caret"></b></a>
+            <ul class="dropdown-menu">
+              <% @device_types.each do |group| %>
+                <li><%= link_to "#{group.name}", device_types_path(group.name) %></li>
+              <% end %>
+              <li class="divider"></li>
+              <li><%= link_to "All Devices", device_types_path('all') %></li>
+            </ul>
+          </li>
+          <li><%= link_to 'People', people_path %></li>
+          <li><%= link_to 'Inventory', inventory_items_path %></li>
+          <li><%= link_to 'Loans', loans_path %></li>
+        </ul>
+      <% end %>
       <ul class="nav navbar-nav navbar-right">
-        
+        <% if current_user %>
+          <p class="navbar-text">Signed in as <%= current_user.name %></p>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-wrench"></span>&nbsp;<b class="caret"></b></a>
+            <ul class="dropdown-menu">
+              <% if current_user.admin? %>
+                <li><%= link_to "Administrator Dashboard", admin_dashboard_path %>
+                <li class="divider"></li>
+              <% end %>
+              <li><%= link_to 'Edit Profile', edit_user_registration_path %>
+              <li><%= link_to 'Log Out', destroy_user_session_path, method:'delete' %></li>
+            </ul>
+          </li>
+          <li>
+            <%= link_to new_search_path, remote: true do %>
+              <span class="glyphicon glyphicon-search"></span>
+            <% end %>
+          </li>
+        <% else %>
+          <li><%= link_to 'Login', new_user_session_path %></li>
+        <% end %>
       </ul>
     </div><!--/.nav-collapse -->
   </div>

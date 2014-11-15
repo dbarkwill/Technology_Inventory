@@ -1,0 +1,29 @@
+<%= form_for [:admin, @device_group] do |f| %>
+  <% if @device_group.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@device_group.errors.count, "error") %> prohibited this device_group from being saved:</h2>
+
+      <ul>
+      <% @device_group.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+<div class="row">
+  <div class="col-md-12">
+    <div class="form-group">
+      <%= f.label :name %><br>
+      <%= f.text_field :name, class:"form-control" %>
+    </div>
+  </div>
+</div>
+<br>
+<div class="row">
+  <div class="col-md-12">
+    <div class="actions">
+      <%= f.submit class:"btn btn-default" %>
+    </div>
+  </div>
+</div>
+<% end %>

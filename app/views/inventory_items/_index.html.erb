@@ -1,0 +1,29 @@
+<div class="panel panel-default">
+  <table class="table">
+    <thead>
+      <tr>
+        <th>SKU</th>
+        <th>Name</th>
+        <th>Description</th>
+        <th>
+          <div class="pull-right">
+            <%= link_to new_inventory_item_path, class:"btn btn-default btn-xs", remote: true do%>
+              <span class="glyphicon glyphicon-plus"></span>
+            <% end %>
+          </div>
+        </th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @inventory_items.each do |inventory_item| %>
+        <tr>
+          <td><%= link_to inventory_item.sku, inventory_item %></td>
+          <td><%= inventory_item.name %></td>
+          <td><%= inventory_item.description %></td>
+          <td></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

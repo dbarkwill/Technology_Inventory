@@ -10,34 +10,34 @@
       </ul>
     </div>
   <% end %>
-
-  <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
+<div class="row">
+  <div class="col-md-12">
+    <div class="form-group">
+      <%= f.label :name %><br>
+      <%= f.text_field :name, class:"form-control" %>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :asset_tag %><br>
-    <%= f.text_field :asset_tag %>
-  </div>
-  <div class="field">
-    <%= f.label :notes %><br>
-    <%= f.text_area :notes %>
-  </div>
-  <div class="field">
-    <%= f.label :device_group %><br>
-    <%= f.collection_select :device_group_id, DeviceGroup.all.collect, :id, :name , {:include_blank => "Please Select"}, {:class => "form-control"} %>
-  </div>
+  <%= hidden_field_tag :device_group_id, @device.device_group.id %>
   <% if @device.device_group %>
-    <% @device.attr_devices.each do |a| %>
-      <%= fields_for :attr_devices, a do |attr_fields| %>
-        <div class="field">
-          <%= attr_fields.label :value, "#{a.attr.name}" %><br>
-          <%= attr_fields.text_field :value, :name => "attr[#{a.attr_id}]" %>
+    <% @property_list.each do |p| %>
+      <%= f.fields_for p, index: p.property.id do |property_fields| %>
+        <div class="col-md-12">
+          <div class="form-group">
+            <%= property_fields.label :value, "#{p.property.name} #{p.property.unit}" %><br>
+            <%= property_form_generator(property_fields, p) %>
+          </div>
         </div>
       <% end %>
     <% end %>
   <% end %>
-  <div class="actions">
-    <%= f.submit %>
+</div>
+<hr class="hr-divide">
+<div class="row">
+  <div class="col-md-12">
+  <br>
+    <div class="actions">
+      <%= f.submit class:"btn btn-default" %>
+    </div>
   </div>
+</div>
 <% end %>

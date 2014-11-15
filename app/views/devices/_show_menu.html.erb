@@ -1,0 +1,3 @@
+<li><%= link_to "Create New #{@device.device_group.name.singularize}", device_group_new_path(@device.device_group.name) %></li>
+<li><%= link_to "Edit #{@device.device_group.name.singularize}", device_group_edit_path(@device.device_group.name, @device) %></li>
+<li><%= link_to "Delete #{@device.device_group.name.singularize}", device_group_show_path(@device.device_group.name, @device), method: :delete, data: { confirm: 'Are you sure?' } %></li>

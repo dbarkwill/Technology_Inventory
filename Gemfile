@@ -46,3 +46,24 @@ gem 'bootstrap-sass'
 
 # Data Tables
 gem 'jquery-datatables-rails', git: 'git://github.com/rweng/jquery-datatables-rails.git'
+
+# JQuery and Turbolinks
+gem 'jquery-turbolinks'
+
+# Devise Authentication
+gem 'devise'
+
+# Pundit Authorization
+gem 'pundit'
+
+# TinyMCE
+gem 'tinymce-rails'
+
+# CarrierWave for file uploads
+gem 'carrierwave'
+
+# Remotipart for JS file uploads
+gem 'remotipart'
+
+# Fontawesome Icons
+gem 'font-awesome-rails'

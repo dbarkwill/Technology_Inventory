@@ -1,0 +1,18 @@
+
+	<h3><small>Menu:</small></h3>
+		<div class="bs-docs-sidebar hidden-print hidden-xs hidden-sm">
+			<ul class="nav bs-docs-sidenav">
+				<li <%= cp(admin_dashboard_path) %> ><%= link_to 'Dashboard Home', admin_dashboard_path %></li>
+				<li <%= cp(admin_users_path) %> ><%= link_to "Users", admin_users_path %></li>
+				<li <%= cp(admin_device_groups_path) %> >
+					<%= link_to "Device Groups", admin_device_groups_path %>
+					<ul class="nav">
+						<% DeviceGroup.all.each do |group| %>
+							<li <%= cp(admin_device_group_path(group)) %> ><%= link_to group.name, admin_device_group_path(group) %></li>
+						<% end %>
+						
+					</ul>
+				</li>
+				<li <%= cp(admin_properties_path) %> ><%= link_to 'Properties', admin_properties_path %></li>
+			</ul>
+		</div>

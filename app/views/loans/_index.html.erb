@@ -1,0 +1,74 @@
+<ul class="nav nav-tabs" role="tablist">
+      <li role="presentation" class="active">
+        <a href="#open" role="tab" data-toggle="tab">Open</a>
+      </li>
+      <li role="presentation">
+        <a href="#closed" role="tab" data-toggle="tab">Closed</a>
+      </li>
+    </ul>
+    <div class="tab-content">
+      <div role="tabpanel" class="tab-pane fade in active" id="open">
+        <div class="panel panel-default">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Loanee</th>
+                <th>Notes</th>
+                <th>
+                  <div class="pull-right">
+                    <%= link_to new_loan_path, class:'btn btn-default btn-xs', remote: true do %>
+                      <span class='glyphicon glyphicon-plus'></span>
+                    <% end %>
+                  </div>
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @open_loans.each do |loan| %>
+              	<tr>
+              		<td><%= loan.loanee %></td>
+              		<td><%= loan.notes %></td>
+              		<td>
+              			<div class="pull-right">
+              				<%= link_to 'view', loan, class:'btn btn-default btn-xs' %>
+              			</div>
+              		</td>
+              	</tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div role="tabpanel" class="tab-pane fade" id="closed">
+         <div class="panel panel-default">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Loanee</th>
+                <th>Notes</th>
+                <th>
+                  <div class="pull-right">
+                    <%= link_to new_loan_path, class:'btn btn-default btn-xs', remote: true do %>
+                      <span class='glyphicon glyphicon-plus'></span>
+                    <% end %>
+                  </div>
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @closed_loans.each do |loan| %>
+                <tr>
+                  <td><%= loan.loanee %></td>
+                  <td><%= loan.notes %></td>
+                  <td>
+                    <div class="pull-right">
+                      <%= link_to 'view', loan, class:'btn btn-default btn-xs' %>
+                    </div>
+                  </td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>

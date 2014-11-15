@@ -1,0 +1,21 @@
+<div class="panel panel-default">
+	<div class="panel-body">
+		<% if @article.uploads.count > 0 %>
+			<% @article.uploads.each_with_index do |upload, i| %>
+				<div class="row">
+					<div class="col-md-9">
+						<%= upload.name %>
+					</div>
+					<div class="col-md-3">
+						<div class="pull-right">
+							<%= link_to 'view', upload_path(upload), remote: true %>
+						</div>
+					</div>
+				</div>
+				<%= '<hr>'.html_safe unless i == @article.uploads.size - 1 %>
+			<% end %>
+		<% else %>
+			No files have been attached. 
+		<% end %>
+	</div>
+</div>

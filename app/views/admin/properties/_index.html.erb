@@ -1,0 +1,25 @@
+<% @properties.each do |property| %>
+	<% values = property.values.split(",").each {|v| v.strip!} if property.values %>
+	<tr>
+		<td><%= property.name %></td>
+		<td><%= property.style %></td>
+		<td><%= property.unit %></td>
+		<td>
+			<%= fa_icon "#{property.fa_style} 2x" if !property.fa_style.blank? %>&nbsp;&nbsp;
+			<%= '(' + property.fa_style + ')' if !property.fa_style.blank? %>
+		</td>
+		<td>
+			<% if values %>
+				<% values.each do |value|  %>
+					<%= value %><br>
+				<% end %>
+			<% end %>
+		</td>
+		<td>
+			<div class="pull-right">
+				<%= link_to "Edit", edit_admin_property_path(property), class:"label label-default", remote: true %>
+				<%= link_to "Delete", admin_property_delete_path(property), class:"label label-danger", remote: true %>
+			</div>
+		</td>
+	</tr>
+<% end %>

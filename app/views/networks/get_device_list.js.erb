@@ -1,0 +1,1 @@
+$('#device_list').empty().append("<%= escape_javascript(label_tag :device_id, 'Link to') %><%= escape_javascript(select_tag 'network[addresses_attributes][0][device_id]', options_for_select(@device_list), class:'form-control' )%>");

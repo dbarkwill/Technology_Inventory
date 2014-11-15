@@ -1,0 +1,59 @@
+<%= form_for(@person) do |f| %>
+  <% if @person.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@person.errors.count, "error") %> prohibited this person from being saved:</h2>
+
+      <ul>
+      <% @person.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+<div class="row">
+  <div class="col-md-12">
+    <div class="form-group">
+      <%= f.label :first_name %><br>
+      <%= f.text_field :first_name, class:"form-control" %>
+    </div>
+  </div>
+  <div class="col-md-12">
+    <div class="form-group">
+      <%= f.label :last_name %><br>
+      <%= f.text_field :last_name, class:"form-control" %>
+    </div>
+  </div>
+  <div class="col-md-12">
+    <div class="form-group">
+      <%= f.label :extension %><br>
+      <%= f.text_field :extension, class:"form-control" %>
+    </div>
+  </div>
+  <div class="col-md-12">
+    <div class="form-group">
+      <%= f.label :direct_dial %><br>
+      <%= f.text_field :direct_dial, class:"form-control" %>
+    </div>
+  </div>
+  <div class="col-md-12">
+    <div class="form-group">
+      <%= f.label :cell %><br>
+      <%= f.text_field :cell, class:"form-control" %>
+    </div>
+  </div>
+  <div class="col-md-12">
+    <div class="form-group">
+      <%= f.label :email %><br>
+      <%= f.email_field :email, class:"form-control" %>
+    </div>
+  </div>
+</div>
+<hr class="hr-divide">
+<div class="row">
+  <div class="col-md-12">
+    <div class="actions">
+      <%= f.submit class:"btn btn-default" %>
+    </div>
+  </div>
+</div>
+<% end %>

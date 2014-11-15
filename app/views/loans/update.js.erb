@@ -1,0 +1,9 @@
+$("ul.errors").html("")
+<% if @loan.errors.any? %>
+  <% @loan.errors.full_messages.each do |message| %>
+    $("ul.errors").append($("<li />").html("<%= message.html_safe %>"))
+  <% end %>
+<% else %>
+  $("#loan-show").html("<%= escape_javascript(render 'show_index') %>")
+  $("#loan-modal").modal("hide")
+<% end %>

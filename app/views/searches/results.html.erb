@@ -1,0 +1,55 @@
+<div class="panel panel-default">
+	<% if @device_results.count > 0 %>
+		<div class="panel-search-heading"><small>Devices</small></div>
+		<div class="list-group">
+			<% @device_results.limit(5).each do |device| %>
+				<%= link_to device_group_show_path(device.device_group.name, device), class:"list-group-item" do %>  
+                    <h4><strong><%= device.name %>:</strong> <%= device.device_group.name.singularize %></h4>
+                <% end %>
+			<% end %>
+		</div>
+	<% end %>
+	<% if @device_property_results.count > 0 %>
+		<div class="panel-search-heading"><small>Device Properties</small></div>
+		<div class="list-group">
+			<% @device_property_results.limit(5).each do |device_property| %>
+				<%= link_to device_group_show_path(device_property.device.device_group.name, device_property.device), class:"list-group-item" do %>  
+                    <h4>
+                    	<strong><%= device_property.device.name %>:</strong> <%= device_property.device.device_group.name.singularize %> |
+						<strong><%= device_property.property.name %>: </strong> <%= device_property.value %>
+					</h4>
+                <% end %>
+			<% end %>
+		</div>
+	<% end %>
+	<% if @article_results.count > 0 %>
+		<div class="panel-search-heading"><small>Articles</small></div>
+		<div class="list-group">
+			<% @article_results.limit(5).each do |article| %>
+				<%= link_to article_path(article), class:"list-group-item" do %>  
+                    <h4><strong><%= article.title %></strong></h4>
+                <% end %>
+			<% end %>
+		</div>
+	<% end %>
+	<% if @address_results.count > 0 %>
+		<div class="panel-search-heading"><small>IP Addresses</small></div>
+		<div class="list-group">
+			<% @address_results.limit(5).each do |address| %>
+				<%= link_to device_group_show_path(address.device.device_group.name, address.device), class:"list-group-item" do %>  
+                    <h4>
+	                    <strong><%= address.device.name %>:</strong> <%= address.address %> |
+						<strong>Network: </strong><%= address.network.name %>
+					</h4>
+                <% end %>
+			<% end %>
+		</div>
+	<% end %>
+	<% if @address_results.count + @article_results.count + @device_results.count + @device_property_results.count < 1 %>
+		<div class="list-group">
+			<div class="list-group-item">
+				<h4>No results found</h4>
+			</div>
+		</div>
+	<% end %>
+</div>

@@ -1,0 +1,47 @@
+<%= form_for @inventory_item do |f| %>
+  <% if @inventory_item.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@inventory_item.errors.count, "error") %> prohibited this inventory_item from being saved:</h2>
+
+      <ul>
+      <% @inventory_item.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="form-group">
+        <%= f.label :sku, 'SKU' %>
+        <%= f.text_field :sku, class:'form-control' %>
+      </div>
+      <div class="form-group">
+        <%= f.label :name %>
+        <%= f.text_field :name, class:'form-control' %>
+      </div>
+      <div class="form-group">
+        <%= f.label :inventory_category_id, 'Category' %>
+        <%= f.collection_select :inventory_category_id, InventoryCategory.all, :id, :name, {:include_blank => "Please Select"}, {:class => "form-control"} %><br>
+        <p>or create new</p>
+        <%= f.text_field :new_inventory_category_name, class:'form-control' %>
+      </div>
+      <div class="form-group">
+        <%= f.label :description %>
+        <%= f.text_area :description, class:'form-control' %>
+      </div>
+      <div class="form-group">
+        <%= f.label :cost %>
+        <div class="input-group">
+          <span class="input-group-addon">$</span>
+          <%= f.text_field :cost, class:'form-control' %>
+        </div>
+      </div>
+      <div class="form-group">
+        <%= f.label :serial_number_required, 'Serial Number Required?' %>&nbsp;&nbsp;
+        <%= f.check_box :serial_required %>
+      </div>
+    </div>
+  </div>
+  <%= f.submit 'save inventory item', class: "btn btn-primary" %>
+<% end %>

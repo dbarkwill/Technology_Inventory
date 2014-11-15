@@ -1,0 +1,14 @@
+<tr>
+	<td>
+		<%= @devicePropertiesResults.value %>
+		<%= hidden_field_tag 'loan[loan_line_items_attributes][replace][identifier]', @devicePropertiesResults.value %>
+		<%= hidden_field_tag 'loan[loan_line_items_attributes][replace][loanable_id]', @devicePropertiesResults.device_id %>
+		<%= hidden_field_tag 'loan[loan_line_items_attributes][replace][loanable_type]', 'Device' %>
+	</td>
+	<td>
+		<%= text_area_tag 'loan[loan_line_items_attributes][replace][description]', @devicePropertiesResults.device.name, class:'form-control' %>
+	</td>
+	<td>
+		<%= text_field_tag 'loan[loan_line_items_attributes][replace][quantity]', nil, disabled: true, class:'form-control' %>
+	</td>
+</tr>

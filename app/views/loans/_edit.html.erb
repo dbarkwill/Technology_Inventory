@@ -1,0 +1,97 @@
+<div class="modal-dialog modal-lg">
+  <div class="modal-content">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+      <h4 class="modal-title" id="myModalLabel">edit loan</h4>
+    </div>
+    <%= form_for @loan, remote: true do |f| %>
+      <div class="modal-body">
+        <ul class="errors"></ul>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="form-group">
+              <%= f.label :loanee %>
+              <%= f.text_field :loanee, class:'form-control' %>
+            </div>
+            <div class="form-group">
+              <%= f.label :notes %>
+              <%= f.text_area :notes, class:'form-control' %>
+            </div>
+            <table class="table" id="loan">
+              <thead>
+                <tr>
+                  <th width="200">SKU / Asset Tag</th>
+                  <th>Description</th>
+                  <th width="100">Quantity</th>
+                  <th width="100">Remove?</th>
+                </tr>
+              </thead>
+              <tbody>
+                <%= f.fields_for :loan_line_items, @loan.loan_line_items do |li| %>
+                  <tr>
+                    <td><%= li.text_field :identifier, disabled: true, class:'form-control search' %></td>
+                    <td><%= li.text_area :description, disabled: true, class:'form-control' %></td>
+                    <td><%= li.text_field :quantity, disabled: true, class:'form-control' %></td>
+                    <td><%= li.check_box :_destroy %></td>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+            <%= link_to 'add line item', '#', class:'add-line-item' %>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <%= f.submit 'update', class: "btn btn-primary" %>
+        <%= link_to "cancel", "#", class: "btn", data: {dismiss: "modal"} %>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<script>
+$(document).ready(function() {
+  $('.add-line-item').on('click', function(event) {
+    var unique_id = new Date().getTime();
+    var template = "<%= escape_javascript(render 'loan_line_items_template') %>";
+    var html = template.replace(/replace/g, unique_id);
+    $('#loan tr:last').after(html);
+    event.preventDefault();
+  });
+});
+
+$('#loan tbody').on("keyup", ".search", detectSearch );
+
+var currentSearchField;
+
+function detectSearch(event){
+  clearTimeout($.data(this, 'timer'));
+  currentSearchField = this
+    if (event.keyCode == 13)
+      search(true);
+    else
+      $(this).data('timer', setTimeout(search, 500));
+}
+
+function search(force, element) {
+    var existingString = $(currentSearchField).val();
+    if (!force && existingString.length < 3) return; //wasn't enter, not > 2 char
+    var request = $.ajax({
+      type: "GET",
+      url: 'search_by_sku_or_asset_tag',
+      data: {query: existingString},
+      dataType: "html"
+    });
+
+    request.done(function(response, status, jqXHR){
+      if( !$.trim(response)) {
+        $(currentSearchField).parent().parent().css( "background-color", "red" );
+      } else {
+        var unique_id = new Date().getTime();
+        tableRow = $(currentSearchField).parent().parent();
+        html = response.replace(/replace/g, unique_id);
+        tableRow.replaceWith(html);
+      }
+    });
+}
+</script>

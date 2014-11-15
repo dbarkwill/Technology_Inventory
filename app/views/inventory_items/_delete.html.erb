@@ -1,0 +1,15 @@
+<div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="myModalLabel">delete inventory item?</h4>
+      </div>
+	  <div class="modal-body">
+	    Are you sure you wish to delete <b><%= @inventory_item.name %></b>? This action is perminate and is not recommended unless there are no items of this SKU in inventory.
+	  </div>
+	  <div class="modal-footer">
+	  	<%= link_to "delete inventory item", inventory_item_path(@inventory_item), method: :delete, class: "btn btn-danger" %>
+	    <%= link_to "cancel", "#", class: "btn", data: {dismiss: "modal"} %>
+	  </div>
+    </div>
+</div>

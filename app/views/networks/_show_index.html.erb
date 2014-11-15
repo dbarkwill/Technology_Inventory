@@ -1,0 +1,39 @@
+<div class="panel panel-default">
+	<div class="panel-body">
+		<table class="table datatable table-striped">
+			<thead>
+				<tr>
+					<th>IP Address</th>
+					<th>Device Name</th>
+					<th>MAC Address</th>
+					<th>Device Type</th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				<% @ip_list.each_host do |ip| %>
+					<tr>
+						<% current_address = @network_ips.detect{|network_ip| network_ip.address.to_s == ip.to_s} %>
+						<% if current_address %>
+							<td><%= ip %></td>
+							<td><%= link_to "#{current_address.device.name}", device_group_show_path(current_address.device.device_group.name, current_address.device) %></td>
+							<td><%= current_address.device.MAC %></td>
+							<td><%= current_address.device.device_group.name.singularize %></td>
+							<td>
+								<div class="pull-right">
+					              <%= link_to 'X', current_address, method: :delete, remote: true, class:"label label-danger" %>
+					            </div>
+					        </td>
+						<% else %>
+							<td><%= ip %></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+						<% end %>
+					</tr>
+				<% end %>
+			</tbody>
+		</table>
+	</div>
+</div>

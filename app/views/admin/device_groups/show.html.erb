@@ -1,0 +1,46 @@
+<div class="row">
+	<div class="col-md-3 hidden-sm hidden-xs">
+		<%= render 'shared/admin_sidebar' %>
+	</div>
+	<div class="col-md-9">
+		<div class="row">
+			<div class="col-xs-12">
+				<h1><%= @device_group.name.downcase %></h1>
+			</div>
+		</div>
+		<br>
+		<div class="row">
+			<div class="col-md-12">
+				<div class="row">
+					<div id="show-index">
+						<%= render 'show_index' %>
+					</div>
+					<div class="col-md-4">
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								<h4 class="panel-title">Devices</h4>
+							</div>
+							<ul class="list-group">
+								<% if @device_group.devices.count > 0 %>
+									<% @device_group.devices.each do |device| %>
+										<li class="list-group-item"><%= device.name %></li>
+									<% end %>
+								<% else %>
+									<li class="list-group-item">No devices found</li>
+								<% end %>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<hr class="hr-divide">
+		<div class="row">
+			<div class="col-md-12">
+				<a href="<%= admin_device_groups_path %>" class="btn btn-default"><span class="glyphicon glyphicon-arrow-left"></span>&nbsp;back</a>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="modal fade" id="device-group-modal" tabindex="-1" role="dialog" aria-labelledby="device-group-modal" aria-hidden="true"></div>

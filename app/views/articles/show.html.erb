@@ -1,0 +1,19 @@
+<div id="page">
+ <%= render 'show' %>
+</div>
+
+
+
+<script>
+  $(document).ready(function() {
+    $('#linkable_type').change(function() {
+        $.ajax({
+           url: "<%= linkable_select_article_path %>",
+           data: {
+               linkable_type: $("#linkable_type option:selected").val()
+           },
+           dataType: "script"
+        });
+    });
+  });
+</script>

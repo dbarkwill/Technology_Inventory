@@ -1,0 +1,33 @@
+<div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <%= form_tag search_path, :method => 'get', :id=> 'search', remote: true do %>
+        	<%= fa_icon 'search 3x' %>&nbsp;&nbsp;&nbsp;&nbsp;
+        	<%= text_field_tag 'query', params[:search], placeholder: 'search', class:"form-control-search" %>
+        <% end %>
+      </div>
+      <div id="search-results">
+      </div>
+    </div>
+</div>
+
+<script>
+$('#search-modal').on('shown.bs.modal', function () {
+    $('#query').focus();
+})
+$('#query').keyup(function(e) {
+    clearTimeout($.data(this, 'timer'));
+    if (e.keyCode == 13)
+      search(true);
+    else
+      $(this).data('timer', setTimeout(search, 500));
+});
+function search(force) {
+    var existingString = $("#query").val();
+    if (!force && existingString.length < 3) return; //wasn't enter, not > 2 char
+    $.get('/search/results?query=' + existingString, function(data) {
+        $('div#search-results').html(data);
+        $('#search-results').show();
+    });
+}
+</script>

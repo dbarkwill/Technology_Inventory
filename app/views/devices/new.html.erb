@@ -1,5 +1,13 @@
-<h1>New device</h1>
-
-<%= render 'form' %>
-
-<%= link_to 'Back', devices_path %>
+<div class="row">
+	<div class="col-md-6 col-md-offset-3">
+		<div class="panel panel-default">
+			<div class="panel-body">
+				<h1>new <%= @device_group.name.singularize.downcase %></h1>
+				<hr class="hr-divide">
+				<%= render 'form' %>
+			</div>
+		</div>
+		<a href="<%= device_types_path(@device_group.name) %>" class="btn btn-default"><span class="glyphicon glyphicon-arrow-left"></span>&nbsp;back</a>
+	</div>
+</div>
+<hr class="hr-divide">

@@ -1,0 +1,23 @@
+<div class="row">
+	<div class="col-md-3">
+		<%= render "shared/admin_sidebar" %>
+	</div>
+	<div class="col-md-9">
+		<div class="row">
+			<div class="col-md-4">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h4 class="panel-title">Pending Published</h4>
+					</div>
+					<ul class="list-group">
+						<% @pending_published.each do |article| %>
+							<li class="list-group-item">
+								<%= article.title %> by <%= article.user.first_name %> <%= article.user.last_name %>
+							</li>
+						<% end %>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

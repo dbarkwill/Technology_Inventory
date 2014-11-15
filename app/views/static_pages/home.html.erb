@@ -1,0 +1,56 @@
+<div class="jumbotron">
+<h1>tracksIT</h1>
+</div>
+<% if user_signed_in? %>
+	<% if @articles.count > 0 %>
+		<% @articles.each do |article| %>
+		<div class="row row-flex">
+			<div class="col-md-3">
+				<div class="panel panel-default">
+					<div class="panel-body">
+						<h3><%= article.title %></h3>
+						<h5>written by <%= article.user.name %></h5>
+						<h5>on <%= article.updated_at %></h5>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-9">
+				<div class="panel panel-default">
+					<div class="panel-body">
+						<%= raw article.content %>
+					</div>
+				</div>
+			</div>
+		</div>
+		<% end %>
+	<% else %>
+		<div class="panel panel-default">
+			<div class="panel-body">
+				<h3>You can publish articles from the knowledge base to the front page by selecting "Publish to Front Page" when editing a document</h3>
+			</div>
+		</div>
+	<% end %>
+<% else %>
+	<div class="row">
+		<div class="col-md-4">
+			<div class="jumbotron">
+				<h2>keep track of devices</h2>
+			</div>
+		</div>
+		<div class="col-md-4">
+			<div class="jumbotron">
+				<h2>manage documentation</h2>
+			</div>
+		</div>
+		<div class="col-md-4">
+			<div class="jumbotron">
+				<h2>generate<br>reports</h2>
+			</div>
+		</div>
+	</div>
+	<div class="panel panel-default">
+		<div class="panel-body">
+			<h1><center>click above to login</center></h1>
+		</div>
+	</div>
+<% end %>

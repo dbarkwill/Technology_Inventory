@@ -1,0 +1,36 @@
+<div class="row">
+	<div class="col-md-3">
+		<%= render "shared/admin_sidebar" %>
+	</div>
+	<div class="col-md-9">
+		<h1>users</h1>
+		<br>
+		<div class="row">
+			<div class="col-md-12">
+				<div class="panel panel-default">
+					<table class="table">
+						<thead>
+							<tr>
+								<th>Name</th>
+								<th>Email</th>
+								<th></th>
+								<th width="200">
+									<div class="pull-right">
+										<%= link_to new_admin_user_path, class:"btn btn-default btn-xs", remote: true do %>
+											<span class="glyphicon glyphicon-plus"></span>
+										<% end %>
+									</div>
+								</th>
+							</tr>
+						</thead>
+						<tbody class="user-index">
+							<%= render 'index' %>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="modal fade" id="user-modal" tabindex="-1" role="dialog" aria-labelledby="user-modal" aria-hidden="true"></div>

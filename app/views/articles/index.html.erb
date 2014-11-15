@@ -1,0 +1,60 @@
+<div class="row">
+  <div class="col-xs-10">
+    <% if params[:search] %>
+      <h1>search results<small> for "<%= params[:search]%>"</small></h1>
+    <% else %>
+      <h1>knowledge base</h1>
+    <% end %>
+  </div>
+  <div class="col-xs-2">
+    <div class="pull-right">
+      <br>
+      <%= link_to new_article_path, class:"btn btn-default", 'data-no-turbolink' => true do %>
+        <span class="glyphicon glyphicon-plus"></span>
+      <% end %>
+    </div>
+  </div>
+</div>
+<br>
+<div class="row">
+  <div class="col-md-9">
+    <% @articles.each do |article| %>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="panel panel-default">
+            <div class="panel-body">
+              <div class="pull-right">
+                <%= link_to "edit article", edit_article_path(article), class:"btn btn-default", 'data-no-turbolink' => true %>
+              </div>
+              <h4><%= link_to article.title, article %></h4>
+              <hr class="hr-divide">
+              <span class="glyphicon glyphicon-tags"></span>&nbsp;&nbsp;<%= raw article.tags.map(&:name).map { |t| link_to t, tag_path(t) }.join(', ') %>
+            </div>
+            <div class="panel-body">
+              <%= raw article.summary %>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+  <div class="col-md-3">
+    <% if @tags.count > 0 %>
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h4 class="panel-title">
+            <span class="glyphicon glyphicon-tags"></span>&nbsp;&nbsp;tags
+          </h4>
+        </div>
+        <div class="panel-body">
+            <ul class="list-unstyled">
+              <% @tags.each do |tag| %>
+                <li><%= link_to tag.name, tag_path(tag.name) %> (<%= tag.articles.count %>)</li>
+              <% end %>
+            </ul>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
+

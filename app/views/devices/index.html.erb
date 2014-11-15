@@ -1,31 +1,55 @@
-<h1>Listing devices</h1>
-
-<table class="table">
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Asset tag</th>
-      <th>Notes</th>
-      <th>Device Group</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @devices.each do |device| %>
-      <tr>
-        <td><%= device.name %></td>
-        <td><%= device.asset_tag %></td>
-        <td><%= device.notes %></td>
-        <td><%= device.device_group.name %></td>
-        <td><%= link_to 'Show', device %></td>
-        <td><%= link_to 'Edit', edit_device_path(device) %></td>
-        <td><%= link_to 'Destroy', device, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Device', new_device_path %>
+<div class="row">
+  <div class="col-md-3 hidden-xs hidden-sm">
+    <h3><small>Device Types:</small></h3>
+    <div class="bs-docs-sidebar">
+      <ul class="nav bs-docs-sidenav">
+        <% @device_types.each do |group| %>
+          <li <%= cp(device_types_path(group.name)) %> > <%= link_to "#{group.name} (#{group.devices.count})", device_types_path(group.name) %> </li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+  <div class="col-md-9">
+    <div class="row">
+      <div class="col-xs-10">
+        <h1>
+          <% if params[:search] %>
+            search results
+            <small> for "<%= params[:search] %>"</small>
+          <% else %>
+            all <%= @device_group.name.downcase %>
+          <% end %>
+        </h1>
+      </div>
+      <div class="col-xs-2">
+        <div class="pull-right">
+          <br>
+          <% unless params[:search] || params[:group] == 'all' %>
+            <%= link_to device_group_new_path(@device_group.name), class:"btn btn-default" do %>
+              <span class="glyphicon glyphicon-plus"></span>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <% @devices_array.each do |devices| %>
+        <% if devices.count > 0 %>
+          <div class="col-md-6">
+            <div class="panel panel-default">
+              <div class="list-group">
+                <% devices.each do |device| %>
+                  <% css = 'list-group-item-danger' if device.loaned? %>
+                  <%= link_to device_info_path(device), class:"list-group-item #{css}", remote: true do %>  
+                    <h4><%= device.name %></h4>
+                  <% end %>
+                <% end %>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="device-modal" tabindex="-1" role="dialog" aria-labelledby="device-modal" aria-hidden="true"></div>

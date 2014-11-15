@@ -1,0 +1,12 @@
+<% @device_groups.each do |device_group| %>
+	<tr>
+		<td><%= link_to device_group.name, admin_device_group_path(device_group) %></td>
+		<td><%= device_group.devices.count %></td>
+		<td>
+			<div class="pull-right">
+				<%= link_to "Edit", edit_admin_device_group_path(device_group), class:"label label-default", remote: true %>
+				<%= link_to "Delete", admin_device_group_delete_path(device_group), class:"label label-danger", remote: true %>
+			</div>
+		</td>
+	</tr>
+<% end %>
