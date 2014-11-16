@@ -1,6 +1,11 @@
 Rails.application.routes.draw do
 
-  get 'wiki/:page_name' => 'wiki#show', :as => "wiki_show"
+  get 'wiki/all_pages' => 'wiki#show_all', :as => "wiki_pages"
+  get 'wiki/:page_reference' => 'wiki#show', :as => "wiki_show"
+  delete 'wiki/:page_reference' => 'wiki#destroy', :as => "wiki_delete"
+  get 'wiki' => 'wiki#index'
+  get 'wiki/:page_reference/edit' => 'wiki#edit', :as => "wiki_edit"
+  patch 'wiki' => 'wiki#update'
 
   get 'loans/search_by_sku_or_asset_tag' => 'loans#search_by_sku_or_asset_tag'
   patch 'loans/:id/close' => 'loans#close', :as => "close_loan"

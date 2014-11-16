@@ -30,7 +30,7 @@ class NetworksController < ApplicationController
   end
 
   def save_address
-    
+
   end
 
 
@@ -75,7 +75,7 @@ class NetworksController < ApplicationController
       if @network.update(network_params)
         format.html { redirect_to @network, notice: 'Network was successfully updated.' }
         format.json { render :show, status: :ok, location: @network }
-        format.js { 
+        format.js {
           @ip_list = IPAddress(@network.network)
           @network_ips = @network.addresses
           render :update
@@ -83,7 +83,7 @@ class NetworksController < ApplicationController
       else
         format.html { render :edit }
         format.json { render json: @network.errors, status: :unprocessable_entity }
-        format.js { 
+        format.js {
           render :update
         }
       end
@@ -95,7 +95,10 @@ class NetworksController < ApplicationController
   def destroy
     @network.destroy
     respond_to do |format|
-      format.html { redirect_to networks_url, notice: 'Network was successfully destroyed.' }
+      format.html {
+        flash[:notice] = 'Network was successfully destroyed.'
+        index
+      }
       format.json { head :no_content }
     end
   end

@@ -9,8 +9,8 @@ class Wiki < ActiveRecord::Base
   def transform_links
     match = Regexp.new(/\[{2}([\w\s]{1,})\]{2}/i)
     contents.to_s.gsub!(match) do |substitute|
-      result = Wiki.find_or_create_by(:page_name => substitute)
-      '<a href="/wiki/' + result.page_reference + '">' + substitute + '</a>'
+      result = Wiki.find_or_create_by(:page_name => $1)
+      '<a href="/wiki/' + result.page_reference + '">' + $1 + '</a>'
     end
   end
 

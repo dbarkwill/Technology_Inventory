@@ -19,4 +19,5 @@
 //= require dataTables/jquery.dataTables
 //= require dataTables/jquery.dataTables.bootstrap3
 //= require turbolinks
+//= require ckeditor/init
 //= require_tree .
