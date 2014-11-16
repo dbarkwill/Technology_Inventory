@@ -1,0 +1,37 @@
+<div class="row">
+  <div class="col-md-9">
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <h3><%= @page.page_name %></h3>
+        <h5>Administrator \\ <%= @page.updated_at.to_time.strftime("%-m-%-d-%Y") %></h5>
+        <hr>
+        <% if @page.contents %>
+          <%= @page.contents.html_safe %>
+        <% else %>
+          You haven't added anything to this page yet. Click edit above to get started.
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <%= render 'sidebar' %>
+  </div>
+</div>
+
+<div class="modal fade" id="page-modal" tabindex="-1" role="dialog" aria-labelledby="page-modal" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="myModalLabel">delete page</h4>
+      </div>
+      <div class="modal-body">
+        Are you sure you wish to delete this page?
+      </div>
+      <div class="modal-footer">
+        <%= link_to "delete", wiki_delete_path(@page.page_reference), class: "btn btn-danger", method: :delete %>
+        <%= link_to "cancel", "#", class: "btn", data: {dismiss: "modal"} %>
+      </div>
+    </div>
+  </div>
+</div>

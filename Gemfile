@@ -67,3 +67,6 @@ gem 'remotipart'
 
 # Fontawesome Icons
 gem 'font-awesome-rails'
+
+# CK Editor
+gem 'ckeditor'

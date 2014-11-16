@@ -1,0 +1,18 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h4 class="panel-title">
+      <span class="glyphicon glyphicon-tags"></span>&nbsp;&nbsp; tags
+    </h4>
+  </div>
+  <div class="panel-body">
+      <ul class="list-unstyled">
+        <li>testing (2)</li>
+        <li>more test (1)</li>
+        <li>last one (5)</li>
+      </ul>
+  </div>
+</div>
+
+<%= link_to 'edit', wiki_edit_path(@page.page_reference), class:'btn btn-default btn-block' %>
+<%= link_to 'view all pages', wiki_pages_path, class:'btn btn-default btn-block' %>
+<%= link_to 'delete', '#', class:'btn btn-danger btn-block', data: {toggle: "modal", target: "#page-modal"} %>
