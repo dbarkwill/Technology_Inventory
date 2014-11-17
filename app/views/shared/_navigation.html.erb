@@ -1,4 +1,54 @@
-<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+<script type="text/javascript">
+    $("#menu-toggle").click(function(e) {
+        e.preventDefault();
+        $("#wrapper").toggleClass("active");
+    });
+</script>
+
+<div id="wrapper" class="active">
+
+  <!-- Sidebar -->
+
+  <div id="sidebar-wrapper">
+    <ul id="sidebar_menu" class="sidebar-nav">
+      <li class="sidebar-brand"><a id="menu-toggle" href="#">tracksIT<span class="fa fa-navicon fa-fw"></span></a></li>
+    </ul>
+    <fa-ul class="sidebar-nav" id="sidebar">
+      <li>
+        <%= link_to networks_path do %>
+            Networks <span class="fa fa-wifi fa-fw"></span>
+    <% end %>
+      </li>
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Devices <b class="caret"></b></a>
+        <ul class="dropdown-menu">
+          <% @device_types.each do |group| %>
+              <li><%= link_to "#{group.name}", device_types_path(group.name) %></li>
+          <% end %>
+          <li class="divider"></li>
+          <li><%= link_to "All Devices", device_types_path('all') %></li>
+        </ul>
+      </li>
+      <li><%= link_to people_path do %>
+            People <span class="pull-right" style="margin-right: 50px"> <span class="fa fa-group fa-fw"></span></span>
+        <% end %>
+      </li>
+      <li><%= link_to  inventory_items_path do %>
+            Inventory <span class="fa fa-cubes fa-fw"></span>
+        <% end %>
+      </li>
+      <li><%= link_to loans_path do %>
+            Loans <span class="pull-right" style="margin-right: 30px"><span class="fa fa-user fa-fw"></span><span class="fa fa-long-arrow-right fa-fw"></span></span>
+
+        <% end %>
+      </li>
+    </fa-ul>
+  </div>
+</div>
+
+
+
+<!-- <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -52,6 +102,6 @@
           <li><%= link_to 'Login', new_user_session_path %></li>
         <% end %>
       </ul>
-    </div><!--/.nav-collapse -->
+    </div> /.nav-collapse
   </div>
-</div>
+</div> -->
