@@ -3,18 +3,29 @@
     <div class="panel panel-default">
       <div class="panel-body">
         <h3><%= @page.page_name %></h3>
+        <br>
         <h5>Administrator \\ <%= @page.updated_at.to_time.strftime("%-m-%-d-%Y") %></h5>
+        <% if @page.tags.count > 0 %>
+          <h5><span class="glyphicon glyphicon-tag"></span>&nbsp; <%= @page.tag_list %></h5>
+        <% end %>
         <hr>
         <% if @page.contents %>
-          <%= @page.contents.html_safe %>
+          <div id="editor1" contenteditable="true" >
+            <%= @page.contents.html_safe %>
+          </div>
         <% else %>
           You haven't added anything to this page yet. Click edit above to get started.
         <% end %>
       </div>
     </div>
   </div>
-  <div class="col-md-3">
+  <div class="col-md-3 hidden-print">
     <%= render 'sidebar' %>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-12">
+    <%= link_to 'back', :back %>
   </div>
 </div>
 

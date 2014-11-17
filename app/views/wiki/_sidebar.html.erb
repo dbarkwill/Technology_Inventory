@@ -6,9 +6,9 @@
   </div>
   <div class="panel-body">
       <ul class="list-unstyled">
-        <li>testing (2)</li>
-        <li>more test (1)</li>
-        <li>last one (5)</li>
+        <% @tags.each do |tag| %>
+          <li><%= tag.name + " (#{tag.wikis.count})"%></li>
+        <% end %>
       </ul>
   </div>
 </div>

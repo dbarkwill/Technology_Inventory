@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141114205901) do
+ActiveRecord::Schema.define(version: 20141116165513) do
 
   create_table "addresses", force: true do |t|
     t.string   "address"
@@ -148,12 +148,11 @@ ActiveRecord::Schema.define(version: 20141114205901) do
 
   create_table "taggings", force: true do |t|
     t.integer  "tag_id"
-    t.integer  "article_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "wiki_id"
   end
 
-  add_index "taggings", ["article_id"], name: "index_taggings_on_article_id"
   add_index "taggings", ["tag_id"], name: "index_taggings_on_tag_id"
 
   create_table "tags", force: true do |t|
