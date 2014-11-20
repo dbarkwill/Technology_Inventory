@@ -1,4 +1,11 @@
 <div class="row">
+  <div class="col-md-12">
+    <div id="editorTop">
+    </div>
+  </div>
+</div>
+<br>
+<div class="row">
   <div class="col-md-9">
     <div class="panel panel-default">
       <div class="panel-body">
@@ -9,13 +16,13 @@
           <h5><span class="glyphicon glyphicon-tag"></span>&nbsp; <%= @page.tag_list %></h5>
         <% end %>
         <hr>
-        <% if @page.contents %>
-          <div id="editor1" contenteditable="true" >
-            <%= @page.contents.html_safe %>
-          </div>
-        <% else %>
-          You haven't added anything to this page yet. Click edit above to get started.
-        <% end %>
+        <div id="editor1" contenteditable="false">
+          <% if @page.contents %>
+              <%= @page.contents.html_safe %>
+          <% else %>
+            You haven't added anything to this page yet. Click edit above to get started.
+          <% end %>
+        </div>
       </div>
     </div>
   </div>
@@ -23,6 +30,14 @@
     <%= render 'sidebar' %>
   </div>
 </div>
+<br>
+<div class="row">
+  <div class="col-md-12">
+    <div id="editorBottom">
+    </div>
+  </div>
+</div>
+<br>
 <div class="row">
   <div class="col-md-12">
     <%= link_to 'back', :back %>
@@ -46,3 +61,41 @@
     </div>
   </div>
 </div>
+
+<script>
+CKEDITOR.disableAutoInline = true;
+
+$(".enableEditing").click(function(e) {
+    e.preventDefault();
+    var contents = document.getElementById('editor1');
+    contents.setAttribute('contenteditable', true);
+    CKEDITOR.inline( 'editor1',{
+      extraPlugins: 'sharedspace,sourcedialog,tableresize,quicktable',
+      removePlugins: 'floatingspace,resize',
+      sharedSpaces: {
+        top: 'editorTop',
+        bottom: 'editorBottom',
+      },
+      startupFocus: true,
+      on: {
+          blur: function( event ) {
+              var contents = event.editor.getData();
+              var parsedData = {
+                wiki: {
+                  contents: contents,
+                  page_reference: "<%= @page.page_reference %>"
+                }
+              }
+              console.log( parsedData );
+              var request = $.ajax({
+                type: "PATCH",
+                url: '/wiki',
+                data: parsedData,
+                dataType: "html"
+              });
+          }
+      }
+    } );
+});
+
+</script>

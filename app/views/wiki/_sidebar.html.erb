@@ -13,6 +13,6 @@
   </div>
 </div>
 
-<%= link_to 'edit', wiki_edit_path(@page.page_reference), class:'btn btn-default btn-block' %>
+<%= link_to 'edit', '#', class:'btn btn-default btn-block enableEditing' %>
 <%= link_to 'view all pages', wiki_pages_path, class:'btn btn-default btn-block' %>
 <%= link_to 'delete', '#', class:'btn btn-danger btn-block', data: {toggle: "modal", target: "#page-modal"} %>

@@ -4,6 +4,7 @@ class Wiki < ActiveRecord::Base
   has_many :taggings
   has_many :tags, through: :taggings
   belongs_to :user
+  scope :is_root,-> {where(root: true)}
 
   def self.tagged_with(name)
     Tag.find_by_name!(name).articles
@@ -23,16 +24,17 @@ class Wiki < ActiveRecord::Base
     end
   end
 
-  def generate_page_reference(length=8)
-    write_attribute(:page_reference, rand(36**length).to_s(36))
-  end
-
-  def transform_links
-    match = Regexp.new(/\[{2}([\w\s]{1,})\]{2}/i)
-    contents.to_s.gsub!(match) do |substitute|
-      result = Wiki.find_or_create_by(:page_name => $1)
-      '<a href="/wiki/' + result.page_reference + '">' + $1 + '</a>'
+  private
+    def generate_page_reference(length=8)
+      write_attribute(:page_reference, rand(36**length).to_s(36))
     end
-  end
+
+    def transform_links
+      match = Regexp.new(/\[{2}([\w\s]{1,})\]{2}/i)
+      contents.to_s.gsub!(match) do |substitute|
+        result = Wiki.find_or_create_by(:page_name => $1)
+        '<a href="/wiki/' + result.page_reference + '">' + $1 + '</a>'
+      end
+    end
 
 end

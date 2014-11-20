@@ -1,9 +1,11 @@
 Rails.application.routes.draw do
 
   get 'wiki/all_pages' => 'wiki#show_all', :as => "wiki_pages"
+  get 'wiki/new' => 'wiki#new', :as => "wiki_new"
   get 'wiki/:page_reference' => 'wiki#show', :as => "wiki_show"
   delete 'wiki/:page_reference' => 'wiki#destroy', :as => "wiki_delete"
-  get 'wiki' => 'wiki#index'
+  get 'wiki' => 'wiki#index', :as => 'wikis'
+  post 'wiki' => 'wiki#create'
   get 'wiki/:page_reference/edit' => 'wiki#edit', :as => "wiki_edit"
   patch 'wiki' => 'wiki#update'
 
