@@ -1,3 +1,4 @@
+/*
 .row{
     margin-left:0px;
     margin-right:0px;
@@ -146,4 +147,233 @@
         width: 150px;
         transition: all .4s ease 0s;
     }
+}
+*/
+
+.navbar-inverse{
+  background-color: rgb(34,34,34);
+}
+
+.navbar-inverse .navbar-nav>.active>a, .navbar-inverse .navbar-nav>.active>a:focus{
+  background-color: #3367A0;
+}
+
+.sidebar-nav>li>a:hover, .sidebar-nav>li>a:focus{
+  background-color: rgb(68,68,68) !important;
+  border-top: 1px solid black;
+  border-bottom: 1px solid black;
+}
+
+
+
+.navbar-inverse .navbar-nav>li>a{
+  color: #f2f2f2;
+}
+
+.navbar-fixed-left{
+  background-color: rgb(48,48,48);
+  min-height: 100% !important;
+}
+
+nav.navbar.navbar-fixed-left a{
+  color: rgb(170,170,170);
+}
+nav.navbar.navbar-fixed-left .sidebar-nav a > span.glyphicon{
+  float: right;
+  padding-right: 5px;
+}
+
+nav.navbar.navbar-fixed-left > .container > .sidebar-header{
+  margin: 0px;
+  padding: 0px;
+  padding-top: 10px;
+  width: 150px;
+}
+
+.sidebar-header > a#toggle-menu{
+  color: white;
+}
+
+.nav.sidebar-nav{
+  margin-top: 75px;
+}
+
+#wrapper {
+    padding-left: 50px;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+    z-index: 5000;
+}
+
+#wrapper.toggled {
+    padding-left: 150px;
+}
+
+#sidebar-wrapper {
+    z-index: 6000;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 50px;
+    height: 100%;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+}
+
+#wrapper.toggled #sidebar-wrapper {
+    width: 150px;
+}
+
+#page-content-wrapper {
+    width: 100%;
+    padding: 15px;
+    margin-top: 75px;
+}
+
+#wrapper.toggled #page-content-wrapper {
+    position: absolute;
+    margin-right: -150px;
+}
+
+#wrapper .navbar-brand{
+  margin-left: 50px;
+  -webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+}
+
+#wrapper.toggled .navbar-brand{
+  margin-left: 150px;
+}
+
+/* Sidebar Styles */
+
+.sidebar-nav {
+    position: absolute;
+    top: 0;
+    margin: 0;
+    margin-left: -100px;
+    padding: 0;
+    list-style: none;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+}
+
+#wrapper.toggled .sidebar-nav{
+  margin-left: 0px;
+}
+
+.sidebar-nav li {
+  width: 150px;
+  margin: 0px;
+  padding: 0px;
+}
+
+.sidebar-nav li a {
+    display: block;
+    text-decoration: none;
+    margin: 0px;
+    padding-left: 15px;
+    width: 100%;
+    margin-left: -15px;
+}
+
+@media(min-width:768px) {
+    #wrapper {
+        padding-left: 50px;
+    }
+
+    #wrapper.toggled {
+        padding-left: 150px;
+    }
+
+    #sidebar-wrapper {
+        width: 50px;
+    }
+
+    #wrapper.toggled #sidebar-wrapper {
+        width: 150px;
+    }
+
+    #page-content-wrapper {
+        padding: 20px;
+    }
+
+    #wrapper.toggled #page-content-wrapper {
+        position: relative;
+        margin-right: 0;
+    }
+}
+/* Drop Down Menu */
+
+.sidebar-nav > .sidebar-child > .sidebar-child-menu {
+  top: 0px;
+  left: 134px;
+  position: absolute;
+  z-index: 1000;
+  display: none;
+  width: 175px;
+  background-color: rgb(68,68,68);
+  color: white;
+  padding: 10px;
+  margin: 0px;
+  border: 0px;
+  font-size: 14px;
+  -webkit-border-top-right-radius: 3px;
+  -webkit-border-bottom-right-radius: 3px;
+  -moz-border-radius-topright: 3px;
+  -moz-border-radius-bottomright: 3px;
+  border-top-right-radius: 3px;
+  border-bottom-right-radius: 3px;
+}
+
+ul.sidebar-child-menu{
+  list-style: none;
+  padding: 0px;
+  margin: 0px;
+}
+
+li.sidebar-child:hover .sidebar-child-menu{
+  display: block;
+}
+
+
+li.sidebar-child-title{
+  font-size: 20px;
+  color: rgb(238,118,36);
+  padding: 5px;
+}
+
+li.sidebar-child-heading{
+  font-size: 16px;
+  color: white;
+  margin-left: 10px;
+  width: 90%;
+  padding-bottom: 3px;
+  border-bottom: 1px solid grey;
+}
+.sidebar-child-menu > li > a{
+  width: 100%;
+  margin: 0px;
+  padding: 3px;
+  padding-left: 15px;
+}
+.sidebar-child-menu a:hover{
+  background-color: rgb(48,48,48);
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+}
+.sidebar-child-divider{
+  width: 90%
+  margin: auto;
+  border-bottom: 1px solid grey;
+  padding-top: 10px;
 }

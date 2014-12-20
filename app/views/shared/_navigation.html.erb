@@ -1,154 +1,105 @@
-<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-  <div class="container">
-    <div class="navbar-collapse collapse">
-      <ul class="nav navbar-nav navbar-right">
+<div id="sidebar-wrapper">
+  <nav class="navbar navbar-fixed-left" role="navigation">
+    <div class="container">
+      <div class="sidebar-header">
+        <a href="#" id="toggle-menu">
+          <span class="glyphicon glyphicon-th-list"></span>
+        </a>
+      </div>
+      <ul class="nav sidebar-nav">
+        <li class="sidebar-child">
+          <a href="#" class="sidebar-child-toggle">Networks<span class="glyphicon glyphicon-list-alt"></span></a>
+          <ul class="sidebar-child-menu">
+            <li class="sidebar-child-title">Networks</li>
+            <li><%= link_to 'View Networks', networks_path %></li>
+            <li><%= link_to 'Create a Network', new_network_path %></li>
+          </ul>
+        </li>
+        <li class="sidebar-child">
+          <a href="#" class="sidebar-child-toggle">Devices<span class="glyphicon glyphicon-th-large"></span></a>
+          <ul class="sidebar-child-menu">
+            <li class="sidebar-child-title">Devices</li>
+            <% @device_types.each do |group| %>
+              <li><%= link_to "#{group.name}", device_types_path(group.name) %></li>
+            <% end %>
+            <li class="sidebar-child-divider"></li>
+            <li><%= link_to "All Devices", device_types_path('all') %></li>
+          </ul>
+        </li>
+        <li>
+          <%= link_to people_path do %>
+            People<span class="glyphicon glyphicon-user"></span>
+          <% end %>
+        </li>
+        <li>
+          <%= link_to inventory_items_path do %>
+            Inventory<span class="glyphicon glyphicon-th"></span>
+          <% end %>
+        </li>
+        <li>
+          <%= link_to loans_path do %>
+            Loans<span class="glyphicon glyphicon-share-alt"></span>
+          <% end %>
+        </li>
+        <li class="sidebar-child">
+          <a href="#" class="sidebar-child-toggle">Wiki<span class="glyphicon glyphicon-file"></span></a>
+          <ul class="sidebar-child-menu">
+            <li class="sidebar-child-title">Wiki</li>
+            <% @wiki_pages.each do |page| %>
+              <li><%= link_to page.page_name, wiki_show_path(page.page_reference) %></li>
+            <% end %>
+            <li class="sidebar-child-divider"></li>
+            <li><%= link_to 'All Wiki Pages', wiki_pages_path %></li>
+            <li><a href="#">Create new Page</a></li>
+          </ul>
+        </li>
         <% if current_user %>
-          <p class="navbar-text">Signed in as <%= current_user.name %></p>
-          <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-wrench"></span>&nbsp;<b class="caret"></b></a>
-            <ul class="dropdown-menu">
+          <li class="sidebar-child">
+            <a href="#" class="sidebar-child-toggle">Settings<span class="glyphicon glyphicon-cog"></span></a>
+            <ul class="sidebar-child-menu">
+              <li class="sidebar-child-title">Settings</li>
               <% if current_user.admin? %>
-                <li><%= link_to "Administrator Dashboard", admin_dashboard_path %>
-                <li class="divider"></li>
+                <li><%= link_to "Admin Dashboard", admin_dashboard_path %></li>
+                <li class="sidebar-child-divider"></li>
               <% end %>
-              <li><%= link_to 'Edit Profile', edit_user_registration_path %>
+              <li><%= link_to 'Edit Profile', edit_user_registration_path %></li>
               <li><%= link_to 'Log Out', destroy_user_session_path, method:'delete' %></li>
             </ul>
           </li>
-          <li>
-            <%= link_to new_search_path, remote: true do %>
-              <span class="glyphicon glyphicon-search"></span>
-            <% end %>
-          </li>
-        <% else %>
-          <li><%= link_to 'Login', new_user_session_path %></li>
         <% end %>
+        <li>
+          <%= link_to new_search_path, remote: true do %>
+            Search<span class="glyphicon glyphicon-search"></span>
+          <% end %>
+        </li>
       </ul>
     </div>
-  </div>
+  </nav>
 </div>
-
-
-
-
-<script type="text/javascript">
-    $("#menu-toggle").click(function(e) {
-        e.preventDefault();
-        $("#wrapper").toggleClass("active");
-    });
-</script>
-
-<!-- Sidebar -->
-<div id="wrapper">
-  <div id="sidebar-wrapper">
-    <ul id="sidebar_menu" class="sidebar-nav">
-      <li class="sidebar-brand">
-        <a id="menu-toggle" href="#">tracksIT<span class="fa fa-navicon fa-fw"></span></a>
-      </li>
-    </ul>
-    <fa-ul class="sidebar-nav" id="sidebar">
-      <li>
-        <%= link_to networks_path do %>
-          Networks <span class="fa fa-wifi fa-fw"></span>
-        <% end %>
-      </li>
-      <li class="dropdown">
-        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Devices <b class="caret"></b></a>
-        <ul class="dropdown-menu">
-          <% @device_types.each do |group| %>
-            <li><%= link_to "#{group.name}", device_types_path(group.name) %></li>
-          <% end %>
-          <li class="divider"></li>
-          <li><%= link_to "All Devices", device_types_path('all') %></li>
-        </ul>
-      </li>
-      <li>
-        <%= link_to people_path do %>
-          People <span class="fa fa-group fa-fw" style='margin-left:15px;'></span>
-        <% end %>
-      </li>
-      <li>
-        <%= link_to  inventory_items_path do %>
-          Inventory <span class="fa fa-cubes fa-fw"></span>
-        <% end %>
-      </li>
-      <li>
-        <%= link_to loans_path do %>
-          Loans <span class="pull-right" style="margin-right: 30px"><span class="fa fa-user fa-fw"></span><span class="fa fa-long-arrow-right fa-fw"></span></span>
-        <% end %>
-      </li>
-      <li class="dropdown">
-        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Wiki <span class="fa fa-file-o fa-fw" style='margin-left:35px;'></span></a>
-        <ul class="dropdown-menu">
-          <li><%= link_to 'Index', wikis_path %></li>
-          <li class="divider"></li>
-          <% @wiki_pages.each do |page| %>
-            <li><%= link_to page.page_name, wiki_show_path(page.page_reference) %></li>
-          <% end %>
-          <li class="divider"></li>
-          <li><%= link_to 'All Wiki Pages', wiki_pages_path %></li>
-        </ul>
-      </li>
-    </fa-ul>
-  </div>
-</div>
-
-
-
-<!-- <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-  <div class="container">
+<nav class="navbar navbar-fixed-top navbar-inverse" role="navigation">
+  <div class="container-fluid">
     <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
         <span class="sr-only">Toggle navigation</span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <%= link_to 'tracksIT', root_path, class:"navbar-brand"%>
+      <a class="navbar-brand" href="#">tracksIT</a>
     </div>
-    <div class="navbar-collapse collapse">
+    <div id="navbar" class="collapse navbar-collapse pull-right">
       <% if current_user %>
-        <ul class="nav navbar-nav">
-          <li><%= link_to "Knowledge Base", articles_path %></li>
-          <li><%= link_to 'Networks', networks_path %></li>
-          <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Devices <b class="caret"></b></a>
-            <ul class="dropdown-menu">
-              <% @device_types.each do |group| %>
-                <li><%= link_to "#{group.name}", device_types_path(group.name) %></li>
-              <% end %>
-              <li class="divider"></li>
-              <li><%= link_to "All Devices", device_types_path('all') %></li>
-            </ul>
-          </li>
-          <li><%= link_to 'People', people_path %></li>
-          <li><%= link_to 'Inventory', inventory_items_path %></li>
-          <li><%= link_to 'Loans', loans_path %></li>
-        </ul>
+        <p class="navbar-text">Signed in as <%= current_user.name %></p>
+      <% else %>
+        <%= link_to 'Login', new_user_session_path %>
       <% end %>
-      <ul class="nav navbar-nav navbar-right">
-        <% if current_user %>
-          <p class="navbar-text">Signed in as <%= current_user.name %></p>
-          <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-wrench"></span>&nbsp;<b class="caret"></b></a>
-            <ul class="dropdown-menu">
-              <% if current_user.admin? %>
-                <li><%= link_to "Administrator Dashboard", admin_dashboard_path %>
-                <li class="divider"></li>
-              <% end %>
-              <li><%= link_to 'Edit Profile', edit_user_registration_path %>
-              <li><%= link_to 'Log Out', destroy_user_session_path, method:'delete' %></li>
-            </ul>
-          </li>
-          <li>
-            <%= link_to new_search_path, remote: true do %>
-              <span class="glyphicon glyphicon-search"></span>
-            <% end %>
-          </li>
-        <% else %>
-          <li><%= link_to 'Login', new_user_session_path %></li>
-        <% end %>
-      </ul>
-    </div> /.nav-collapse
-  </div>
-</div> -->
+    </div><!-- /.nav-collapse -->
+  </div><!-- /.container -->
+</nav><!-- /.navbar -->
+
+<script>
+    $("#toggle-menu").click(function(e) {
+        e.preventDefault();
+        $("#wrapper").toggleClass("toggled");
+    });
+</script>

@@ -7,44 +7,37 @@
     <title>Technology Inventory</title>
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
     <%= javascript_include_tag "application", "data-turbolinks-track" => false %>
-  	
-  	<%= csrf_meta_tags %>
+    <%= csrf_meta_tags %>
   </head>
-
   <body>
-
-  <%= render "shared/navigation" %>
-
-    <div class="container">
-
-    <% if flash[:notice] %>
-      <div class="alert alert-success alert-dismissable">
-        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-        <%= flash[:notice] %>
-      </div>
-    <% end %>
-    <% if flash[:alert] %>
-      <div class="alert alert-warning alert-dismissable">
-        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-        <%= flash[:alert] %>
-      </div>
-    <% end %>
-    <% if flash[:error] %>
-      <div class="alert alert-danger alert-dismissable">
-        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-        <%= flash[:error] %>
-      </div>
-    <% end %>
-
-      <div class="row">
-        <div class="col-md-12">
+    <div id="wrapper">
+      <%= render "shared/navigation" %>
+      <div id="page-content-wrapper">
+        <div class="container-fluid">
+          <% if flash[:notice] %>
+            <div class="alert alert-success alert-dismissable">
+              <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+              <%= flash[:notice] %>
+            </div>
+          <% end %>
+          <% if flash[:alert] %>
+            <div class="alert alert-warning alert-dismissable">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            <%= flash[:alert] %>
+            </div>
+          <% end %>
+          <% if flash[:error] %>
+            <div class="alert alert-danger alert-dismissable">
+              <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+              <%= flash[:error] %>
+            </div>
+          <% end %>
           <%= yield %>
+          </div>
+        </div> <!-- /container -->
+        <div class="modal fade" id="search-modal" tabindex="-1" role="dialog" aria-labelledby="search-modal" aria-hidden="true">
         </div>
       </div>
-
-    </div> <!-- /container -->
-    <div class="modal fade" id="search-modal" tabindex="-1" role="dialog" aria-labelledby="search-modal" aria-hidden="true">
     </div>
   </body>
-  
 </html>
