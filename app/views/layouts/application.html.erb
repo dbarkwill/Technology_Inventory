@@ -13,7 +13,7 @@
     <div id="wrapper">
       <%= render "shared/navigation" %>
       <div id="page-content-wrapper">
-        <div class="container-fluid">
+        <div class="container">
           <% if flash[:notice] %>
             <div class="alert alert-success alert-dismissable">
               <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
@@ -22,8 +22,8 @@
           <% end %>
           <% if flash[:alert] %>
             <div class="alert alert-warning alert-dismissable">
-            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-            <%= flash[:alert] %>
+              <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+              <%= flash[:alert] %>
             </div>
           <% end %>
           <% if flash[:error] %>
@@ -33,11 +33,16 @@
             </div>
           <% end %>
           <%= yield %>
-          </div>
-        </div> <!-- /container -->
-        <div class="modal fade" id="search-modal" tabindex="-1" role="dialog" aria-labelledby="search-modal" aria-hidden="true">
         </div>
+      </div> <!-- /container -->
+      <div class="modal fade" id="search-modal" tabindex="-1" role="dialog" aria-labelledby="search-modal" aria-hidden="true">
       </div>
     </div>
   </body>
 </html>
+
+<script>
+$(document).ready(function () {
+  $('.dropdown-toggle').dropdown();
+});
+</script>

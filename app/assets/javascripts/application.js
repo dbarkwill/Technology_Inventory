@@ -16,8 +16,9 @@
 //= require jquery_ujs
 //= require tinymce
 //= require bootstrap
+//= require bootstrap-sprockets
 //= require dataTables/jquery.dataTables
-//= require dataTables/jquery.dataTables.bootstrap3
+//= require dataTables/bootstrap/3/jquery.dataTables.bootstrap
 //= require turbolinks
 //= require ckeditor/init
-//= require_tree .
+//= require_directory .
