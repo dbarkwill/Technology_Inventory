@@ -6,4 +6,6 @@ class DeviceGroup < ActiveRecord::Base
 	has_many :articles, :through => :links
 
 	accepts_nested_attributes_for :properties
+	mount_uploader :icon, DeviceIconUploader
+	
 end

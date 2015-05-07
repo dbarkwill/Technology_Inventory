@@ -2,4 +2,5 @@
   <td><%= text_field_tag 'loan[loan_line_items_attributes][replace][identifier]', nil, class:'form-control search' %></td>
   <td><%= text_field_tag 'loan[loan_line_items_attributes][replace][description]', nil, class:'form-control' %></td>
   <td><%= text_field_tag 'loan[loan_line_items_attributes][replace][quantity]', nil, class:'form-control' %></td>
+  <td><%= link_to '&times;'.html_safe, '#', class:"btn btn-sm btn-danger remove-line-item" %></td>
 </tr>

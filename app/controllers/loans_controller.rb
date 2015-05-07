@@ -1,5 +1,6 @@
 class LoansController < ApplicationController
-  before_action :set_loan, only: [:show, :edit, :update, :destroy]
+  before_action :set_loan, only: [:show, :report, :edit, :update, :destroy]
+  layout 'report', only: [:report]
 
   # GET /loans
   # GET /loans.json
@@ -11,6 +12,11 @@ class LoansController < ApplicationController
   # GET /loans/1
   # GET /loans/1.json
   def show
+  end
+
+  # GET /loans/report/1
+  # GET /loans/report/1.pdf
+  def report
   end
 
   # GET /loans/new
@@ -39,6 +45,34 @@ class LoansController < ApplicationController
     else
        head 200, content_type: "text/html"
     end
+  end
+
+  def lookup
+    @inventoryResults = InventoryItem.search(params[:query])
+    @deviceResults = Device.search(params[:query])
+    @devicePropertyResults = DeviceProperty.search(params[:query])
+    @inventoryCategoryResults = InventoryCategory.search(params[:query])
+    @results = Array.new
+    @inventoryResults.each do |inventory|
+      @results << inventory
+    end
+    @inventoryCategoryResults.each do |inventory_result|
+      inventory_result.inventory_items.each do |item|
+        unless @results.include? item
+          @results << item
+        end
+      end
+    end
+    @deviceResults.each do |device|
+      @results << device
+    end
+    @devicePropertyResults.each do |property|
+      @deviceResult = property.device
+      unless @results.include? @deviceResult
+        @results << @deviceResult
+      end
+    end
+    render :lookup_results, :layout => false, :content_type => 'text/html'
   end
 
   # GET /loans/1/edit

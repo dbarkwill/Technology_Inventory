@@ -203,7 +203,7 @@ li.sidebar-child-heading{
   margin-left: 10px;
   width: 90%;
   padding-bottom: 3px;
-  border-bottom: 1px solid grey;
+  border-bottom: 1px solid gray;
 }
 .sidebar-child-menu > li > a{
   width: 100%;
@@ -220,6 +220,6 @@ li.sidebar-child-heading{
 .sidebar-child-divider{
   width: 90%
   margin: auto;
-  border-bottom: 1px solid grey;
+  border-bottom: 1px solid gray;
   padding-top: 10px;
 }

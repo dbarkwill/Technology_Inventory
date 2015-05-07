@@ -1,20 +1,10 @@
 <div class="row">
-  <div class="col-md-12">
+  <div class="col-md-8">
     <div id="editorTop">
     </div>
-  </div>
-</div>
-<br>
-<div class="row">
-  <div class="col-md-9">
     <div class="panel panel-default">
       <div class="panel-body">
         <h3><%= @page.page_name %></h3>
-        <br>
-        <h5>Administrator \\ <%= @page.updated_at.to_time.strftime("%-m-%-d-%Y") %></h5>
-        <% if @page.tags.count > 0 %>
-          <h5><span class="glyphicon glyphicon-tag"></span>&nbsp; <%= @page.tag_list %></h5>
-        <% end %>
         <hr>
         <div id="editor1" contenteditable="false">
           <% if @page.contents %>
@@ -25,19 +15,14 @@
         </div>
       </div>
     </div>
+    <div id="editorBottom">
+    </div>
   </div>
+  <div class="divider-vertical"></div>
   <div class="col-md-3 hidden-print">
     <%= render 'sidebar' %>
   </div>
 </div>
-<br>
-<div class="row">
-  <div class="col-md-12">
-    <div id="editorBottom">
-    </div>
-  </div>
-</div>
-<br>
 <div class="row">
   <div class="col-md-12">
     <%= link_to 'back', :back %>

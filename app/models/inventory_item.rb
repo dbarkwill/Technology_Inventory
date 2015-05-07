@@ -36,4 +36,8 @@ class InventoryItem < ActiveRecord::Base
 		return total
 	end
 
+	def self.search(query)
+		where("sku like ? OR description like ?", "%#{query}%", "%#{query}%")
+	end
+
 end

@@ -138,6 +138,6 @@ class Admin::DeviceGroupsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def device_group_params
-      params.require(:device_group).permit(:name, properties_attributes: [:id, :name, :style, :unit, :values, :fa_style])
+      params.require(:device_group).permit(:name, :icon, properties_attributes: [:id, :name, :style, :unit, :values, :fa_style])
     end
 end

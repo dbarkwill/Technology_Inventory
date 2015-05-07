@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <title>SRO Report</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="stylesheet" type="text/css" href="http://localhost:3000/assets/report.css" >
+   <%= csrf_meta_tags %>
+   </head>
+
+  <body>
+    <div class="container">
+    <div class="row">
+      <div class="col-xs-4">
+        <br>
+        <br>
+        <address>
+          <strong>Park Chapel</strong><br>
+          <div class="small">
+            1176 E McKenzie RD<br>
+            Greenfield, IN 46140<br>
+            P: 317-462-4513<br>
+            E: support@parkchapel.org
+          </div>
+        </address>
+      </div>
+      <div class="col-xs-8">
+        <%= yield :header %>
+      </div>
+    </div>
+    <div class="row">
+      <% if content_for? :sidebar %>
+        <div class="col-xs-3 sidebar">
+          <%= yield :sidebar %>
+        </div>
+        <div class="col-xs-9 main">
+          <%= yield :main %>
+        </div>
+      <% else %>
+        <div class="col-xs-12 main">
+          <%= yield :main %>
+        </div>
+      <% end %>
+    </div>
+      <hr>
+      <div class="row">
+        <div class="col-xs-12">
+          <%= yield :bottom %>
+        </div>
+      </div>
+    </div> 
+  </body>
+</html>

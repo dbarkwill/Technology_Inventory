@@ -9,6 +9,7 @@
 		<%= text_area_tag 'loan[loan_line_items_attributes][replace][description]', @inventoryResults.first.description, class:'form-control' %>
 	</td>
 	<td>
-		<%= text_field_tag 'loan[loan_line_items_attributes][replace][quantity]', nil, class:'form-control' %>
+		<%= text_field_tag 'loan[loan_line_items_attributes][replace][quantity]', '1', class:'form-control quantity-field' %>
 	</td>
+	<td><%= link_to '&times;'.html_safe, '#', class:"btn btn-sm btn-danger remove-line-item" %></td>
 </tr>

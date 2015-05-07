@@ -1,0 +1,34 @@
+<div class="col-md-6">
+  <p>ip address information:</p>
+  <div class="panel panel-default">
+    <table class="table table-striped">
+      <% if @device.addresses.count > 0 %>
+        <thead>
+          <tr>
+            <th>Address</th>
+            <th>Network</th>
+            <th width='25px'></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @device.addresses.each do |a| %>
+            <tr>
+              <td><%= a.address %></td>
+              <td><%= a.network.name %></td>
+              <td><%= link_to 'X', a, method: :delete, remote: true, class:'label label-danger' %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      <% else %>
+        <tbody>
+          <tr>
+            <td>An IP address has not been assigned to this <%= @device_group.name.singularize.downcase %>. Click below to add one.</td>
+          </tr>
+        </tbody>
+      <% end %>
+    </table>
+    <div class="panel-footer">
+    <%= link_to "Add IP Address", new_address_path(:device_id => @device.id),remote: true, class:"btn btn-default btn-block" %>
+    </div>
+  </div>
+</div>

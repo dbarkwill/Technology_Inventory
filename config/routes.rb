@@ -10,7 +10,9 @@ Rails.application.routes.draw do
   patch 'wiki' => 'wiki#update'
 
   get 'loans/search_by_sku_or_asset_tag' => 'loans#search_by_sku_or_asset_tag'
+  get 'loans/lookup' => 'loans#lookup'
   patch 'loans/:id/close' => 'loans#close', :as => "close_loan"
+  get 'loans/report/:id' => 'loans#report'
   resources :loans
 
   get 'inventory_items/new_receiving' => 'inventory_items#new_receiving', :as => "new_receiving"
@@ -81,7 +83,9 @@ Rails.application.routes.draw do
   resources :attrs
 
   # Routes for Devices
+  get 'devices/:id/attachments' => 'devices#attachments', as: :device_attachments
   get 'devices/:id/device_info' => 'devices#device_info', as: :device_info
+  get 'devices/:id/history' => 'devices#history_info', as: :device_history_info
   get 'devices/:group' => 'devices#index', as: :device_types
   get 'devices/:group/new' => 'devices#new', as: :device_group_new
   get 'devices/:group/:id' => 'devices#show', as: :device_group_show

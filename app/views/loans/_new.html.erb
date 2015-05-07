@@ -7,8 +7,8 @@
 		<%= form_for @loan, remote: true do |f| %>
 			<div class="modal-body">
 				<ul class="errors"></ul>
-				<div class="row">
-					<div class="col-md-12">
+				<div class="row vertical-divider">
+					<div class="col-md-8">
 						<div class="form-group">
 							<%= f.label :loanee %>
 							<%= f.text_field :loanee, class:'form-control' %>
@@ -20,16 +20,24 @@
 						<table class="table" id="loan">
 							<thead>
 								<tr>
-									<th width="200">SKU / Asset Tag</th>
+									<th width="125">SKU / Asset Tag</th>
 									<th>Description</th>
-									<th width="100">Quantity</th>
+									<th width="75">Quantity</th>
+									<th></th>
 								</tr>
 							</thead>
 							<tbody>
-								<%= render 'loan_line_item_fields', :f => f, :child_index => Time.now.to_i %>
 							</tbody>
 						</table>
 						<%= link_to 'add line item', '#', class:'add-line-item' %>
+					</div>
+					<div class="col-md-4">
+						<div class="input-group" id="lookup">
+							<span class="input-group-addon" id="search-addon"><span class="glyphicon glyphicon-search"></span></span>
+							<input type="text" class="form-control lookup" placeholder="search..." aria-describedby="search-addon"/>
+						</div>
+						<div id="lookup-results">
+						</div>
 					</div>
 				</div>
 			</div>
@@ -52,7 +60,41 @@ $(document).ready(function() {
 	});
 });
 
-$('#loan tbody').on("keyup", ".search", detectSearch );
+$(document).on("click", '.remove-line-item', function(event) { 
+    $(this).parent().parent().remove();
+    event.preventDefault();
+});
+
+
+$(document).on('click', 'a.add-lookup-item', function(event) {
+	var lookupString = $(this).html();
+	event.preventDefault();
+
+	if ($("td:contains(" + lookupString + ")").length){
+        var duplicateLine = $("td:contains(" + lookupString + ")").first().parent();
+        var quantityField = duplicateLine.find('input.quantity-field');
+        quantityField.val( function(i, oldval) {
+		    return ++oldval;
+		});
+    }
+    else {
+    	var request = $.ajax({
+			type: "GET",
+			url: 'loans/search_by_sku_or_asset_tag',
+			data: {query: lookupString},
+			dataType: "html"
+		});
+
+		request.done(function(response, status, jqXHR){
+			var unique_id = new Date().getTime();
+			html = response.replace(/replace/g, unique_id);
+			$('#loan tr:last').after(html);
+		});
+    }
+});
+
+
+$(document).on("keyup", ".search", detectSearch );
 
 var currentSearchField;
 
@@ -77,12 +119,45 @@ function search(force, element) {
 
 		request.done(function(response, status, jqXHR){
 			if( !$.trim(response)) {
-				$(currentSearchField).parent().parent().css( "background-color", "red" );
+				$(currentSearchField).parent().css( "background-color", "yellow" );
 			} else {
 				var unique_id = new Date().getTime();
 				tableRow = $(currentSearchField).parent().parent();
 				html = response.replace(/replace/g, unique_id);
 				tableRow.replaceWith(html);
+			}
+		});
+}
+
+$('#lookup').on("keyup", ".lookup", detectLookup );
+
+var currentLookupField;
+
+function detectLookup(event){
+	clearTimeout($.data(this, 'timer'));
+	currentLookupField = this
+		if (event.keyCode == 13)
+			lookup(true);
+		else
+			$(this).data('timer', setTimeout(lookup, 500));
+}
+
+function lookup(force, element) {
+		var existingString = $(currentLookupField).val();
+		if (!force && existingString.length < 3) return; //wasn't enter, not > 2 char
+		var request = $.ajax({
+			type: "GET",
+			url: 'loans/lookup',
+			data: {query: existingString},
+			dataType: "html"
+		});
+
+		request.done(function(response, status, jqXHR){
+			if( !$.trim(response)) {
+				$(currentLookupField).parent().css( "background-color", "red" );
+			} else {
+				var unique_id = new Date().getTime();
+				$('#lookup-results').html(response);
 			}
 		});
 }

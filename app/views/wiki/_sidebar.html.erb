@@ -1,9 +1,19 @@
 <div class="panel panel-default">
-  <div class="panel-heading">
-    <h4 class="panel-title">
-      <span class="glyphicon glyphicon-tags"></span>&nbsp;&nbsp; tags
-    </h4>
-  </div>
+  <table class="table">
+    <tr>
+      <td style="vertical-align:middle"><%= image_tag "http://placehold.it/75x75", class:"img-rounded", size:"75" %></td>
+      <td style="vertical-align:middle">
+        <h4>
+          Test U.
+        </h4>
+        <p>
+          Finance Department<br>
+          800-555-5555<br>
+          test@example.org
+        </p>
+      </td>
+    </tr>
+  </table>
   <div class="panel-body">
       <ul class="list-unstyled">
         <% @tags.each do |tag| %>

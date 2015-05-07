@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141120012609) do
+ActiveRecord::Schema.define(version: 20150406201354) do
 
   create_table "addresses", force: true do |t|
     t.string   "address"
@@ -37,6 +37,7 @@ ActiveRecord::Schema.define(version: 20141120012609) do
     t.string   "color"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "icon"
   end
 
   create_table "device_groups_properties", id: false, force: true do |t|
@@ -58,6 +59,7 @@ ActiveRecord::Schema.define(version: 20141120012609) do
     t.boolean  "loaned"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "status",          limit: 255
   end
 
   create_table "inventory_categories", force: true do |t|

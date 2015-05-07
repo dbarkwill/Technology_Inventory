@@ -11,9 +11,9 @@
 // about supported directives.
 //
 //= require jquery
-//= require jquery.remotipart
 //= require jquery.turbolinks
 //= require jquery_ujs
+//= require jquery.remotipart
 //= require tinymce
 //= require bootstrap
 //= require bootstrap-sprockets

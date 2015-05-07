@@ -16,6 +16,10 @@
       <%= f.label :name %><br>
       <%= f.text_field :name, class:"form-control" %>
     </div>
+    <div class="form-group">
+      <%= f.label :status %><br>
+      <%= f.select(:status, Device.statuses.keys.map {|status| [status.titleize, status]}, {include_blank: "Select status"}, {:class => "form-control"}) %>
+    </div>
   </div>
   <%= hidden_field_tag :device_group_id, @device.device_group.id %>
   <% if @device.device_group %>

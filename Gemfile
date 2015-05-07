@@ -70,3 +70,10 @@ gem 'font-awesome-rails'
 
 # CK Editor
 gem 'ckeditor'
+
+# PDF Generation
+gem 'pdfkit', '0.6.2'
+gem 'wkhtmltopdf-binary', '0.9.9.3'
+
+# Unicorn
+gem 'unicorn', '4.8.3'
