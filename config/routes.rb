@@ -1,9 +1,18 @@
 Rails.application.routes.draw do
 
-  get 'wiki/:page_name' => 'wiki#show', :as => "wiki_show"
+  get 'wiki/all_pages' => 'wiki#show_all', :as => "wiki_pages"
+  get 'wiki/new' => 'wiki#new', :as => "wiki_new"
+  get 'wiki/:page_reference' => 'wiki#show', :as => "wiki_show"
+  delete 'wiki/:page_reference' => 'wiki#destroy', :as => "wiki_delete"
+  get 'wiki' => 'wiki#index', :as => 'wikis'
+  post 'wiki' => 'wiki#create'
+  get 'wiki/:page_reference/edit' => 'wiki#edit', :as => "wiki_edit"
+  patch 'wiki' => 'wiki#update'
 
   get 'loans/search_by_sku_or_asset_tag' => 'loans#search_by_sku_or_asset_tag'
+  get 'loans/lookup' => 'loans#lookup'
   patch 'loans/:id/close' => 'loans#close', :as => "close_loan"
+  get 'loans/report/:id' => 'loans#report'
   resources :loans
 
   get 'inventory_items/new_receiving' => 'inventory_items#new_receiving', :as => "new_receiving"
@@ -74,7 +83,9 @@ Rails.application.routes.draw do
   resources :attrs
 
   # Routes for Devices
+  get 'devices/:id/attachments' => 'devices#attachments', as: :device_attachments
   get 'devices/:id/device_info' => 'devices#device_info', as: :device_info
+  get 'devices/:id/history' => 'devices#history_info', as: :device_history_info
   get 'devices/:group' => 'devices#index', as: :device_types
   get 'devices/:group/new' => 'devices#new', as: :device_group_new
   get 'devices/:group/:id' => 'devices#show', as: :device_group_show

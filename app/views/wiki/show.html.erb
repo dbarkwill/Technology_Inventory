@@ -1,1 +1,86 @@
-<h1>It works!</h1>
+<div class="row">
+  <div class="col-md-8">
+    <div id="editorTop">
+    </div>
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <h3><%= @page.page_name %></h3>
+        <hr>
+        <div id="editor1" contenteditable="false">
+          <% if @page.contents %>
+              <%= @page.contents.html_safe %>
+          <% else %>
+            You haven't added anything to this page yet. Click edit above to get started.
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <div id="editorBottom">
+    </div>
+  </div>
+  <div class="divider-vertical"></div>
+  <div class="col-md-3 hidden-print">
+    <%= render 'sidebar' %>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-12">
+    <%= link_to 'back', :back %>
+  </div>
+</div>
+
+<div class="modal fade" id="page-modal" tabindex="-1" role="dialog" aria-labelledby="page-modal" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="myModalLabel">delete page</h4>
+      </div>
+      <div class="modal-body">
+        Are you sure you wish to delete this page?
+      </div>
+      <div class="modal-footer">
+        <%= link_to "delete", wiki_delete_path(@page.page_reference), class: "btn btn-danger", method: :delete %>
+        <%= link_to "cancel", "#", class: "btn", data: {dismiss: "modal"} %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+CKEDITOR.disableAutoInline = true;
+
+$(".enableEditing").click(function(e) {
+    e.preventDefault();
+    var contents = document.getElementById('editor1');
+    contents.setAttribute('contenteditable', true);
+    CKEDITOR.inline( 'editor1',{
+      extraPlugins: 'sharedspace,sourcedialog,tableresize,quicktable',
+      removePlugins: 'floatingspace,resize',
+      sharedSpaces: {
+        top: 'editorTop',
+        bottom: 'editorBottom',
+      },
+      startupFocus: true,
+      on: {
+          blur: function( event ) {
+              var contents = event.editor.getData();
+              var parsedData = {
+                wiki: {
+                  contents: contents,
+                  page_reference: "<%= @page.page_reference %>"
+                }
+              }
+              console.log( parsedData );
+              var request = $.ajax({
+                type: "PATCH",
+                url: '/wiki',
+                data: parsedData,
+                dataType: "html"
+              });
+          }
+      }
+    } );
+});
+
+</script>

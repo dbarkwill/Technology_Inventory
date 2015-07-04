@@ -1,0 +1,15 @@
+<div class="col-md-6">
+  <p>properties:</p>
+  <div class="panel panel-default">
+    <table class="table table-striped">
+      <tbody>
+        <% @device.device_properties.each do |device_property| %>
+          <tr>
+            <td><strong><%= device_property.property.name %>:</strong></td>
+            <td><%= device_property.value %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

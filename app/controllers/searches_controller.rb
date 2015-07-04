@@ -12,6 +12,8 @@ class SearchesController < ApplicationController
 
 		@address_results = Address.search(params[:query])
 
+		@inventory_results = InventoryItem.search(params[:query])
+
 		render :results
 	end
 

@@ -1,0 +1,60 @@
+<% content_for :header do %>
+	<div class="row">
+		<div class="col-xs-8">
+			<br>
+			<br>
+			<h1>Packing List</h1>
+		</div>
+		<div class="col-xs-4">
+			<br>
+			<br>
+			<dl>
+				<dt>Name</dt>
+				<dd>
+					<div class="small"><%= @loan.loanee %></div>
+				</dd>
+				<dt>Notes</dt>
+				<dd>
+					<div class="small">
+						<%= @loan.notes %>
+					</div>
+				</dd>
+			</dl>
+		</div>
+	</div>
+<% end %>
+
+
+<% content_for :main do %>
+	<br>
+	<hr>
+	<br>
+	<br>
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th width="125px">SKU / Asset Tag</th>
+				<th>Description</th>
+				<th width="100px">Quantity</th>
+				<th width="25px">&nbsp;</th>
+			</tr>
+		</thead>
+		<tbody>
+			<% @loan.loan_line_items.each do |line_item| %>
+				<tr>
+					<td><%= line_item.identifier %></td>
+					<td><%= line_item.description %></td>
+					<td><center><%= line_item.quantity %></center></td>
+					<td>&#x25a2;</td>
+				</tr>
+			<% end %>
+		</tbody>
+	</table>
+	<br>
+<% end %>
+
+<% content_for :date do %>
+	<%= @loan.created_at %>
+<% end %>
+<% content_for :bottom do %>
+<% end %>

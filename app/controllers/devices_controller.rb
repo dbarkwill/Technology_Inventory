@@ -1,5 +1,5 @@
 class DevicesController < ApplicationController
-  before_action :set_device, only: [:show, :edit, :update, :destroy, :clear_history, :device_info]
+  before_action :set_device, only: [:show, :edit, :update, :destroy, :clear_history, :device_info, :history_info, :attachments]
   before_action :set_group
 
   # GET /devices
@@ -26,6 +26,18 @@ class DevicesController < ApplicationController
   def device_info
     respond_to do |format|
       format.js { render :device_info}
+    end
+  end
+
+  def history_info
+    respond_to do |format|
+      format.js { render :history_info}
+    end
+  end
+
+  def attachments
+    respond_to do |format|
+      format.js { render :attachments}
     end
   end
 
@@ -136,6 +148,6 @@ class DevicesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def device_params
-      params.require(:device).permit(:name, :asset_tag, :notes, :device_group_id)
+      params.require(:device).permit(:name, :asset_tag, :notes, :device_group_id, :status)
     end
 end

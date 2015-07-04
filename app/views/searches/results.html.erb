@@ -9,6 +9,16 @@
 			<% end %>
 		</div>
 	<% end %>
+	<% if @inventory_results.count > 0 %>
+		<div class="panel-search-heading"><small>Inventory Items</small></div>
+		<div class="list-group">
+			<% @inventory_results.limit(5).each do |inventory_item| %>
+				<%= link_to inventory_item_path(inventory_item), class:"list-group-item" do %>  
+                    <h4><strong><%= inventory_item.name %>:</strong> <%= inventory_item.sku %></h4>
+                <% end %>
+			<% end %>
+		</div>
+	<% end %>
 	<% if @device_property_results.count > 0 %>
 		<div class="panel-search-heading"><small>Device Properties</small></div>
 		<div class="list-group">
@@ -45,7 +55,7 @@
 			<% end %>
 		</div>
 	<% end %>
-	<% if @address_results.count + @article_results.count + @device_results.count + @device_property_results.count < 1 %>
+	<% if @address_results.count + @article_results.count + @device_results.count + @device_property_results.count + @inventory_results.count < 1 %>
 		<div class="list-group">
 			<div class="list-group-item">
 				<h4>No results found</h4>

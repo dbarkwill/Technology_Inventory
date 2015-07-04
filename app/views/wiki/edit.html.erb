@@ -1,0 +1,121 @@
+<div class="row">
+  <div class="col-md-9">
+    <%= form_for(@page) do |f| %>
+      <% if @page.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@page.errors.count, "error") %> prohibited this page from being saved:</h2>
+          <ul>
+          <% @page.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+          </ul>
+        </div>
+      <% end %>
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <%= f.label :page_name %><br>
+          <%= f.text_field :page_name, class:"form-control" %>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <%= f.label :tag_list, "Tags (seperated by commas)" %><br>
+          <%= f.text_field :tag_list, class:"form-control" %>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="form-group">
+          <%= f.label :contents %><br>
+          <%= f.text_area :contents, rows:"20" %>
+        </div>
+        <%= f.hidden_field :page_reference %>
+      </div>
+    </div>
+    <hr class="hr-divide">
+    <div class="row">
+      <div class="col-md-12">
+      <br>
+        <div class="actions">
+          <%= f.submit class:"btn btn-default" %>
+        </div>
+      </div>
+    </div>
+    <% end %>
+  </div>
+  <div class="col-md-3">
+    <div clas="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+      <div class="panel panel-default">
+        <div class="panel-heading" role="tab" id="existingTags">
+          <h4 class="panel-title">
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+              existing tags
+            </a>
+          </h4>
+        </div>
+        <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="existingTags">
+          <div class="panel-body">
+              <ul class="list-unstyled">
+                <% @tags.each do |tag| %>
+                  <li><%= tag.name + " (#{tag.wikis.count})"%></li>
+                <% end %>
+              </ul>
+          </div>
+        </div>
+      </div>
+      <div class="panel panel-default">
+        <div class="panel-heading" role="tab" id="recentallyCreated">
+          <h4 class="panel-title">
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+              recentally created pages
+            </a>
+          </h4>
+        </div>
+        <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="recentallyCreated">
+          <div class="panel-body">
+              <ul class="list-unstyled">
+                <% @recentally_created.each do |page| %>
+                  <li><%= page.page_name %></li>
+                <% end %>
+              </ul>
+          </div>
+        </div>
+      </div>
+      <div class="panel panel-default">
+        <div class="panel-heading" role="tab" id="recentallyUpdated">
+          <h4 class="panel-title">
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+              recentally updated pages
+            </a>
+          </h4>
+        </div>
+        <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="recentallyUpdated">
+          <div class="panel-body">
+              <ul class="list-unstyled">
+                <% @recentally_updated.each do |page| %>
+                  <li><%= page.page_name %></li>
+                <% end %>
+              </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <p>Tip: You can link to other wiki pages by putting the page name in double square brackets. Example: [[Home]]</p>
+    <p>If you are unsure of the page name, you can use the search feature to search the contents of all of the pages.<p>
+  </div>
+</div>
+
+<script src="//tinymce.cachefly.net/4.1/tinymce.min.js"></script>
+<script>
+        tinymce.init({
+          selector:'textarea#wiki_contents',
+          plugins: "table code textpattern fullscreen hr textcolor link advlist ",
+          toolbar: "undo redo | formatselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent |  link | forecolor backcolor ",
+          tools: "inserttable",
+          table_default_attributes: {
+            class: 'table'
+          }
+        });
+</script>

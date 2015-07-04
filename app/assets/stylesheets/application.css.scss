@@ -12,22 +12,22 @@
  *
  *= require_tree .
  *= require dataTables/jquery.dataTables
- *= require dataTables/jquery.dataTables.bootstrap3
+ *= require dataTables/bootstrap/3/jquery.dataTables.bootstrap
  *= require_self
  */
 
  @import url('http://fonts.googleapis.com/css?family=Open+Sans:200,300');
+ @import 'bootstrap-sprockets';
  @import 'bootstrap';
  @import 'font-awesome';
 
 body{
-    font-family: 'Open Sans',Arial,Helvetica,Sans-Serif;
-	padding-top: 70px;
+  font-family: 'Open Sans',Arial,Helvetica,Sans-Serif;
 	background-color: #EEEEEE !important;
 }
 
 html, body{
-    height: 100%;
+  height: 100%;
 }
 
 .hr-divider {
@@ -151,9 +151,7 @@ ul.nav-pills li.active {
 }
 
 .dropdown-menu {
-    position: relative;
     border-radius: 0px;
-    background: none;
 
 }
 
@@ -164,14 +162,13 @@ ul.nav-pills li.active {
 }
 
 .dropdown-menu li a {
-  color: #999999;
+  color: rgb(68,68,68);
   display: block;
   text-decoration: none;
 }
 
 .dropdown-menu li a:hover {
-  color: #fff;
-  background: rgba(255,255,255,0.2);
+  background: rgba(68,68,68,0.2);
   text-decoration: none;
 }
 
@@ -200,7 +197,7 @@ ul.nav-pills li.active {
     border-radius: 0px;
 }
 
-.row-flex, .row-flex > div[class*='col-'] {  
+.row-flex, .row-flex > div[class*='col-'] {
     display: -webkit-box;
     display: -moz-box;
     display: -ms-flexbox;
@@ -280,4 +277,161 @@ ul.nav-pills li.active {
 
 div.panel-default > ul.nav-stacked > li.active {
     background-color: #A8A8A8;
+}
+
+.row.vertical-divider {
+  overflow: hidden;
+}
+.row.vertical-divider > div[class^="col-"] {
+  padding-bottom: 100px;
+  margin-bottom: -100px;
+}
+.row.vertical-divider div[class^="col-"]:first-child {
+  border-right: 2px solid rgb(229,229,229);
+}
+
+#lookup-results{
+    overflow: scroll
+}
+
+.title {
+    font-size: 2em;
+    padding: 10px;
+}
+
+/* Yellow */
+.ds-pending{
+    @extend .alert;
+    @extend .alert-warning;
+}
+
+/* Green */
+.ds-ready_to_deploy{
+    @extend .alert;
+    @extend .alert-success;
+}
+
+/* Blue */
+.ds-deployed{
+    @extend .alert;
+    @extend .alert-info;
+}
+
+/* Purple */
+.ds-development{
+    @extend .alert;
+    @extend .alert-info;
+    background-color: rgba(107,0,128,0.2);
+    color: rgb(107,0,128);
+    border-color: rgba(107,0,128,0.3);
+}
+
+/* Red */
+.ds-lost{
+    @extend .alert;
+    @extend .alert-danger;
+}
+
+/* Pink */
+.ds-broken{
+    @extend .alert;
+    @extend .alert-info;
+    background-color: rgba(254,80,234,0.2);
+    color: rgb(254,80,234);
+    border-color: rgba(254,80,234,0.3);
+}
+
+/* Aqua */
+.ds-requestable{
+    @extend .alert;
+    @extend .alert-info;
+    background-color: rgba(1,223,215,0.2);
+    color: rgb(1,223,215);
+    border-color: rgba(1,223,215,0.3);
+}
+
+/* Orange */
+.ds-loaned{
+    @extend .alert;
+    @extend .alert-info;
+    background-color: rgba(255,128,0,0.2);
+    color: rgb(255,128,0);
+    border-color: rgba(255,128,0,0.3);
+}
+
+/* Black */
+.ds-archived{
+    @extend .alert;
+    @extend .alert-info;
+    background-color: rgba(0,0,0,0.9);
+    color: rgb(255,255,255);
+    border-color: rgba(0,0,0,0.7);
+}
+
+/* Yellow */
+.lbl-pending{
+    @extend .label;
+    @extend .label-warning;
+}
+
+/* Green */
+.lbl-ready_to_deploy{
+    @extend .label;
+    @extend .label-success;
+}
+
+/* Blue */
+.lbl-deployed{
+    @extend .label;
+    @extend .label-info;
+}
+
+/* Purple */
+.lbl-development{
+    @extend .label;
+    @extend .label-info;
+    background-color: rgba(107,0,128,0.4);
+}
+
+/* Red */
+.lbl-lost{
+    @extend .label;
+    @extend .label-danger;
+}
+
+/* Pink */
+.lbl-broken{
+    @extend .label;
+    @extend .label-info;
+    background-color: rgba(254,80,234,0.4);
+}
+
+/* Aqua */
+.lbl-requestable{
+    @extend .label;
+    @extend .label-info;
+    background-color: rgba(1,223,215,0.4);
+}
+
+/* Orange */
+.lbl-loaned{
+    @extend .label;
+    @extend .label-info;
+    background-color: rgba(255,128,0,0.4);
+}
+
+/* Black */
+.lbl-archived{
+    @extend .label;
+    @extend .label-info;
+    background-color: rgba(0,0,0,0.9);
+    color: rgb(255,255,255);
+}
+
+.divider-vertical {
+    border-left: 1px solid gray;
+    float: left;
+    opacity: 0.1;
+    margin: 0 30px;
+    height: 800px;
 }

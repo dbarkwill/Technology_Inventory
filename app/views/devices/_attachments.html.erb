@@ -1,0 +1,29 @@
+<div class="modal-dialog modal-lg">
+  <div class="modal-content">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+      <h4 class="modal-title" id="myModalLabel"><%= @device.name %> Attachments</h4>
+    </div>
+    <div class="modal-body">
+      <div class="row">
+        <div class="col-md-2">
+          <ul class="nav nav-pills nav-stacked">
+            <li role="presentation" class="active"><a href="#pictures" aria-controls="pictures" role="tab" data-toggle="tab">Pictures</a></li>
+            <li role="presentation"><a href="#files" aria-controls="files" role="tab" data-toggle="tab">Files</a></li>
+          </ul>
+        </div>
+        <div class="col-md-10">
+          <div class="tab-content">
+            <div role="tabpanel" class="tab-pane active" id="pictures">
+              
+            </div>
+            <div role="tabpanel" class="tab-pane" id="files">files</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+    </div>
+  </div>
+</div>

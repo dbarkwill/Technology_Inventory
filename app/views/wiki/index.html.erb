@@ -1,0 +1,66 @@
+<div class="row">
+  <div class="col-md-8">
+    <h1>Wikis</h1>
+  </div>
+  <div class="col-md-4">
+    <br>
+    <div class="pull-right">
+      <%= link_to wiki_new_path, class:'btn btn-default', remote: true do %>
+        <span class="glyphicon glyphicon-plus"></span>
+      <% end %>
+    </div>
+  </div>
+</div>
+<br>
+<div class="row">
+  <div class="col-md-9">
+    <div class="panel panel-default">
+      <div class="list_group">
+        <% @pages.each do |page| %>
+          <%= link_to wiki_show_path(page.page_reference), class:'list-group-item' do %>
+            <h2><%= page.page_name %></h2>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h4 class="panel-title">tags</h4>
+      </div>
+      <div class="panel-body">
+          <ul class="list-unstyled">
+            <% @tags.each do |tag| %>
+              <li><%= tag.name + " (#{tag.wikis.count})"%></li>
+            <% end %>
+          </ul>
+      </div>
+    </div>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h4 class="panel-title">recentally created</h4>
+      </div>
+      <div class="panel-body">
+          <ul class="list-unstyled">
+            <% @recentally_created.each do |page| %>
+              <li><%= link_to page.page_name, wiki_show_path(page.page_reference) %></li>
+            <% end %>
+          </ul>
+      </div>
+    </div>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h4 class="panel-title">recentally updated</h4>
+      </div>
+      <div class="panel-body">
+          <ul class="list-unstyled">
+            <% @recentally_updated.each do |page| %>
+              <li><%= link_to page.page_name, wiki_show_path(page.page_reference) %></li>
+            <% end %>
+          </ul>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="wiki-modal" tabindex="-1" role="dialog" aria-labelledby="wiki-modal" aria-hidden="true"></div>

@@ -1,0 +1,36 @@
+<div class="col-md-12">
+  <p>history:</p>
+  <div class="panel panel-default">
+    <table class="table table-striped">
+      <% if @device.logs.count > 0 %>
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Message</th>
+            <th>User</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @device.logs.order(created_at: :desc).limit(5).each do |log| %>
+            <tr>
+              <td><%= log.created_at.to_time.strftime("%-m-%-d-%Y") %></td>
+              <td><%= log.message %></td>
+              <td>Placeholder User</td>
+            </tr>
+          <% end %>
+        </tbody>
+      <% else %>
+        <tbody>
+          <tr>
+            <td>No logs for this device</td>
+          </tr>
+        </tbody>
+      <% end %>
+    </table>
+    <% if @device.logs.count > 5 %>
+      <div class="panel-footer">
+        <%= link_to 'View Full History', device_history_info_path(@device), class:"btn btn-default", remote: true %> 
+      </div>
+    <% end %>
+  </div>
+</div>

@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   include Pundit
   protect_from_forgery with: :exception
-  before_filter :set_device_groups
+  before_filter :set_device_groups, :set_wiki_pages
 
   before_action :configure_permitted_parameters, if: :devise_controller?
 
@@ -13,6 +13,10 @@ class ApplicationController < ActionController::Base
 
   def set_device_groups
   	@device_types = DeviceGroup.all
+  end
+
+  def set_wiki_pages
+    @wiki_pages = Wiki.is_root
   end
 
   def configure_permitted_parameters

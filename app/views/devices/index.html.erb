@@ -1,15 +1,22 @@
 <div class="row">
   <div class="col-md-3 hidden-xs hidden-sm">
-    <h3><small>Device Types:</small></h3>
-    <div class="bs-docs-sidebar">
-      <ul class="nav bs-docs-sidenav">
-        <% @device_types.each do |group| %>
-          <li <%= cp(device_types_path(group.name)) %> > <%= link_to "#{group.name} (#{group.devices.count})", device_types_path(group.name) %> </li>
-        <% end %>
-      </ul>
+    <div class="panel panel-default">
+      <div class="panel-body">
+      
+        <div class="bs-docs-sidebar">
+          <ul class="nav bs-docs-sidenav">
+            <li <%= cp(device_types_path('all')) %> > <%= link_to "All Devices", device_types_path('all') %></li>
+            <hr>
+            <% @device_types.each do |group| %>
+              <li <%= cp(device_types_path(group.name)) %> > <%= link_to "#{group.name} (#{group.devices.count})", device_types_path(group.name) %> </li>
+            <% end %>
+          </ul>
+        </div>
+      </div>
     </div>
   </div>
-  <div class="col-md-9">
+  <div class="divider-vertical"></div>
+  <div class="col-md-8">
     <div class="row">
       <div class="col-xs-10">
         <h1>
@@ -39,9 +46,8 @@
             <div class="panel panel-default">
               <div class="list-group">
                 <% devices.each do |device| %>
-                  <% css = 'list-group-item-danger' if device.loaned? %>
-                  <%= link_to device_info_path(device), class:"list-group-item #{css}", remote: true do %>  
-                    <h4><%= device.name %></h4>
+                  <%= link_to device_info_path(device), class:"list-group-item", remote: true do %>  
+                    <h4><%= device.name %><span class="lbl-<%= device.status %> pull-right"><%= device.status.titleize %></span></h4>
                   <% end %>
                 <% end %>
               </div>

@@ -6,33 +6,61 @@
 			</div>
 			<div class="panel-body">
 				<div class="row">
-					<div class="col-xs-12">
-						<h4><%= @device.name %></h4>
+					<div class="col-xs-8">
+						<div class="title">
+							<%= image_tag @device.device_group.icon_url, class:"img-thumbnail", size: "50" %>
+							<%= @device.name %>
+						</div>
+					</div>
+					<div class="col-xs-4">
 					</div>
 				</div>
-				<hr class="hr-divide">
-				<% if @device.loaned %>
-					<div class="alert alert-danger">
-						Device was loaned to <%= @device.loans.last.loanee %> on <%= @device.loans.last.created_at.to_time.strftime("%-m-%-d-%Y") %>
-					</div>
-					<hr class="hr-divide">
-				<% end %>
+				<hr>
 				<div class="row">
-					<% @device.device_properties.each do |device_property| %>
-						<% if device_property.value != nil && device_property.value != '' %>
-							<div class="col-md-6">
-								<h4>
-									<%= fa_icon "#{device_property.property.fa_style}" if device_property.property.fa_style %>
-									<%= device_property.property.name %>: <%= device_property.value %>
-								</h4>
-							</div>
-						<% end %>
-					<% end %>
+					<div class="col-md-8">
+						<p>properties:</p>
+						<div class="panel panel-default">
+							<table class="table table-striped">
+								<% @device.device_properties.each do |device_property| %>
+									<% if device_property.value != nil && device_property.value != '' %>
+										<tr>
+											<td><strong><%= device_property.property.name %>:</strong></td>
+											<td><%= device_property.value %></td>
+										</tr>
+									<% end %>
+								<% end %>
+							</table>
+						</div>
+					</div>
+					<div class="col-md-4">
+						<p>status:</p>
+						<div class="ds-<%= @device.status %>">
+							<center><%= @device.status.titleize %></center>
+						</div>
+						<br>
+						<p>ip addresses:</p>
+						<div class="panel panel-default">
+							<% if @device.addresses.count > 0 %>
+								<table class="table table-striped">
+									<% @device.addresses.each do |a| %>
+										<tr>
+											<td><%= a.address %><span class="hidden-md"> - <%= a.network.name %></span></td>
+										</tr>
+									<% end %>
+								</table>
+							<% else %>
+								<div class="panel-body">
+									<p>An IP address has not been assigned to this <%= @device.device_group.name.singularize.downcase %>.</p>
+								</div>
+							<% end %>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
 		<div class="panel-body">
 	  		<%= link_to 'view', device_group_show_path(@device.device_group.name, @device), class:'btn btn-info pull-right' %>
+	  		&nbsp;
 	  		<%= link_to 'edit', device_group_edit_path(@device.device_group.name, @device), class:'btn btn-danger pull-right' %>
 	  	</div>
     </div>

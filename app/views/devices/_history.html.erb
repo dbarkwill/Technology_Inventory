@@ -1,24 +1,19 @@
-<div class="panel-heading">
-  <div class="panel-title">
-    History
-  </div>
-</div>
-<ul class="list-group">
-  <% if @device.logs.count > 0 %>
-    <% @device.logs.order(created_at: :desc).limit(5).each do |log| %>
-      <li class="list-group-item">
+<div class="modal-dialog">
+  <div class="modal-content">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+      <h4 class="modal-title" id="myModalLabel"><%= @device.device_group.name.singularize %> History</h4>
+    </div>
+    <div class="modal-body">
+      <% @device.logs.order(created_at: :desc).each do |log| %>
         On <%= log.created_at.to_time.strftime("%-m-%-d-%Y") %>:<br>
         <%= log.message %>
-      </li>
-    <% end %>
-  <% else %>
-    <li class="list-group-item">No history for this device.</li>
-  <% end %>
-</ul>
-<% if @device.logs.count > 5 %>
-  <div class="panel-footer">
-    <button data-toggle="modal" data-target="#viewHistory" class="btn btn-default btn-block">
-      View Full History
-    </button>
+        <hr>
+      <% end %>
+    </div>
+    <div class="modal-footer">
+      <%= link_to "Clear History", device_group_clear_history_path(@device.device_group.name, @device),  method: :delete, class:"btn btn-danger" %>
+      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+    </div>
   </div>
-<% end %>
+</div>

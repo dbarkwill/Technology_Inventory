@@ -11,12 +11,14 @@
 // about supported directives.
 //
 //= require jquery
-//= require jquery.remotipart
 //= require jquery.turbolinks
 //= require jquery_ujs
+//= require jquery.remotipart
 //= require tinymce
 //= require bootstrap
+//= require bootstrap-sprockets
 //= require dataTables/jquery.dataTables
-//= require dataTables/jquery.dataTables.bootstrap3
+//= require dataTables/bootstrap/3/jquery.dataTables.bootstrap
 //= require turbolinks
-//= require_tree .
+//= require ckeditor/init
+//= require_directory .

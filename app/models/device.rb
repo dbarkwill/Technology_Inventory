@@ -13,6 +13,8 @@ class Device < ActiveRecord::Base
 	has_many :loan_line_items, :as => :loanable
 	has_many :loans, :through => :loan_line_items
 
+	enum status: [:pending, :ready_to_deploy, :deployed, :development, :out_for_repair, :lost, :broken, :requestable, :loaned, :archived]
+
 	def MAC
 		self.device_properties.each do |device_property|
 			if device_property.property.name.to_s == 'MAC'
@@ -20,6 +22,15 @@ class Device < ActiveRecord::Base
 			end
 		end
 		return @MacAddress if @MacAddress
+	end
+
+	def asset_tag
+		self.device_properties.each do |device_property|
+			if device_property.property.name.to_s == 'Asset Tag'
+				@asset_tag = device_property.value
+			end
+		end
+		return @asset_tag if @asset_tag
 	end
 
 	def self.search(query)

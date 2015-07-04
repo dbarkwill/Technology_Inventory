@@ -1,0 +1,26 @@
+<br>
+<ul class="list-group">
+	<% if @results.count < 1 %>
+		<li class="list-group-item">
+			No results found
+		</li>
+	<% else %>
+		<% @results.each do |result| %>
+			<% if result.class.name == 'InventoryItem' %>
+				<li class="list-group-item">
+					<strong><%= result.name %></strong><br>
+					<small>SKU: <%= link_to result.sku, '#', class:'add-lookup-item' %><div class="pull-right">QTY: <%= result.on_hand_quantity %></div></small>
+				</li>
+			<% else %>
+				<li class="list-group-item">
+					<strong><%= result.name %></strong><br>
+					<small>Asset Tag: <%= link_to result.asset_tag, '#', class:'add-lookup-item' %></small>
+				</li>
+			<% end %>
+		<% end %>
+	<% end %>
+</ul>
+
+<script>
+
+</script>
